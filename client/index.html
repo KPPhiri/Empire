@@ -1,16 +1,19 @@
-
 <!DOCTYPE html>
 <html lang="en-US">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Card Game</title>
-    <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="styles/main.css" type="text/css">
 
 </head>
 <body>
 	<div id="heading">
-	<h1>HELLO ME!!</h1>
+	<h1>!!HELLO ME!!</h1>
+	<form id = "chat-form">
+			<input id="chat" />
+			<button id="say">Say</button>
+	</form>
 	</div>	
     <div class="split menu">
         <ul>
@@ -26,6 +29,6 @@
         </h1>
     </div>
     <script src ="/socket.io/socket.io.js"></script>
-	<script src="src/client.js"></script>
+	<script src="./src/client.js"></script>
 </body>
 </html>
