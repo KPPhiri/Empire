@@ -1,0 +1,6 @@
+express:
+most popular http framework
+socket.io:
+realtime communication on web
+nodemon:
+when you change stuff on the server side code you need to restart server
