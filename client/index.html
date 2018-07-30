@@ -1,11 +1,31 @@
-<html>
+
+<!DOCTYPE html>
+<html lang="en-US">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="../styles/main.css">
+
 </head>
 <body>
-<div id="heading">
-<h1>HELLO ME!!</h1>
-</div>	
-<script src ="/socket.io/socket.io.js"></script>
-<script src="src/client.js"></script>
+	<div id="heading">
+	<h1>HELLO ME!!</h1>
+	</div>	
+    <div class="split menu">
+        <ul>
+            <li class="button btn-vs">VS</li>
+            <li class="button btn-start">START</li>
+            <li class="button btn-history">HISTORY</li>
+            <li class="button btn-about">ABOUT</li>
+        </ul>
+    </div>
+    <div class="split title">
+        <h1>
+            CARD GAME!!
+        </h1>
+    </div>
+    <script src ="/socket.io/socket.io.js"></script>
+	<script src="src/client.js"></script>
 </body>
 </html>
