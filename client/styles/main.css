@@ -18,6 +18,10 @@
     text-align: center;
 }
 /* Buttons */
+.button:hover {
+    background-color: lightyellow;
+    cursor: pointer;
+}
 .button {
     top: 50%;
     left: 50%;
