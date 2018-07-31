@@ -1,0 +1,24 @@
+/* Global */
+.hand {
+    left: 0;
+    right: 0;
+    height: 50%;
+    position: fixed;
+}
+
+.Opp {
+    top: 0;
+    background-color: lightgrey;
+    text-align: right;
+}
+.You {
+    bottom: 0;
+    background-color: white;
+    text-align: left;
+
+}
+
+#player {
+    bottom: 10px;
+    position: absolute;
+}
