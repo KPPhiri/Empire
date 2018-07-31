@@ -22,3 +22,16 @@
     bottom: 10px;
     position: absolute;
 }
+
+
+#character {
+     border-style: solid;
+     width: 10%;
+     position: absolute;
+     bottom: 70px;
+}
+
+#opponent {
+     border-style: solid;
+     width: 10%;
+}
