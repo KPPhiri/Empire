@@ -1,8 +1,10 @@
 
 const writeEvent = (text) => {
-	const parent = document.querySelector('#heading');
+	//const parent = document.querySelector('#heading');
+    const parent = document.querySelector('#list');
 	console.log("WORKINGG");
-	const el = document.createElement('p');
+	const el = document.createElement('li');
+    //const elem = document.querySelector('#msgs');
 	el.innerHTML = text;
 	parent.appendChild(el);
 };

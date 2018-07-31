@@ -1,5 +1,10 @@
 /* Global */
-
+html {
+    font-family: Tahoma, Geneva, sans-serif;
+}
+h1 {
+    font-family: Impact, Charcoal, sans-serif;
+}
 /* Layouts */
 .split {
     height: 100%;
@@ -9,7 +14,7 @@
 .menu {
     left: 0;
     width: 30%;
-    background-color: lightgrey;
+    background-color: #034f84;
 }
 .title {
     right: 0;
@@ -19,7 +24,7 @@
 }
 /* Buttons */
 .button:hover {
-    background-color: lightyellow;
+    background-color: #92a8d1;
     cursor: pointer;
 }
 .button {
@@ -37,7 +42,9 @@
     font-size: 24px;
     border-radius: 25px;
     text-shadow: white 2px 2px 2px;
+    box-shadow: 0 8px 16px 0 black;
 }
+
 .btn-vs {
     top: 150px;
 }
