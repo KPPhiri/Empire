@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Card Game</title>
     <link rel="stylesheet" href="../styles/main.css">
+    <link rel="stylesheet" href="../styles/socket.chat.css"
 
 </head>
 <body>
@@ -16,14 +17,18 @@
             <li class="button btn-about">ABOUT</li>
         </ul>
     </div>
-    <div class="split title"  id="heading">>
+    <div class="split title" id="heading">
         <h1>
-            CARD GAME TITLE!!!
+            ONE HERO: THE CARD GAME
         </h1>
-        <form id = "chat-form">
-            <input id="chat" />
-            <button id="say">Say</button>
-    </form>
+        <div class="msgs">
+            <form id = "chat-form">
+                <input type="text" id="chat" />
+                <button id="say">Say</button>
+            </form>
+            <ul id="list">
+            </ul>
+        </div>
     </div>
     <script src ="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
