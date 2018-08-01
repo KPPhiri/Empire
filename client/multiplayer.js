@@ -37,3 +37,33 @@ var charDeck = [new Character("Bob", "img/bob.jpg"), new Character("Jane", "img/
 //adding characters
 document.getElementById('character').src = "img/vince.jpg";
 document.getElementById('opponent').src = "img/jane.jpg";
+
+//points progress bar
+function progress() {
+    var prg = document.getElementById('progress');
+    var pts = document.getElementById('pt');
+    var counter = 10;
+    //5
+    var progress = 500;
+    var id = setInterval(frame, 50);
+
+    function frame() {
+        // if(progress == 500 && counter == 100) {
+        //     clearInterval(id);
+        // } else {
+        //     progress += 5;
+        //     counter+= 1;
+        //     prg.style.width = progress + 'px';
+        //     pts.innerHTML = counter + 'pts';
+        // }
+        if(progress == 0 || counter == 0) {
+            clearInterval(id);
+        } else {
+            progress -= 50;
+            counter -= 1;
+            prg.style.width = progress + 'px';
+            pts.innerHTML = counter + 'pts';
+        }
+    }
+}
+//progress();
