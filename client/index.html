@@ -21,14 +21,17 @@
         <h1>
             ONE HERO: THE CARD GAME
         </h1>
-        <div class="msgs">
-            <form id = "chat-form">
-                <input type="text" id="chat" />
+        <div class="rps-wrapper">
+          <ul id="events"></ul>
+          <div class="controls">
+            <div class="chat-wrapper">
+              <form id="chat-form">
+                <input id="chat" autocomplete="off" title="chat"/>
                 <button id="say">Say</button>
-            </form>
-            <ul id="list">
-            </ul>
+              </form>
+            </div>
         </div>
+      </div>
     </div>
     <script src ="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
