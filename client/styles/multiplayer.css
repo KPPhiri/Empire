@@ -130,56 +130,114 @@ body {
 .card {
   border-style: solid;
   position: absolute;
-  height: 30%;
-  width: 11%;
+  height: 25%;
+  width: 10%;
 
 }
 
 #handPos1 {
     bottom: 0;
-    left: 30%;
-    z-index: 11;
-    transform: rotate(-10deg);
+    left: 25%;
+    z-index: 10;
+    transform: rotate(-15deg);
 }
 
 #handPos2 {
     bottom: 1.5%;
-    left: 35%;
+    left: 31%;
     z-index: 11;
-    transform: rotate(-5deg);
+    transform: rotate(-10deg);
 }
 
 #handPos3 {
-    bottom: 2%;
-    left: 40%;
+    bottom: 3%;
+    left: 37%;
     z-index: 12;
-    transform: rotate(0deg);
+    transform: rotate(-5deg);
 }
 
 #handPos4 {
-    bottom: 2%;
-    left: 45%;
+    bottom: 4%;
+    left: 43%;
     z-index: 13;
-    transform: rotate(5deg);
+    transform: rotate(0deg);
 }
 
 #handPos5 {
-    bottom: 2%;
+    bottom: 3%;
     left: 50%;
     z-index: 14;
-    transform: rotate(10deg);
+    transform: rotate(5deg);
 }
 
 #handPos6 {
-    bottom: 0;
-    left: 55%;
+    bottom: 1.5%;
+    left: 56%;
     z-index: 15;
-    transform: rotate(15deg);
+    transform: rotate(10deg);
 }
 
 #handPos7 {
     bottom: 0;
-    left: 60%;
+    left: 63%;
     z-index: 16;
     transform: rotate(20deg);
+}
+
+/*enemys hand*/
+ .ecard {
+  border-style: solid;
+  position: absolute;
+  height: 30%;
+  width: 7%;
+
+}
+
+#ehandPos1 {
+  top:0;
+    left: 29%;
+    z-index: 10;
+    transform: rotate(15deg);
+}
+
+#ehandPos2 {
+    top: 3%;
+    left: 32%;
+    z-index: 11;
+    transform: rotate(10deg);
+}
+
+#ehandPos3 {
+    top: 6%;
+    left: 38%;
+    z-index: 12;
+    transform: rotate(5deg);
+}
+
+#ehandPos4 {
+    top: 7%;
+    left: 44%;
+    z-index: 13;
+    transform: rotate(-2deg);
+}
+
+#ehandPos5 {
+    top: 6%;
+    left: 50%;
+    z-index: 14;
+    transform: rotate(-5deg);
+}
+
+#ehandPos6 {
+    top: 3%;
+    left: 56%;
+    z-index: 15;
+    transform: rotate(-10deg);
+}
+
+#ehandPos7 {
+    top: -3%;
+    left: 60%;
+    z-index: 16;
+    transform: rotate(-20deg);
 }
