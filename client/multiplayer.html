@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Card Game</title>
     <link rel="stylesheet" href="../styles/multiplayer.css">
+    <link rel="stylesheet" href="../styles/characterSelection.css">
 
 </head>
 <body>
-    <div class="hand Opp">
+    <div id="Oppo" class="hand">
         <h1 id="opp">OPPONENT</h1>
         <img src="" id="opponent"></img>
 
@@ -25,12 +26,31 @@
     <div class="playingField">
     <!-- <h1>I am playing field</h1> -->
         <img src="img/terrain.jpg" class="backgroundIm"></img>
+        <img src="img/jane.jpg" id="opponent"></img>
+    </div>
+    <div id="You" class="hand">
+        <div class="bottomLeft">
+            <img src="img/bob.jpg" id="character"></img>
+            <h1 id="player">PLAYER1</h1>
+        </div>
+    </div>
 
+    <div class="playingField">
+        <h1>I am playing field</h1>
     </div>
-    <div class="hand You">
-        <h1 id="player">PLAYER1</h1>
-        <img src="" id="character"></img>
+    <div id="points" class="progress-points">
+        <p id="pt">10pts
+            <div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        <p>
+
+        <p id="pt1" class="player1">10pts
+            <div class="progress-bar player1">
+                <div class="progress" id="progress"></div>                </div>
+        <p>
     </div>
+
     <div id="playerHand">
           <img src="img/bob.jpg" class="card" id="handPos1" ></img>
           <img src="img/jane.jpg" class="card" id="handPos2"></img>
@@ -41,6 +61,7 @@
           <img src="img/vince.jpg" class="card" id="handPos7"></img>
     </div>
 
+<!-- <<<<<<< Kee-Bum
     <div id="points" class="progress-points">
         <p id="pt" class="side">10pts
             <div class="progress-bar side">
@@ -49,6 +70,32 @@
         <p>
     </div>
 
+======= -->
+    <!-- Character Selection PopUp-->
+    <div class="ch-select">
+        <div class="char-content">
+            <a href="http://localhost:8080/" class="button" id="cancel">Cancel</a>
+
+            <div class="char1">
+                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <p>Character Name</p>
+            </div>
+            
+            <a href="" onclick="Play();return false;"class="button" id="start">Start</a>
+        </div>
+    </div>
     <script src="./multiplayer.js"></script>
 </body>
 </html>
