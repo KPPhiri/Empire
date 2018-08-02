@@ -1,4 +1,7 @@
 /* Global */
+body {
+    margin: 0;
+}
 
 .hand {
     left: 0;
@@ -7,15 +10,21 @@
     position: fixed;
 }
 
-.Opp {
+#Oppo {
     top: 0;
     background-color: lightgrey;
     text-align: right;
 }
-.You {
+#You {
+    position: fixed;
     bottom: 0;
     background-color: white;
     text-align: left;
+}
+.bottomLeft {
+    position: fixed;
+    bottom: 0;
+    left: 0;
 }
 .playingField {
     background-color: lightblue;
@@ -34,34 +43,34 @@
         margin: -150px 0 0 -200px;
     }
 }
+/* Player Names */
 #player {
+    font-size: 2.9vw;
     margin: 0;
-    position: fixed;
+
     bottom: 0;
     padding: 10px 10px 10px;
-
 }
-
 #opp {
+    font-size: 2.9vw;
     margin: 0;
     padding: 10px 10px 10px;
 }
 
+/* Player Images */
 #character {
-    position: absolute;
-    bottom: 58px;
+    position: relative;
     border-style: solid;
-    width: 10%;
+    width: 10vw;
     left: 10px;
 }
 
 #opponent {
     position: absolute;
     border-style: solid;
-    width: 10%;
+    width: 10vw;
     right: 10px;
 }
-
 
 /* Points Progress Bar */
 .progress-points {
@@ -71,19 +80,27 @@
     left: 0;
     top: 0;
     font-size: 20px;
-    text-align: left;
     z-index: 3;
 }
 #pt {
+    font-size: 16px;
+    text-align: left;
     float: left;
     width: 50px;
     text-align: center;
-    margin: 12px 0px 12px 0px;
+    margin: 10px 0px 12px 0px;
+}
+#pt1 {
+    font-size: 16px;
+    float: right;
+    width: 50px;
+    text-align: center;
+    margin: 12px 0px 10px 0px;
 }
 .progress-bar {
     overflow: hidden;
-    width: 503px;
-    height: 23px;
+    width: 203px;
+    height: 13px;
     background-color: black;
     border-radius: 16px;
     margin: 10px;
@@ -92,11 +109,24 @@
 }
 .progress {
     margin: 1px;
-    width: 500px;
-    height: 20px;
+    width: 200px;
+    height: 10px;
     border-radius: 10px;
     background-color: dodgerblue;
-  
+}
+.player1 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px 0px 10px 0px;
+    overflow: hidden;
+
+}
+.progress-bar.player1 {
+    right: 50px;
+}
+
+/* Cards */
 .card {
   border-style: solid;
   position: absolute;

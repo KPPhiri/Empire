@@ -1,0 +1,50 @@
+.ch-select {
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.7);
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 20;
+    top: 0;
+}
+.char-content {
+    width: 400px;
+    height: 440px;
+    background-color: white;
+    z-index: 21;
+    border-radius: 4px;
+    padding: 20px;
+    text-align: center;
+}
+.char1 {
+    background-color: lightgrey;
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 8px;
+    padding: 10px;
+}
+.ch-card {
+    width: 60%;
+    height: 70%
+}
+.button {
+    display: block;
+    text-decoration: none;
+    background-color: pink;
+    border-radius: 5px;
+    margin: auto;
+    padding: 4px;
+    width: 75px;
+    color: black;
+    font-size: 25px;
+
+}
+.button#cancel {
+    margin: 0;
+    align-items: left;
+    font-size: 15px;
+    width: 55px;
+}
