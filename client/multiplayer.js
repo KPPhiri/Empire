@@ -38,13 +38,13 @@ var charDeck = [new Character("Bob", "img/bob.jpg"), new Character("Jane", "img/
 document.getElementById('character').src = "img/vince.jpg";
 document.getElementById('opponent').src = "img/jane.jpg";
 
-//points progress bar
+//opponents points progress bar
 function progress() {
     var prg = document.getElementById('progress');
     var pts = document.getElementById('pt');
     var counter = 10;
     //5
-    var progress = 500;
+    var progress = 200;
     var id = setInterval(frame, 50);
 
     function frame() {
@@ -59,7 +59,7 @@ function progress() {
         if(progress == 0 || counter == 0) {
             clearInterval(id);
         } else {
-            progress -= 50;
+            progress -= 20;
             counter -= 1;
             prg.style.width = progress + 'px';
             pts.innerHTML = counter + 'pts';
@@ -67,3 +67,11 @@ function progress() {
     }
 }
 //progress();
+
+//character selection buttons
+const Play = () => {
+    const parent = document.querySelector('.ch-select');
+    //add functionality so that when you choose a card it's applied to the game board
+	console.log("WORKINGG");
+    parent.style.display = 'none';
+};
