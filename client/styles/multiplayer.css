@@ -99,7 +99,8 @@ body {
     float: right;
     width: 50px;
     text-align: center;
-    margin: 12px 0px 10px 0px;
+    bottom: 0;
+    margin: 12px 0px 10px 0px; */
 }
 .progress-bar {
     overflow: hidden;
@@ -128,8 +129,8 @@ body {
     right: 0;
     margin: 10px 0px 10px 0px;
     overflow: hidden;
-
 }
+
 .progress-bar.player1 {
     right: 50px;
 }
