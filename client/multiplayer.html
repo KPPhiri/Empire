@@ -11,24 +11,26 @@
     <div class="hand Opp">
         <h1 id="opp">OPPONENT</h1>
         <img src="" id="opponent"></img>
+
+        <div id="enemyHand">
+              <img src="img/enemyHand.jpg"  class="ecard" id="ehandPos1"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos2"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos3"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos4"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos5"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos6"></img>
+              <img src="img/enemyHand.jpg" class="ecard" id="ehandPos7"></img>
+        </div>
+    </div>
+    <div class="playingField">
+    <!-- <h1>I am playing field</h1> -->
+        <img src="img/terrain.jpg" class="backgroundIm"></img>
+
     </div>
     <div class="hand You">
         <h1 id="player">PLAYER1</h1>
         <img src="" id="character"></img>
     </div>
-    <div class="playingField">
-        <h1>I am playing field</h1>
-    </div>
-    <div id="points" class="progress-points">
-        <p id="pt" class="side">10pts
-            <div class="progress-bar side">
-                <div class="progress" id="progress"></div>
-            </div>
-        <p>
-    </div>
-
-    <img src="img/bob.jpg"></img>
-      <img src="img/jane.jpg"></img>
     <div id="playerHand">
           <img src="img/bob.jpg" class="card" id="handPos1" ></img>
           <img src="img/jane.jpg" class="card" id="handPos2"></img>
@@ -38,6 +40,15 @@
           <img src="img/jane.jpg" class="card" id="handPos6"></img>
           <img src="img/vince.jpg" class="card" id="handPos7"></img>
     </div>
+
+    <div id="points" class="progress-points">
+        <p id="pt" class="side">10pts
+            <div class="progress-bar side">
+                <div class="progress" id="progress"></div>
+            </div>
+        <p>
+    </div>
+
     <script src="./multiplayer.js"></script>
 </body>
 </html>
