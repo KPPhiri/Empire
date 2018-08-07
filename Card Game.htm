@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<!-- saved from url=(0038)http://localhost:8080/multiplayer.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Card Game</title>
+    <link rel="stylesheet" href="./Card Game_files/multiplayer.css">
+    <link rel="stylesheet" href="./Card Game_files/characterSelection.css">
+
+</head>
+<body>
+    <!-- Openonet's hand  -->
+    <div id="Oppo" class="hand">
+        <h1 id="oppChar">OPPONENT</h1>
+        <img src="./Card Game_files/jane.jpg" id="opponent">
+        <div id="enemyHand">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos1">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos2">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos3">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos4">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos5">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos6">
+               <img src="./Card Game_files/enemyHand.jpg" class="ecard" id="ehandPos7">
+         </div>
+    </div>
+
+    <div id="You" class="hand">
+        <div class="bottomLeft">
+            <img src="./Card Game_files/vince.jpg" id="playerChar">
+            <img src="./Card Game_files/enemyHand.jpg" id="playerDeck">
+            <img src="./Card Game_files/enemyHand.jpg" id="playerDeck1">
+            <img src="./Card Game_files/enemyHand.jpg" id="playerDeck2">
+            <img src="./Card Game_files/enemyHand.jpg" id="playerDeck3">
+            <h1 id="player">PLAYER1</h1>
+            <p id="drawing">Drawing</p>
+        </div>
+    </div>
+
+    <!-- Player's hand  -->
+    <div id="playerHand">
+          <img src="./Card Game_files/bob.jpg" class="card" id="handPos0">
+          <img src="./Card Game_files/jane.jpg" class="card" id="handPos1">
+          <img src="./Card Game_files/bob.jpg" class="card" id="handPos2">
+          <img src="./Card Game_files/bob.jpg" class="card" id="handPos3">
+          <img src="./Card Game_files/jane.jpg" class="card" id="handPos4">
+          <img src="./Card Game_files/bob.jpg" class="card" id="handPos5">
+          <img src="./Card Game_files/bob.jpg" class="card" id="handPos6">
+    </div>
+
+
+    <div class="playingField" id="try">
+        <img src="./Card Game_files/terrain.jpg" class="backgroundIm">
+    </div>
+    <div id="points" class="progress-points">
+        <p id="pt">10pts
+            </p><div class="progress-bar">
+                <div class="progress" id="progress"></div>
+            </div>
+        <p>
+
+        </p><p id="pt1" class="player1">10pts
+            </p><div class="progress-bar player1">
+                <div class="progress" id="progress"></div>                </div>
+        <p>
+    </p></div>
+
+    <div class="ch-select" style="display: none;">
+        <div class="char-content">
+            <a href="http://localhost:8080/" class="button" id="cancel">Cancel</a>
+
+            <div class="char1">
+                <img src="./Card Game_files/bob.jpg" alt="" class="ch-card">
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="./Card Game_files/bob.jpg" alt="" class="ch-card">
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="./Card Game_files/bob.jpg" alt="" class="ch-card">
+                <p>Character Name</p>
+            </div>
+            <div class="char1">
+                <img src="./Card Game_files/bob.jpg" alt="" class="ch-card">
+                <p>Character Name</p>
+            </div>
+
+            <a href="http://localhost:8080/multiplayer.html" onclick="Play();return false;" class="button" id="start">Start</a>
+        </div>
+    </div>
+    <script src="./Card Game_files/socket.io.js"></script>
+    <script src="./Card Game_files/multiplayer.js"></script>
+
+
+</body></html>

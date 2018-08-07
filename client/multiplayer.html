@@ -9,35 +9,46 @@
 
 </head>
 <body>
+    <!-- Openonet's hand  -->
     <div id="Oppo" class="hand">
-        <h1 id="opp">OPPONENT</h1>
+        <h1 id="oppChar">OPPONENT</h1>
         <img src="img/jane.jpg" id="opponent"></img>
-        <div id="enemyHand">
-               <img src="img/enemyHand.jpg"  class="ecard" id="ehandPos1"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos2"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos3"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos4"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos5"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos6"></img>
-               <img src="img/enemyHand.jpg" class="ecard" id="ehandPos7"></img>
-         </div>
     </div>
+
+    <div id="enemyHand">
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos0"></img>
+      <img src="img/enemyHand.jpg"  class="ecard" id="ehandPos1"></img>
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos2"></img>
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos3"></img>
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos4"></img>
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos5"></img>
+      <img src="img/enemyHand.jpg" class="ecard" id="ehandPos6"></img>
+     </div>
+
     <div id="You" class="hand">
         <div class="bottomLeft">
-            <img src="img/bob.jpg" id="character"></img>
+            <img src="img/bob.jpg" id="playerChar"></img>
+            <img src="img/enemyHand.jpg"  id="playerDeck" ></img>
+            <img src="img/enemyHand.jpg"  id="playerDeck1" ></img>
+            <img src="img/enemyHand.jpg"  id="playerDeck2" ></img>
+            <img src="img/enemyHand.jpg"  id="playerDeck3" ></img>
             <h1 id="player">PLAYER1</h1>
         </div>
     </div>
+
+    <!-- Player's hand  -->
     <div id="playerHand">
-          <img src="img/bob.jpg" class="card" id="handPos1" ></img>
-          <img src="img/jane.jpg" class="card" id="handPos2"></img>
-          <img src="img/vince.jpg" class="card" id="handPos3"></img>
-          <img src="img/jane.jpg" class="card" id="handPos4"></img>
-          <img src="img/bob.jpg" class="card" id="handPos5"></img>
-          <img src="img/jane.jpg" class="card" id="handPos6"></img>
-          <img src="img/vince.jpg" class="card" id="handPos7"></img>
+          <img class="card" id="handPos0" ></img>
+          <img class="card" id="handPos1"></img>
+          <img class="card" id="handPos2"></img>
+          <img class="card" id="handPos3"></img>
+          <img class="card" id="handPos4"></img>
+          <img src="img/jane.jpg" class="card" id="handPos5"></img>
+          <img src="img/vince.jpg" class="card" id="handPos6"></img>
     </div>
-    <div class="playingField">
+
+
+    <div class="playingField"  id="try">
         <img src="img/terrain.jpg" class="backgroundIm"></img>
     </div>
     <div id="points" class="progress-points">
@@ -52,18 +63,11 @@
                 <div class="progress" id="progress"></div>                </div>
         <p>
     </div>
+    <div >
+      <img id="eActionCard" class="card" src="img/bob.jpg"></img>
+      <img id="actionCard" class="card" src="img/bob.jpg"></img>
+    </div>
 
-    <!-- <div id="playerHand">
-          <img src="img/bob.jpg" class="card" id="handPos1" ></img>
-          <img src="img/jane.jpg" class="card" id="handPos2"></img>
-          <img src="img/vince.jpg" class="card" id="handPos3"></img>
-          <img src="img/jane.jpg" class="card" id="handPos4"></img>
-          <img src="img/bob.jpg" class="card" id="handPos5"></img>
-          <img src="img/jane.jpg" class="card" id="handPos6"></img>
-          <img src="img/vince.jpg" class="card" id="handPos7"></img>
-    </div> -->
-
-    <!-- Character Selection PopUp-->
     <div class="ch-select">
         <div class="char-content">
             <a href="http://localhost:8080/" class="button" id="cancel">Cancel</a>
@@ -88,6 +92,8 @@
             <a href="" onclick="Play();return false;"class="button" id="start">Start</a>
         </div>
     </div>
-    <script src="./multiplayer.js"></script>
+    <script src ="/socket.io/socket.io.js"></script>
+    <script src="src/client.js"></script>
+    <script src="src/multiplayer.js"></script>
 </body>
 </html>

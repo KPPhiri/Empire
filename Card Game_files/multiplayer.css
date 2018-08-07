@@ -1,0 +1,303 @@
+/* Global */
+body {
+    margin: 0;
+}
+
+.hand {
+    left: 0;
+    right: 0;
+    height: 50%;
+    z-index:2;
+    position: fixed;
+}
+
+#Oppo {
+    top: 0;
+    background-color: lightgrey;
+    text-align: right;
+}
+#You {
+    position: fixed;
+    bottom: 0;
+    background-color: white;
+    text-align: left;
+    left: 0;
+}
+.bottomLeft {
+    position: fixed;
+    bottom: 0;
+
+}
+.backgroundIm {
+  width: 100%;
+  height: 100%;
+}
+.playingField {
+    background-color: lightblue;
+    position: absolute;
+    width: 800px;
+    height: 360px;
+    top: 50%;
+    left: 50%;
+    z-index: 3;
+    margin: -180px 0 0 -400px;
+}
+@media only screen and (max-width: 1100px) {
+    .playingField {
+        width: 400px;
+        height: 300px;
+        margin: -150px 0 0 -200px;
+    }
+}
+/* Player Names */
+#player {
+    font-size: 2.9vw;
+    margin: 0;
+
+    bottom: 0;
+    padding: 10px 10px 10px;
+}
+#opp {
+    font-size: 2.9vw;
+    margin: 0;
+    padding: 10px 10px 10px;
+}
+
+/* Player Images */
+#playerChar {
+    position: relative;
+    border-style: solid;
+    width: 10vw;
+    left: 10px;
+    z-index:10;
+}
+
+#playerDeck {
+    position: absolute;
+    border-style: solid;
+    width: 10vw;
+    height: 15vw;
+    margin-left:-20%;
+    z-index:5;
+    bottom: 30%;
+    transform: rotate(-10deg);
+}
+#playerDeck1 {
+    position: absolute;
+    border-style: solid;
+    width: 10vw;
+    height: 15vw;
+    margin-left:-20%;
+    z-index:4;
+    bottom: 30%;
+    transform: rotate(-13deg);
+}
+#playerDeck2 {
+    position: absolute;
+    border-style: solid;
+    width: 10vw;
+    height: 15vw;
+    margin-left:-20%;
+    z-index:3;
+    bottom: 30%;
+    transform: rotate(-20deg);
+}
+#playerDeck3 {
+    position: absolute;
+    border-style: solid;
+    width: 10vw;
+    height: 15vw;
+    margin-left:-20%;
+    z-index:2;
+    bottom: 30%;
+    transform: rotate(-25deg);
+}
+
+
+#opponent {
+    position: absolute;
+    border-style: solid;
+    width: 10vw;
+    right: 10px;
+}
+
+
+
+/* Points Progress Bar */
+.progress-points {
+    position: absolute;
+    height: 50%;
+    width: 50%;
+    left: 0;
+    top: 0;
+    font-size: 20px;
+    z-index: 3;
+}
+#pt {
+    font-size: 16px;
+    text-align: left;
+    float: left;
+    width: 50px;
+    text-align: center;
+    margin: 10px 0px 12px 0px;
+}
+#pt1 {
+    font-size: 16px;
+    float: right;
+    width: 50px;
+    text-align: center;
+    margin: 12px 0px 10px 0px;
+}
+.progress-bar {
+    overflow: hidden;
+    width: 203px;
+    height: 13px;
+    background-color: black;
+    border-radius: 16px;
+    margin: 10px;
+    padding: 3px;
+    z-index: 3;
+}
+.progress {
+    margin: 1px;
+    width: 200px;
+    height: 10px;
+    border-radius: 10px;
+    background-color: dodgerblue;
+}
+.player1 {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    margin: 10px 0px 10px 0px;
+    overflow: hidden;
+
+}
+.progress-bar.player1 {
+    right: 50px;
+}
+
+/* Cards */
+.card {
+  border-style: solid;
+  position: absolute;
+  height: 25%;
+  width: 10%;
+
+}
+#drawing {
+  visibility:hidden;
+  bottom: 4%;
+  left: 43%;
+    z-index: 20;
+    color: red;
+    font-family: courier;
+    font-size: 160%;
+}
+
+#handPos0 {
+    bottom: 0;
+    left: 25%;
+    z-index: 10;
+    transform: rotate(-15deg);
+}
+
+#handPos1 {
+    bottom: 1.5%;
+    left: 31%;
+    z-index: 11;
+    transform: rotate(-10deg);
+}
+
+#handPos2 {
+    bottom: 3%;
+    left: 37%;
+    z-index: 12;
+    transform: rotate(-5deg);
+}
+
+#handPos3 {
+    bottom: 4%;
+    left: 43%;
+    z-index: 13;
+    transform: rotate(0deg);
+}
+
+#handPos4 {
+    bottom: 3%;
+    left: 50%;
+    z-index: 14;
+    transform: rotate(5deg);
+}
+
+#handPos5 {
+    bottom: 1.5%;
+    left: 56%;
+    z-index: 15;
+    transform: rotate(10deg);
+}
+
+#handPos6 {
+    bottom: 0;
+    left: 63%;
+    z-index: 16;
+    transform: rotate(20deg);
+}
+
+/*enemys hand*/
+ .ecard {
+  border-style: solid;
+  position: absolute;
+  height: 30%;
+  width: 7%;
+
+}
+
+#ehandPos1 {
+  top:0;
+    left: 29%;
+    z-index: 10;
+    transform: rotate(15deg);
+}
+
+#ehandPos2 {
+    top: 3%;
+    left: 32%;
+    z-index: 11;
+    transform: rotate(10deg);
+}
+
+#ehandPos3 {
+    top: 6%;
+    left: 38%;
+    z-index: 12;
+    transform: rotate(5deg);
+}
+
+#ehandPos4 {
+    top: 7%;
+    left: 44%;
+    z-index: 13;
+    transform: rotate(-2deg);
+}
+
+#ehandPos5 {
+    top: 6%;
+    left: 50%;
+    z-index: 14;
+    transform: rotate(-5deg);
+}
+
+#ehandPos6 {
+    top: 3%;
+    left: 56%;
+    z-index: 15;
+    transform: rotate(-10deg);
+}
+
+#ehandPos7 {
+    top: -3%;
+    left: 60%;
+    z-index: 16;
+    transform: rotate(-20deg);
+}
