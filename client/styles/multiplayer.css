@@ -58,6 +58,7 @@ body {
     z-index:2;
     margin: -180px 0 0 -400px;
 }
+
 @media only screen and (max-width: 1100px) {
     .playingField {
         width: 400px;
@@ -65,13 +66,44 @@ body {
         margin: -150px 0 0 -200px;
     }
 }
+
+/* .speech-bubble {
+  bottom: 22%;
+	position: absolute;
+	background: #00bb1a;
+	border-radius: .4em;
+  width: 8%;
+  height: 16%;
+  z-index: 20;
+  left: 1%;
+}
+#speech-text {
+  font-size: 13px;
+  text-align: center;
+  color: white;
+}
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	width: 0;
+	height: 0;
+	border: 49px solid transparent;
+	border-top-color: #00bb1a;
+	border-bottom: 0;
+	border-right: 0;
+	margin-left: -24.5px;
+	margin-bottom: -25px;
+} */
 /* Player Names */
 #player {
     font-size: 2.9vw;
     margin: 0;
-
     bottom: 0;
     padding: 10px 10px 10px;
+    /* color: black;
+    text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen; */
 }
 #opp {
     font-size: 2.9vw;
@@ -84,7 +116,7 @@ body {
     position: relative;
     border-style: solid;
     width: 10vw;
-    left: 10px;
+    left: 60px;
     z-index:10;
 }
 
@@ -93,7 +125,7 @@ body {
     border-style: solid;
     width: 10vw;
     height: 15vw;
-    margin-left:-20%;
+    margin-left:-5%;
     z-index:5;
     bottom: 30%;
     transform: rotate(-10deg);
@@ -103,7 +135,7 @@ body {
     border-style: solid;
     width: 10vw;
     height: 15vw;
-    margin-left:-20%;
+    margin-left:-5%;
     z-index:4;
     bottom: 30%;
     transform: rotate(-13deg);
@@ -113,7 +145,7 @@ body {
     border-style: solid;
     width: 10vw;
     height: 15vw;
-    margin-left:-20%;
+    margin-left:-5%;
     z-index:3;
     bottom: 30%;
     transform: rotate(-20deg);
@@ -123,7 +155,7 @@ body {
     border-style: solid;
     width: 10vw;
     height: 15vw;
-    margin-left:-20%;
+    margin-left:-5%;
     z-index:2;
     bottom: 30%;
     transform: rotate(-25deg);
@@ -188,10 +220,122 @@ body {
     margin: 10px 0px 10px 0px;
     overflow: hidden;
 
+
 }
 .progress-bar.player1 {
     right: 50px;
 }
+
+.property {
+  position: absolute;
+  height: 10%;
+  width: 10%;
+  z-index: 30;
+  -webkit-filter: drop-shadow(5px 5px 5px #ffffff);
+  filter: drop-shadow(5px 5px 5px #ffffff);
+}
+
+#prop0 {
+    bottom: 28%;
+    left: 25%;
+    z-index: 10;
+    transform: rotate(-15deg);
+}
+
+#prop1 {
+    bottom: 30%;
+    left: 31%;
+    z-index: 11;
+    transform: rotate(-10deg);
+}
+
+#prop2 {
+    bottom: 30%;
+    left: 37%;
+    z-index: 12;
+    transform: rotate(-5deg);
+}
+
+#prop3 {
+    bottom: 32%;
+    left: 43%;
+    z-index: 13;
+    transform: rotate(0deg);
+}
+
+#prop4 {
+    bottom: 28%;
+    left: 50%;
+    z-index: 14;
+    transform: rotate(5deg);
+}
+
+#prop5 {
+    bottom: 30%;
+    left: 56%;
+    z-index: 15;
+    transform: rotate(10deg);
+}
+
+#prop6 {
+    bottom: 28%;
+    left: 63%;
+    z-index: 16;
+    transform: rotate(20deg);
+}
+
+
+#eprop0 {
+    top:11%;
+    left: 25%;
+    z-index: 10;
+    transform: rotate(15deg);
+}
+
+#eprop1 {
+    top: 16%;
+    left: 32%;
+    z-index: 11;
+    transform: rotate(10deg);
+}
+
+#eprop2 {
+    top: 19%;
+    left: 37%;
+    z-index: 12;
+    transform: rotate(5deg);
+}
+
+#eprop3 {
+    top: 19%;
+    left: 43%;
+    z-index: 13;
+    transform: rotate(-2deg);
+}
+
+#eprop4 {
+    top: 20%;
+    left: 50%;
+    z-index: 14;
+    transform: rotate(-5deg);
+}
+
+#eprop5 {
+    top: 16%;
+    left: 56%;
+    z-index: 15;
+    transform: rotate(-10deg);
+}
+
+#eprop6 {
+    top: 11%;
+    left: 63%;
+    z-index: 16;
+    transform: rotate(-20deg);
+}
+
+
+
 
 /* Cards */
 .card {
@@ -200,6 +344,34 @@ body {
   width: 10%;
 
 }
+.card:hover {
+     width: 50%;
+     height: 25%;
+
+}
+
+#cardDescContainer{
+  position:absolute;
+  z-index:20;
+  top: 40%;
+  left: 35%;
+  height: 40%;
+  width: 30%;
+
+
+}
+#cardDescription{
+  position:absolute;
+  opacity: 0;
+  height: 100%;
+  width: 100%;
+  z-index: 30;
+
+
+
+}
+
+
 #drawing {
   visibility:hidden;
   bottom: 4%;
@@ -263,27 +435,27 @@ body {
  .ecard {
   position: absolute;
   height: 13%;
-  width: 3%;
+  width: 5%;
 
 }
 
 #ehandPos6 {
   top:0;
-    left: 39%;
+    left: 36%;
     z-index: 10;
     transform: rotate(15deg);
 }
 
 #ehandPos5 {
     top: 3%;
-    left: 42%;
+    left: 40%;
     z-index: 11;
     transform: rotate(10deg);
 }
 
 #ehandPos4 {
     top: 6%;
-    left: 45%;
+    left: 44%;
     z-index: 12;
     transform: rotate(5deg);
 }
@@ -297,21 +469,21 @@ body {
 
 #ehandPos2 {
     top: 6%;
-    left: 51%;
+    left: 52%;
     z-index: 14;
     transform: rotate(-5deg);
 }
 
 #ehandPos1 {
     top: 3%;
-    left: 54%;
+    left: 56%;
     z-index: 15;
     transform: rotate(-10deg);
 }
 
 #ehandPos0 {
     top: 0%;
-    left: 57%;
+    left: 60%;
     z-index: 16;
     transform: rotate(-20deg);
 }

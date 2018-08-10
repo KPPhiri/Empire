@@ -4,6 +4,16 @@ class Game {
     this.players = players;
 
     this.setSockListeners();
+    // this.players.forEach((player)=> {
+    //     player.getSocket().on('message', (text) => {
+    //       //player.getSocket().broadcast.emit("emessage", text);
+    //       player.getSocket().emit("emessage", text);
+    //       console.log("EMITTINGG");
+    //
+    //
+    //   });
+    // });
+
   }
 
   addPlayer(player) {
@@ -12,7 +22,7 @@ class Game {
 
   setSockListeners() {
     this.players.forEach((player)=> {
-      ['drawing', 'playing', 'message', 'attack'].forEach((action) => {
+      ['drawing', 'playing', 'attack'].forEach((action) => {
         player.getSocket().on(action, (text) => {
           player.getSocket().broadcast.emit("e" +action, text);
         });

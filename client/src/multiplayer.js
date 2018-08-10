@@ -18,10 +18,10 @@ function Card(name, imgURL, action, cost) {
 
 function Action(name, imgURL, cost, ability, isWildCard) {
 	this.name = name,
-this.imgURL = imgURL;
-This.cost = cost;
-This.abiltiy = ability;
-this.isWildCard = isWildCard
+	this.imgURL = imgURL;
+	This.cost = cost;
+	This.abiltiy = ability;
+	this.isWildCard = isWildCard
 }
 
 function Player(charIndex) {
@@ -45,7 +45,7 @@ Player.prototype = {
 //adding action listeners to all 7 cards in hand
 for (i =0; i < 7; i++){
 	button = document.getElementById('handPos' + i);
-	button.addEventListener('click', (event)=> {
+	button.addEventListener('dblclick', (event)=> {
 		var path = event.target.getAttribute('src');
 		 if(path.substr(path.length - 13) != "emptyCard.png") {
 			 cardRemover(Number(event.srcElement.id[7]));

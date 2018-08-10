@@ -24,14 +24,19 @@ const io = socketio(server);
 //Socket.IO allows you to “namespace” your sockets, which essentially means assigning different endpoints or paths.
 //This namespace is identified by io.sockets or simply io
 
-var players = null;
+var waiting = null;
 io.on('connection', (socket) => {
-		if(players == null) {
-			players = [new Player(socket, "bob2")];
-
+	socket.on('message', (text) => {
+		io.emit("emessage", text);
+		});
+		if(!waiting) {
+			waiting = new Player(socket, "bob2");
+			console.log("Waiting on player...");
 		} else {
-			players.push(new Player(socket, "bob"));
-			new Game(players);
+
+			new Game([waiting, new Player(socket, "bob")]);
+			waiting = null;
+			console.log("Starting");
 		}
 
 });

@@ -3,7 +3,7 @@ const sock = io();
 if(window.location.pathname != "/multiplayer.html"){
 
 	const writeEvent = (text) => {
-		console.log("WORKING: " + text);
+		console.log("RECEVINGf: " + text);
 	  // <ul> element
 	  const parent = document.querySelector('#events');
 	  //get timeout
@@ -20,6 +20,7 @@ if(window.location.pathname != "/multiplayer.html"){
 	  tempSpan.innerHTML = t;
 	  msg.appendChild(tempSpan);
 	  parent.appendChild(msg);
+		parent.scrollTop = parent.scrollHeight;﻿
 	};
 
 
@@ -31,11 +32,12 @@ if(window.location.pathname != "/multiplayer.html"){
 		input.value = '';
 
 		sock.emit('message', text);
+		console.log("sending");
 
 	};
 	writeEvent("THIS IS THE CHAT BOX BELOW.....");
 
-	sock.on('message', writeEvent);
+	sock.on('emessage', writeEvent);
 
 	document.querySelector('#chat-form').addEventListener('submit', onFormSubmitted);
 
