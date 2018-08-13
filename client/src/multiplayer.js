@@ -12,7 +12,7 @@ function Card(name, imgURL, action, cost, probability) {
 	this.imgURL = imgURL;
 	this.action = action;
 	this.cost = cost;
-    this.probability = probability;
+  this.probability = probability;
 }
 
 
@@ -117,15 +117,16 @@ function cardRemover(position) {
     } else {
         points = pts.textContent.slice(0,pts.textContent.length-3);
     }
-        while(position + 1 < handCards.length && handCards[position + 1].name != null) {
-    		handCards[position] = handCards[position + 1];
-    		position++;
-    	};
+    while(position + 1 < handCards.length && handCards[position + 1].name != null) {
+  		handCards[position] = handCards[position + 1];
+  		position++;
+		}
     	document.getElementById('actionCard').src = handCards[position].imgURL;
         progress(handCards[position].cost);
     	handCards[position] = new Character(null, "img/emptyCard.png");
 
     	drawHand();
+
 }
 
 /**** Draws hand from character deck****/

@@ -18,28 +18,32 @@ class Game {
 
   setSockListeners2() {
     this.players.forEach((player)=> {
-      if(player.getIsTurn()) {
+
         ['drawing', 'playing', 'attack'].forEach((action) => {
           player.getSocket().on(action, (text) => {
-            console.log("ENEYMY PLAYING:");
+          if(player.getIsTurn()) {
             player.getSocket().broadcast.emit("e" +action, text);
             player.getSocket().emit(action, text);
+          } else {
+            console.log("IS NOT PLAYERS TURN");
+          }
           });
         });
-      }
     });
   }
 
   setSockListeners() {
     this.players.forEach((player)=> {
-      if(player.getIsTurn()) {
+
         ['playingRequest', 'drawingRequest'].forEach((action) => {
-          console.log("PLAYINGREWUESTTTT");
           player.getSocket().on(action, (text) => {
+          if(player.getIsTurn()) {
             player.getSocket().emit(action, text);
+          } else {
+            console.log("IS NOT PLAYERS TURN");
+            }
           });
         });
-      }
 
     });
   }
