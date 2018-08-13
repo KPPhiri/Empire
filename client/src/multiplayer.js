@@ -24,6 +24,7 @@ function Card(name, imgURL, action, cost, probability) {
 // 	This.abiltiy = ability;
 // 	this.isWildCard = isWildCard
 // }
+
 charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg")];
 function Player(charIndex) {
   this.playerChar = charCards[charIndex];
@@ -42,6 +43,8 @@ function Player(charIndex) {
 // }
 
 
+
+
 // *********Action Listeners**********
 
 //adding action listeners to all 7 cards in hand
@@ -53,6 +56,21 @@ for (i =0; i < 7; i++){
 			 cardRemover(Number(event.srcElement.id[7]));
 		 }
 	});
+
+	button.onmouseover = function (event) {
+	var path = event.target.getAttribute('src');
+	var img = document.getElementById('cardDescription');
+   img.src = path;
+	 img.style.opacity = "0.8";
+
+};
+
+button.onmouseout = function () {
+ document.getElementById('cardDescription').style.opacity = "0";
+ document.getElementById('cardDescription').src = "";
+};
+
+
 }
 
 //Adding action listener to deck that adds cards to player hand
@@ -252,4 +270,9 @@ const Play = () => {
 
 
 
-//adding action lister to deck
+const removePrompt = () => {
+    const parent = document.querySelector('.prompt');
+		console.log("REMVOING");
+    //add functionality so that when you choose a card it's applied to the game board
+    parent.style.display = 'none';
+};

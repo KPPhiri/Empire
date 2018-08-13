@@ -6,6 +6,7 @@
     <title>Card Game</title>
     <link rel="stylesheet" href="../styles/multiplayer.css">
     <link rel="stylesheet" href="../styles/characterSelection.css">
+    <link rel="stylesheet" href="../styles/promptBox.css">
     <link rel="stylesheet" href="../styles/cards.css">
 
 </head>
@@ -30,22 +31,22 @@
        <img src="img/enemyHand.jpg" id="cardDescription"></img>
      </div>
      <div id="playerProperties">
-       <!-- <img src="img/properties/prop1.png" class="property" id="prop0"></img>
+       <img src="img/properties/prop1.png" class="property" id="prop0"></img>
        <img src="img/properties/prop2.png" class="property" id="prop1"></img>
        <img src="img/properties/prop3.png" class="property" id="prop2"></img>
        <img src="img/properties/prop4.png" class="property" id="prop3"></img>
        <img src="img/properties/prop5.png" class="property" id="prop4"></img>
        <img src="img/properties/prop6.png" class="property" id="prop5"></img>
-       <img src="img/properties/prop2.png" class="property" id="prop6"></img> -->
+       <img src="img/properties/prop2.png" class="property" id="prop6"></img>
       </div>
       <div id="enemyProperties">
-        <!-- <img src="img/properties/prop1.png" class="property" id="eprop0"></img> -->
-        <!-- <img src="img/properties/prop2.png" class="property" id="eprop1"></img>
+        <img src="img/properties/prop1.png" class="property" id="eprop0"></img>
+        <img src="img/properties/prop2.png" class="property" id="eprop1"></img>
         <img src="img/properties/prop3.png" class="property" id="eprop2"></img>
         <img src="img/properties/prop4.png" class="property" id="eprop3"></img>
         <img src="img/properties/prop5.png" class="property" id="eprop4"></img>
         <img src="img/properties/prop6.png" class="property" id="eprop5"></img>
-        <img src="img/properties/prop2.png" class="property" id="eprop6"></img> -->
+        <img src="img/properties/prop2.png" class="property" id="eprop6"></img>
 
         <!-- <img src="img/properties/eprop2.png" class="property" id="eprop0"></img> -->
         <!-- <img src="img/properties/eprop3.png" class="property" id="eprop1"></img>
@@ -54,6 +55,7 @@
         <img src="img/properties/eprop5.png" class="property" id="eprop4"></img>
         <img src="img/properties/eprop1.png" class="property" id="eprop5"></img>
         <img src="img/properties/eprop2.png" class="property" id="eprop6"></img> -->
+
 
        </div>
 
@@ -132,6 +134,17 @@
             <a href="" onclick="Play();return false;"class="button" id="start">Start</a>
         </div>
     </div>
+
+    <div class="prompt">
+        <div class="prompt-content">
+          <p>Would you like to respond?</p>
+            <a href="" onclick="negateAttack();return false;" class="pbutton" id="yes">Yes</a>
+
+            <a href="" onclick="removePrompt();return false;" class="pbutton" id="no">No</a>
+        </div>
+    </div>
+
+
     <script src ="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>
     <script src="src/multiplayer.js"></script>
