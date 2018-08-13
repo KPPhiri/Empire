@@ -74,6 +74,7 @@ document.getElementById('playerDeck').addEventListener('click', ()=> {
 	}
 
 	sock.on('eplaying', (text) => {
+			//when opponent is playing a card, decrease opponents hand size by 1
 			document.getElementById('eActionCard').src = text;
 			var pos = 6;
 			var temp = document.getElementById('ehandPos' + pos).src;
@@ -81,7 +82,13 @@ document.getElementById('playerDeck').addEventListener('click', ()=> {
 				pos--;
 				temp = document.getElementById('ehandPos' + pos).src;
 			}
-				document.getElementById('ehandPos' + pos).src = "img/emptyCard.png";
+			document.getElementById('ehandPos' + pos).src = "img/emptyCard.png";
+
+			const parent = document.querySelector('.prompt');
+			parent.style.display = 'flex';
+
+
+
 			});
 
 

@@ -344,19 +344,14 @@ body {
   width: 10%;
 
 }
-.card:hover {
-     width: 50%;
-     height: 25%;
-
-}
 
 #cardDescContainer{
   position:absolute;
   z-index:20;
-  top: 40%;
-  left: 35%;
-  height: 40%;
-  width: 30%;
+  top: 30%;
+  left: 37%;
+  height: 45%;
+  width: 22%;
 
 
 }
