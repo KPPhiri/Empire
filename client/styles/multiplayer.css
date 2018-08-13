@@ -134,6 +134,7 @@ body {
 	margin-left: -24.5px;
 	margin-bottom: -25px;
 } */
+
 /* Player Names */
 #player {
     font-size: 2.9vw;
@@ -152,10 +153,14 @@ body {
 /* Player Images */
 #playerChar {
     position: relative;
-    border-style: solid;
     width: 10vw;
     left: 60px;
     z-index:10;
+}
+#opponent {
+    position: absolute;
+    width: 10vw;
+    right: 10px;
 }
 
 #playerDeck {
@@ -198,15 +203,6 @@ body {
     bottom: 30%;
     transform: rotate(-25deg);
 }
-
-
-#opponent {
-    position: absolute;
-    border-style: solid;
-    width: 10vw;
-    right: 10px;
-}
-
 
 
 /* Points Progress Bar */
