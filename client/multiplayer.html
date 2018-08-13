@@ -12,7 +12,7 @@
     <!-- Openonet's hand  -->
     <div id="Oppo" class="hand">
         <h1 id="oppChar">OPPONENT</h1>
-        <img src="img/jane.jpg" id="opponent"></img>
+        <img src="img/emptyCard.png" id="opponent"></img>
     </div>
 
     <div id="enemyHand">
@@ -58,7 +58,7 @@
 
     <div id="You" class="hand">
         <div class="bottomLeft">
-            <img src="img/bob.jpg" id="playerChar"></img>
+            <img src="img/emptyCard.png" id="playerChar"></img>
             <img src="img/enemyHand.jpg"  id="playerDeck" ></img>
             <img src="img/enemyHand.jpg"  id="playerDeck1" ></img>
             <img src="img/enemyHand.jpg"  id="playerDeck2" ></img>
@@ -74,13 +74,13 @@
 
     <!-- Player's hand  -->
     <div id="playerHand">
-          <img class="card" id="handPos0" ></img>
+          <img class="card" id="handPos0"></img>
           <img class="card" id="handPos1"></img>
           <img class="card" id="handPos2"></img>
           <img class="card" id="handPos3"></img>
           <img class="card" id="handPos4"></img>
-          <img src="img/jane.jpg" class="card" id="handPos5"></img>
-          <img src="img/vince.jpg" class="card" id="handPos6"></img>
+          <img class="card" id="handPos5"></img>
+          <img class="card" id="handPos6"></img>
     </div>
 
 
@@ -102,10 +102,11 @@
     </div>
 
     <button id="quit" onclick="window.location='./index.html'">Quit</button>
-    
-    <div >
-      <img id="eActionCard" class="card" src="img/bob.jpg"></img>
-      <img id="actionCard" class="card" src="img/bob.jpg"></img>
+
+    <!-- Initial board has no cards in played cards deck-->
+    <div>
+      <img id="eActionCard" class="card"></img>
+      <img id="actionCard" class="card"></img>
     </div>
 
     <div class="ch-select">

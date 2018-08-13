@@ -23,22 +23,22 @@ function Action(name, imgURL, cost, ability, isWildCard) {
 	This.abiltiy = ability;
 	this.isWildCard = isWildCard
 }
-charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/maro.jpg")];
+charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg")];
 function Player(charIndex) {
   this.playerChar = charCards[charIndex];
   return playerChar;
 }
 
-Player.prototype = {
-  constructor: Player,
-  deckDraw: function() {
-  	  return actionDeck[Math.floor(Math.random() * actionDeck.length)];
-  },
-  playCard: function() {
-  	playerPoints -= actionDeck[choiceIndex].cost;
-  	 actionDeck[choiceIndex].ability();
-  }
-}
+// Player.prototype = {
+//   constructor: Player,
+//   deckDraw: function() {
+//   	  return actionDeck[Math.floor(Math.random() * actionDeck.length)];
+//   },
+//   playCard: function() {
+//   	playerPoints -= actionDeck[choiceIndex].cost;
+//   	 actionDeck[choiceIndex].ability();
+//   }
+// }
 
 
 // *********Action Listeners**********
@@ -67,29 +67,34 @@ document.getElementById('playerDeck').addEventListener('click', () => {
 			rand = deckCards[index];
             console.log(deckCards.length);
 			document.getElementById('handPos' + pos).src = rand.imgURL;
+            handCards[pos] = rand;
 		}
 
-	});
+});
 
 
 
 
 // *********Game Initialization**********
 //Initializing and declaring deck array
-var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
-//new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
+var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
+                new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
+                new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4),
+                new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
+                new Card("Double Points","img/basicCard.jpg","wildCard",5)];
+//basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
-// new Card("Double Points","img/basicCard.jpg","wildCard",5), new Card("Freeze","img/basicCard.jpg","character",4),new Card("Rebuild","img/basicCard.jpg","character",4),new Card("Destroy","img/basicCard.jpg","character",4),
-// new Card("Protect","img/basicCard.jpg","character",4), new Card("Disappear","img/basicCard.jpg","character",4), new Card("Redirect","img/basicCard.jpg","character",4)
+// new Card("Double Points","img/basicCard.jpg","wildCard",5)
+
+//Character Special Cards Deck
+var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4), new Card("Freeze","img/basicCard.jpg","character",4),
+                    new Card("Destroy","img/basicCard.jpg","character",4), new Card("Protect","img/basicCard.jpg","character",4),
+                    new Card("Disappear","img/basicCard.jpg","character",4), new Card("Redirect","img/basicCard.jpg","character",4)];
 
 //Initializing and declaring hand array
-var handCards = [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
-                new Card("Attack","img/basicCard.jpg","attack",1), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
-
-
-
-
-
+var handCards = [];
+// var handCards= [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
+//                 new Card("Attack","img/basicCard.jpg","attack",1), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
 
 
 function cardRemover(position) {
@@ -118,14 +123,26 @@ function cardRemover(position) {
     }
 }
 
-//updating deck html with array contents
-function drawHand() {
-	for(i = 0; i < handCards.length; i++) {
+/**** Draws hand from character deck****/
+function drawInitialHand() {
+    for(i = 0; i < 7; i++) {
+        var index = Math.floor(Math.random()*deckCards.length);
+        rand = deckCards[index];
+        console.log(rand);
+        handCards.push(rand);
+    }
+    for(i = 0; i < handCards.length; i++) {
+        console.log(handCards[i].imgURL);
 		document.getElementById('handPos' + i).src = handCards[i].imgURL;
-
 	}
 }
-drawHand();
+function drawHand() {
+    for(i = 0; i < handCards.length; i++) {
+        console.log(handCards[i].imgURL);
+		document.getElementById('handPos' + i).src = handCards[i].imgURL;
+	}
+}
+//drawHand(); only called when new card drawn
 
 
 
@@ -195,7 +212,11 @@ function progress(cost) {
 /**** Character Selection ****/
 var characterId;
 function Select(charId) {
+    console.log(charId);
     characterId = charId;
+
+    //initialize that character deck
+    deckCards.push(specialCards[charId]);
 }
 const Play = () => {
     const parent = document.querySelector('.ch-select');
@@ -203,6 +224,7 @@ const Play = () => {
     document.getElementById('playerChar').src = Player(characterId).imgURL;
     //document.getElementById('oppChar').src = "img/jane.jpg";
     parent.style.display = 'none';
+    drawInitialHand();
 };
 
 
