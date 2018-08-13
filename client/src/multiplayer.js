@@ -7,22 +7,23 @@ this.propertyType = propertyType;
 this.progressPoints = progressPoints;
 }
 
-function Card(name, imgURL, action, cost) {
+function Card(name, imgURL, action, cost, probability) {
 	this.name = name;
 	this.imgURL = imgURL;
 	this.action = action;
 	this.cost = cost;
+    this.probability = probability;
 }
 
 
 
-function Action(name, imgURL, cost, ability, isWildCard) {
-	this.name = name,
-	this.imgURL = imgURL;
-	This.cost = cost;
-	This.abiltiy = ability;
-	this.isWildCard = isWildCard
-}
+// function Action(name, imgURL, cost, ability, isWildCard) {
+// 	this.name = name,
+// 	this.imgURL = imgURL;
+// 	This.cost = cost;
+// 	This.abiltiy = ability;
+// 	this.isWildCard = isWildCard
+// }
 charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg")];
 function Player(charIndex) {
   this.playerChar = charCards[charIndex];
@@ -55,7 +56,7 @@ for (i =0; i < 7; i++){
 }
 
 //Adding action listener to deck that adds cards to player hand
-document.getElementById('playerDeck').addEventListener('click', () => {
+document.getElementById('playerDeck0').addEventListener('click', () => {
 		var pos = 0;
 		var temp = document.getElementById('handPos' + pos).src;
 		while(temp.substr(temp.length - 13) != "emptyCard.png" && pos< 6) {
@@ -63,9 +64,12 @@ document.getElementById('playerDeck').addEventListener('click', () => {
 			temp = document.getElementById('handPos' + pos).src;
 		}
 		if((temp.substr(temp.length - 13)) == "emptyCard.png") {
-			var index = Math.floor(Math.random()*deckCards.length);
-			rand = deckCards[index];
-            console.log(deckCards.length);
+			var index = Math.floor(Math.random()*weightedDeck.length);
+			rand = weightedDeck[index];
+            //console.log(deckCards.length);
+            //remove card from the deck
+            weightedDeck.splice(index, 1);
+            console.log(weightedDeck.length);
 			document.getElementById('handPos' + pos).src = rand.imgURL;
             handCards[pos] = rand;
 		}
@@ -77,19 +81,23 @@ document.getElementById('playerDeck').addEventListener('click', () => {
 
 // *********Game Initialization**********
 //Initializing and declaring deck array
-var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
-                new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
-                new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4),
-                new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
-                new Card("Double Points","img/basicCard.jpg","wildCard",5)];
+var weightedDeck = [];
+// var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,0.357), new Card("Reject","img/basicCard.jpg","defence",2, 0.143),
+//                 new Card("Counter","img/basicCard.jpg","defence",0, 0.043), new Card("Swap","img/basicCard.jpg","wildCard",4, 0.043),
+//                 new Card("Defend","img/basicCard.jpg","defence",3,0.214), new Card("No Cost","img/basicCard.jpg","wildCard",5, 0.028),
+//                 new Card("Double Points","img/basicCard.jpg","wildCard",5, 0.029)];
+var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,35), new Card("Reject","img/basicCard.jpg","defence",2, 14),
+                new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
+                new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
+                new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
 // new Card("Double Points","img/basicCard.jpg","wildCard",5)
 
 //Character Special Cards Deck
-var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4), new Card("Freeze","img/basicCard.jpg","character",4),
-                    new Card("Destroy","img/basicCard.jpg","character",4), new Card("Protect","img/basicCard.jpg","character",4),
-                    new Card("Disappear","img/basicCard.jpg","character",4), new Card("Redirect","img/basicCard.jpg","character",4)];
+var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4, 14), new Card("Freeze","img/basicCard.jpg","character",4,14),
+                    new Card("Destroy","img/basicCard.jpg","character",4, 14), new Card("Protect","img/basicCard.jpg","character",4, 14),
+                    new Card("Disappear","img/basicCard.jpg","character",4, 14), new Card("Redirect","img/basicCard.jpg","character",4, 14)];
 
 //Initializing and declaring hand array
 var handCards = [];
@@ -124,15 +132,28 @@ function cardRemover(position) {
 }
 
 /**** Draws hand from character deck****/
+function initializeDeck() {
+    //deck elems
+    var totalWeights = 96;
+    var weights = [35,14,4,4,21,2,2,14];
+    var curElem = 0;
+    while (curElem < deckCards.length) {
+        for(i=0; i < weights[curElem];i++) {
+            weightedDeck[weightedDeck.length] = deckCards[curElem];
+        }
+        curElem++;
+    }
+    console.log(weightedDeck.length);
+}
 function drawInitialHand() {
     for(i = 0; i < 7; i++) {
-        var index = Math.floor(Math.random()*deckCards.length);
-        rand = deckCards[index];
+        var index = Math.floor(Math.random()*weightedDeck.length);
+        rand = weightedDeck[index];
         console.log(rand);
         handCards.push(rand);
     }
     for(i = 0; i < handCards.length; i++) {
-        console.log(handCards[i].imgURL);
+        console.log(handCards[i].name);
 		document.getElementById('handPos' + i).src = handCards[i].imgURL;
 	}
 }
@@ -222,8 +243,9 @@ const Play = () => {
     const parent = document.querySelector('.ch-select');
 
     document.getElementById('playerChar').src = Player(characterId).imgURL;
-    //document.getElementById('oppChar').src = "img/jane.jpg";
+    document.getElementById('opponent').src = "img/momoko.jpg";
     parent.style.display = 'none';
+    initializeDeck();
     drawInitialHand();
 };
 

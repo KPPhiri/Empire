@@ -55,7 +55,7 @@ if(window.location.pathname != "/multiplayer.html"){
 
 
 //adding action listener to deck
-document.getElementById('playerDeck').addEventListener('click', ()=> {
+document.getElementById('playerDeck0').addEventListener('click', ()=> {
 	sock.emit("drawing", "now");
 });
 
