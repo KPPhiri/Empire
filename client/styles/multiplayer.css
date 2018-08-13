@@ -34,30 +34,15 @@ body {
 }
 
 
-#actionCard {
-  right: 10%;
-  bottom: 10%;
-  border-style: solid;
-  z-index:10;
-}
-
-#eActionCard {
-  left: 10%;
-  top: 5%;
-  border-style: solid;
-  transform: rotate(180deg);
-  z-index:10;
-}
-
 .playingField {
     background-color: lightblue;
     position: absolute;
     width: 800px;
-    height: 450px;
-    top: 40%;
+    height: 440px;
+    top: 45%;
     left: 50%;
     z-index:2;
-    margin: -180px 0 0 -400px;
+    margin: -220px 0 0 -400px;
 }
 
 @media only screen and (max-width: 1100px) {
@@ -69,11 +54,18 @@ body {
 }
 
 #round {
+    opacity: 0.45;
     position: absolute;
-    top: 50%;
-    left: 50%;
+    width: 160px;
+    height: 50px;
+    top: 55%;
+    left: 55%;
     z-index:2;
+    margin: -25px 0 0 -80px;
+
 }
+
+/** Buttons **/
 #end {
     position: relative;
     float: right;
@@ -144,66 +136,11 @@ body {
     /* color: black;
     text-shadow: 1px 1px 2px black, 0 0 25px green, 0 0 5px darkgreen; */
 }
-#opp {
+#oppChar {
     font-size: 2.9vw;
     margin: 0;
     padding: 10px 10px 10px;
 }
-
-/* Player Images */
-#playerChar {
-    position: relative;
-    width: 10vw;
-    left: 60px;
-    z-index:10;
-}
-#opponent {
-    position: absolute;
-    width: 10vw;
-    right: 10px;
-}
-
-#playerDeck {
-    position: absolute;
-    border-style: solid;
-    width: 10vw;
-    height: 15vw;
-    margin-left:-5%;
-    z-index:5;
-    bottom: 30%;
-    transform: rotate(-10deg);
-}
-#playerDeck1 {
-    position: absolute;
-    border-style: solid;
-    width: 10vw;
-    height: 15vw;
-    margin-left:-5%;
-    z-index:4;
-    bottom: 30%;
-    transform: rotate(-13deg);
-}
-#playerDeck2 {
-    position: absolute;
-    border-style: solid;
-    width: 10vw;
-    height: 15vw;
-    margin-left:-5%;
-    z-index:3;
-    bottom: 30%;
-    transform: rotate(-20deg);
-}
-#playerDeck3 {
-    position: absolute;
-    border-style: solid;
-    width: 10vw;
-    height: 15vw;
-    margin-left:-5%;
-    z-index:2;
-    bottom: 30%;
-    transform: rotate(-25deg);
-}
-
 
 /* Points Progress Bar */
 .progress-points {
@@ -260,6 +197,7 @@ body {
     right: 50px;
 }
 
+/** Properties **/
 .property {
   position: absolute;
   height: 10%;
@@ -364,160 +302,6 @@ body {
 #eprop6 {
     top: 11%;
     left: 63%;
-    z-index: 16;
-    transform: rotate(-20deg);
-}
-
-
-
-
-/* Cards */
-.card {
-  position: absolute;
-  height: 25%;
-  width: 10%;
-
-}
-.card:hover {
-     width: 50%;
-     height: 25%;
-
-}
-
-#cardDescContainer{
-  position:absolute;
-  z-index:20;
-  top: 40%;
-  left: 35%;
-  height: 40%;
-  width: 30%;
-
-
-}
-#cardDescription{
-  position:absolute;
-  opacity: 0;
-  height: 100%;
-  width: 100%;
-  z-index: 30;
-
-
-
-}
-
-
-#drawing {
-  visibility:hidden;
-  bottom: 4%;
-  left: 43%;
-    z-index: 20;
-    color: red;
-    font-family: courier;
-    font-size: 160%;
-}
-
-#handPos0 {
-    bottom: 0;
-    left: 25%;
-    z-index: 10;
-    transform: rotate(-15deg);
-}
-
-#handPos1 {
-    bottom: 1.5%;
-    left: 31%;
-    z-index: 11;
-    transform: rotate(-10deg);
-}
-
-#handPos2 {
-    bottom: 3%;
-    left: 37%;
-    z-index: 12;
-    transform: rotate(-5deg);
-}
-
-#handPos3 {
-    bottom: 4%;
-    left: 43%;
-    z-index: 13;
-    transform: rotate(0deg);
-}
-
-#handPos4 {
-    bottom: 3%;
-    left: 50%;
-    z-index: 14;
-    transform: rotate(5deg);
-}
-
-#handPos5 {
-    bottom: 1.5%;
-    left: 56%;
-    z-index: 15;
-    transform: rotate(10deg);
-}
-
-#handPos6 {
-    bottom: 0;
-    left: 63%;
-    z-index: 16;
-    transform: rotate(20deg);
-}
-
-/*enemys hand*/
- .ecard {
-  position: absolute;
-  height: 13%;
-  width: 5%;
-
-}
-
-#ehandPos6 {
-  top:0;
-    left: 36%;
-    z-index: 10;
-    transform: rotate(15deg);
-}
-
-#ehandPos5 {
-    top: 3%;
-    left: 40%;
-    z-index: 11;
-    transform: rotate(10deg);
-}
-
-#ehandPos4 {
-    top: 6%;
-    left: 44%;
-    z-index: 12;
-    transform: rotate(5deg);
-}
-
-#ehandPos3 {
-    top: 7%;
-    left: 48%;
-    z-index: 13;
-    transform: rotate(-2deg);
-}
-
-#ehandPos2 {
-    top: 6%;
-    left: 52%;
-    z-index: 14;
-    transform: rotate(-5deg);
-}
-
-#ehandPos1 {
-    top: 3%;
-    left: 56%;
-    z-index: 15;
-    transform: rotate(-10deg);
-}
-
-#ehandPos0 {
-    top: 0%;
-    left: 60%;
     z-index: 16;
     transform: rotate(-20deg);
 }
