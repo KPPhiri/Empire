@@ -10,21 +10,26 @@
     top: 0;
 }
 .char-content {
-    width: 400px;
-    height: 440px;
-    background-color: white;
+    width: 480px;
+    height: 520px;
+    background-color: #9BC1BC;
     z-index: 21;
     border-radius: 4px;
     padding: 20px;
     text-align: center;
 }
 .char1 {
-    background-color: lightgrey;
-    width: 150px;
-    height: 150px;
+    background-color: #F4F1BB;
+    width: 200px;
+    height: 200px;
     display: inline-block;
+    border-radius: 10px;
     margin: 8px;
     padding: 10px;
+}
+.char1:focus {
+    background: #E6EBEC;
+    outline: 0;
 }
 .ch-card {
     width: 85%;
@@ -33,9 +38,9 @@
 .button {
     display: block;
     text-decoration: none;
-    background-color: pink;
-    border-radius: 5px;
-    margin: auto;
+    background-color: #ED6A5A;
+    border-radius: 10px;
+    margin: 10px auto;
     padding: 4px;
     width: 75px;
     color: black;
@@ -43,7 +48,8 @@
 
 }
 .button#cancel {
-    margin: 0;
+    background-color: #36C9C6;
+    margin: 10px;
     align-items: left;
     font-size: 15px;
     width: 55px;

@@ -20,7 +20,7 @@
 
 #eActionCard {
   left: 10%;
-  top: 5%;
+  top: 10%;
   transform: rotate(180deg);
   z-index:10;
 }
@@ -108,8 +108,8 @@
 
 }
 .card:hover {
-    width: 20%;
     height: 35%;
+    width: 15%;
 }
 
 #cardDescContainer{
