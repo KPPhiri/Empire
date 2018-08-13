@@ -37,7 +37,7 @@ class Player {
   }
 
   getIsTurn() {
-    return isTurn;
+    return this.isTurn;
   }
 }
 
