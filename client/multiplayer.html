@@ -7,13 +7,14 @@
     <link rel="stylesheet" href="../styles/multiplayer.css">
     <link rel="stylesheet" href="../styles/characterSelection.css">
     <link rel="stylesheet" href="../styles/promptBox.css">
+    <link rel="stylesheet" href="../styles/cards.css">
 
 </head>
 <body>
     <!-- Openonet's hand  -->
     <div id="Oppo" class="hand">
         <h1 id="oppChar">OPPONENT</h1>
-        <img src="img/jane.jpg" id="opponent"></img>
+        <img src="img/emptyCard.png" id="opponent"></img>
     </div>
 
     <div id="enemyHand">
@@ -24,7 +25,7 @@
       <img src="img/enemyHand.jpg" class="ecard" id="ehandPos4"></img>
       <img src="img/enemyHand.jpg" class="ecard" id="ehandPos5"></img>
       <img src="img/enemyHand.jpg" class="ecard" id="ehandPos6"></img>
-     </div>
+    </div>
 
      <div id="cardDescContainer">
        <img src="img/enemyHand.jpg" id="cardDescription"></img>
@@ -60,13 +61,14 @@
 
     <div id="You" class="hand">
         <div class="bottomLeft">
-            <img src="img/bob.jpg" id="playerChar"></img>
-            <img src="img/enemyHand.jpg"  id="playerDeck" ></img>
-            <img src="img/enemyHand.jpg"  id="playerDeck1" ></img>
-            <img src="img/enemyHand.jpg"  id="playerDeck2" ></img>
-            <img src="img/enemyHand.jpg"  id="playerDeck3" ></img>
+            <img src="img/emptyCard.png" id="playerChar"></img>
+            <img src="img/enemyHand.jpg"  class="playerDeck" id="playerDeck0" ></img>
+            <img src="img/enemyHand.jpg"  class="playerDeck" id="playerDeck1" ></img>
+            <img src="img/enemyHand.jpg"  class="playerDeck" id="playerDeck2" ></img>
+            <img src="img/enemyHand.jpg"  class="playerDeck" id="playerDeck3" ></img>
             <h1 id="player" >PLAYER1</h1>
         </div>
+        <button id="end" onclick="nextRound()">End Turn</button>
     </div>
     <hgroup class="speech-bubble">
     	<h1 id="speech-text">Hmm..</h1>
@@ -75,56 +77,59 @@
 
     <!-- Player's hand  -->
     <div id="playerHand">
-          <img class="card" id="handPos0" ></img>
+          <img class="card" id="handPos0"></img>
           <img class="card" id="handPos1"></img>
           <img class="card" id="handPos2"></img>
           <img class="card" id="handPos3"></img>
           <img class="card" id="handPos4"></img>
-          <img src="img/jane.jpg" class="card" id="handPos5"></img>
-          <img src="img/vince.jpg" class="card" id="handPos6"></img>
+          <img class="card" id="handPos5"></img>
+          <img class="card" id="handPos6"></img>
     </div>
 
 
     <div class="playingField"  id="try">
         <img src="img/terrain5.jpg" class="backgroundIm"></img>
+        <h2 id="round">ROUND 1</h2>
     </div>
     <div id="points" class="progress-points">
-        <p id="pt">10pts
+        <p id="pt">2pts
             <div class="progress-bar">
-                <div class="progress" id="progress"></div>
+                <div class="progress" id="progress-op"></div>
             </div>
         <p>
 
-        <p id="pt1" class="player1">10pts
+        <p id="pt1" class="player1">2pts
             <div class="progress-bar player1">
-                <div class="progress" id="progress"></div>                </div>
+                <div class="progress" id="progress"></div></div>
         <p>
     </div>
-    <div >
-      <img id="eActionCard" class="card" src="img/bob.jpg"></img>
-      <img id="actionCard" class="card" src="img/bob.jpg"></img>
+
+    <button id="quit" onclick="window.location='./index.html'">Quit</button>
+
+    <!-- Initial board has no cards in played cards deck-->
+    <div>
+      <img id="eActionCard" class="card"></img>
+      <img id="actionCard" class="card"></img>
     </div>
 
     <div class="ch-select">
         <div class="char-content">
             <a href="http://localhost:8080/" class="button" id="cancel">Cancel</a>
 
-            <div class="char1">
+            <button class="char1">
+                <img id="0" src="img/maro.jpg" alt="" class="ch-card" onclick="Select(this.id);"/>
+
+            </button>
+            <button class="char1">
+                <img id="1" src="img/momoko.jpg" alt="" class="ch-card" onclick="Select(this.id);"/>
+
+            </button>
+            <button class="char1">
                 <img src="img/bob.jpg" alt="" class="ch-card"/>
-                <p>Character Name</p>
-            </div>
-            <div class="char1">
+            </button>
+            <button class="char1">
                 <img src="img/bob.jpg" alt="" class="ch-card"/>
-                <p>Character Name</p>
-            </div>
-            <div class="char1">
-                <img src="img/bob.jpg" alt="" class="ch-card"/>
-                <p>Character Name</p>
-            </div>
-            <div class="char1">
-                <img src="img/bob.jpg" alt="" class="ch-card"/>
-                <p>Character Name</p>
-            </div>
+            </button>
 
             <a href="" onclick="Play();return false;"class="button" id="start">Start</a>
         </div>
