@@ -60,18 +60,48 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 });
 
 
-	//adding action listeners to all 7 cards in hand
+	//
 	for (i =0; i < 7; i++){
 		button = document.getElementById('handPos' + i);
 		button.addEventListener('click', (event)=> {
 			var imgSrc = event.srcElement.src.substr(event.srcElement.src.length - 13);
 			if(imgSrc != "emptyCard.png"){
-				console.log("PLAYING: " + imgSrc)
-				sock.emit('playing', event.srcElement.src);
+				console.log("PLAYINGSLDKFJSDL");
+
+				sock.emit('playingRequest', event.srcElement.id[7]);
 			}
 
 		});
 	}
+
+	sock.on('playingRequest', (text) => {
+		console.log("GETTING REMOVING");
+
+		cardRemover(text);
+	});
+
+
+	//Adding action listener to deck that adds cards to player hand
+	document.getElementById('playerDeck0').addEventListener('click', () => {
+		sock.emit('drawingRequest', 'OK');
+
+		});
+
+
+	sock.on('drawingRequest', (text) => {
+		console.log("DRAWINGGG");
+		var pos = 0;
+		var temp = document.getElementById('handPos' + pos).src;
+		while(temp.substr(temp.length - 13) != "emptyCard.png" && pos< 6) {
+			pos++;
+			temp = document.getElementById('handPos' + pos).src;
+		}
+		if((temp.substr(temp.length - 13)) == "emptyCard.png") {
+			var index = Math.floor(Math.random()*deckCards.length);
+			rand = deckCards[index];
+			document.getElementById('handPos' + pos).src = rand.imgURL;
+		}
+	});
 
 	sock.on('eplaying', (text) => {
 			//when opponent is playing a card, decrease opponents hand size by 1
