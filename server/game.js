@@ -3,8 +3,9 @@ class Game {
   constructor(players) {
     this.start = true;
     this.players = players;
-
+    players[0].setIsTurn(true);
     this.setSockListeners();
+    this.setSockListeners2();
 
   }
   getStart() {
@@ -15,14 +16,17 @@ class Game {
     this.players.push(player);
   }
 
-  setSockListeners() {
+  setSockListeners2() {
     this.players.forEach((player)=> {
-      ['drawing', 'playing', 'attack'].forEach((action) => {
-        player.getSocket().on(action, (text) => {
-          player.getSocket().broadcast.emit("e" +action, text);
-          player.getSocket().emit(action, text);
+      if(player.getIsTurn()) {
+        ['drawing', 'playing', 'attack'].forEach((action) => {
+          player.getSocket().on(action, (text) => {
+            console.log("ENEYMY PLAYING:");
+            player.getSocket().broadcast.emit("e" +action, text);
+            player.getSocket().emit(action, text);
+          });
         });
-      });
+      }
     });
   }
 
@@ -30,8 +34,8 @@ class Game {
     this.players.forEach((player)=> {
       if(player.getIsTurn()) {
         ['playingRequest', 'drawingRequest'].forEach((action) => {
+          console.log("PLAYINGREWUESTTTT");
           player.getSocket().on(action, (text) => {
-            player.getSocket().broadcast.emit(action, text);
             player.getSocket().emit(action, text);
           });
         });

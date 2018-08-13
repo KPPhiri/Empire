@@ -3,7 +3,6 @@ const sock = io();
 if(window.location.pathname != "/multiplayer.html"){
 
 	const writeEvent = (text) => {
-		console.log("RECEVINGf: " + text);
 	  // <ul> element
 	  const parent = document.querySelector('#events');
 	  //get timeout
@@ -56,7 +55,9 @@ if(window.location.pathname != "/multiplayer.html"){
 
 //adding action listener to deck
 document.getElementById('playerDeck0').addEventListener('click', ()=> {
+	sock.emit("drawingRequest", "now");
 	sock.emit("drawing", "now");
+
 });
 
 
@@ -64,19 +65,33 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 	for (i =0; i < 7; i++){
 		button = document.getElementById('handPos' + i);
 		button.addEventListener('click', (event)=> {
+		var position  = event.srcElement.id[7];
+		var pts = document.getElementById('pt1');
+    var points;
+    if (pts.textContent.length == 17) {
+        points = pts.textContent.slice(0,-16);
+    } else {
+        points = pts.textContent.slice(0,pts.textContent.length-3);
+    }
+    //checks to see if sufficient amount of points to play card
+    if (handCards[position].cost <= points) {
 			var imgSrc = event.srcElement.src.substr(event.srcElement.src.length - 13);
 			if(imgSrc != "emptyCard.png"){
-				console.log("PLAYINGSLDKFJSDL");
-
+				console.log("EMITTINGGG: " + 'playing');
+				sock.emit('playing', "OK");
 				sock.emit('playingRequest', event.srcElement.id[7]);
 			}
+		} else {
+			console.log(points);
+			console.log(handCards[event.srcElement.id[7]].cost);
+			console.log("cannot perform move of cost: " + handCards[event.srcElement.id[7]].cost +
+		 "  players points: " + points);
+	}
 
 		});
 	}
 
 	sock.on('playingRequest', (text) => {
-		console.log("GETTING REMOVING");
-
 		cardRemover(text);
 	});
 
@@ -89,7 +104,6 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 
 
 	sock.on('drawingRequest', (text) => {
-		console.log("DRAWINGGG");
 		var pos = 0;
 		var temp = document.getElementById('handPos' + pos).src;
 		while(temp.substr(temp.length - 13) != "emptyCard.png" && pos< 6) {
@@ -112,6 +126,8 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 				pos--;
 				temp = document.getElementById('ehandPos' + pos).src;
 			}
+
+			console.log("REMVOING CARD: " + pos);
 			document.getElementById('ehandPos' + pos).src = "img/emptyCard.png";
 
 			const parent = document.querySelector('.prompt');

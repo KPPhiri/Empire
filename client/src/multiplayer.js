@@ -117,8 +117,6 @@ function cardRemover(position) {
     } else {
         points = pts.textContent.slice(0,pts.textContent.length-3);
     }
-    //checks to see if sufficient amount of points to play card
-    if (handCards[position].cost <= points) {
         while(position + 1 < handCards.length && handCards[position + 1].name != null) {
     		handCards[position] = handCards[position + 1];
     		position++;
@@ -128,11 +126,6 @@ function cardRemover(position) {
     	handCards[position] = new Character(null, "img/emptyCard.png");
 
     	drawHand();
-    } else {
-        console.log(points);
-        console.log(handCards[position].cost);
-        console.log("cannot perform move");
-    }
 }
 
 /**** Draws hand from character deck****/
