@@ -32,9 +32,17 @@
      </div>
      <div id="playerProperties">
        <img src="img/properties/prop1.png" class="property" id="prop0"></img>
+           <p id="phealth0">100</p>
+           <p id="pshield0">0</p>
        <img src="img/properties/prop2.png" class="property" id="prop1"></img>
+           <p id="phealth1">100</p>
+           <p id="pshield1">0</p>
        <img src="img/properties/prop3.png" class="property" id="prop2"></img>
+           <p id="phealth2">100</p>
+           <p id="pshield2">0</p>
        <img src="img/properties/prop4.png" class="property" id="prop3"></img>
+           <p id="phealth3">100</p>
+           <p id="pshield3">0</p>
        <!-- <img src="img/properties/prop5.png" class="property" id="prop4"></img>
        <img src="img/properties/prop6.png" class="property" id="prop5"></img>
        <img src="img/properties/prop2.png" class="property" id="prop6"></img> -->
@@ -123,7 +131,7 @@
       <img id="eActionCard" class="card"></img>
       <img id="actionCard" class="card"></img>
     </div>
-
+    <!-- Character Selection Popup-->
     <div class="ch-select">
         <div class="char-content">
             <a href="http://localhost:8080/" class="button" id="cancel">Cancel</a>
@@ -137,10 +145,10 @@
 
             </button>
             <button class="char1">
-                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <img id="2" src="img/catMagicCard.jpg" alt="" class="ch-card" onclick="Select(this.id);"/>
             </button>
             <button class="char1">
-                <img src="img/bob.jpg" alt="" class="ch-card"/>
+                <img id="3" src="img/ches.jpg" alt="" class="ch-card" onclick="Select(this.id);"/>
             </button>
 
             <a href="" onclick="Play();return false;"class="button" id="start">Start</a>

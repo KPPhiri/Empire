@@ -30,7 +30,7 @@ function Property(number, imgURL, health, shield) {
 // 	this.isWildCard = isWildCard
 // }
 
-charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg")];
+charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg"),new Card("CatMagi", "img/catMagicCard.jpg"), new Card("Ches", "img/ches.jpg")];
 function Player(charIndex) {
   this.playerChar = charCards[charIndex];
   return playerChar;
@@ -106,8 +106,8 @@ var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,35), new Card(
 
 //Character Special Cards Deck
 var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4, 14), new Card("Freeze","img/basicCard.jpg","character",4,14),
-                    new Card("Destroy","img/basicCard.jpg","character",4, 14), new Card("Protect","img/basicCard.jpg","character",4, 14),
-                    new Card("Disappear","img/basicCard.jpg","character",4, 14), new Card("Redirect","img/basicCard.jpg","character",4, 14)];
+                    new Card("Disappear","img/basicCard.jpg","character",4, 14), new Card("Destroy","img/basicCard.jpg","character",4, 14),
+                    new Card("Protect","img/basicCard.jpg","character",4, 14), new Card("Redirect","img/basicCard.jpg","character",4, 14)];
 
 //Initializing and declaring hand array
 var handCards = [];
