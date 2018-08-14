@@ -3,6 +3,7 @@ class Player {
     this.socket = socket;
     this.username = username;
     this.score = 10;
+    this.negateCards = 0;
     this.isTurn = false;
     this.canRespond = false;
     this.charImg = "./../client/img/vince.jpg";
@@ -25,9 +26,18 @@ class Player {
   }
 
   //setters
+  setNegateCards(negateCards) {
+    this.negateCards = negateCards;
+  }
+
+  getNegateCards() {
+    return this.negateCards;
+  }
+
   setScore(score) {
     this.score = score;
   }
+
 
   setCharImg(charImg) {
     this.charImg = charImg;
