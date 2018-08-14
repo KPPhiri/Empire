@@ -77,14 +77,17 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
     if (handCards[position].cost <= points) {
 			var imgSrc = event.srcElement.src.substr(event.srcElement.src.length - 13);
 			if(imgSrc != "emptyCard.png"){
-				console.log("EMITTINGGG: " + 'playing');
-				sock.emit('playing', "OK");
+				sock.emit('playing', handCards[position].imgURL);
 				sock.emit('playingRequest', event.srcElement.id[7]);
+				if (handCards[position].action == "attack") {
+					console.log("Playing an attack card: shound inititate response prompt for opp.");
+					sock.emit('requestResponse', 'allow player repond');
+				}
 			}
 		} else {
-			console.log(points);
-			console.log(handCards[event.srcElement.id[7]].cost);
-			console.log("cannot perform move of cost: " + handCards[event.srcElement.id[7]].cost +
+			// console.log(points);
+			// console.log(handCards[event.srcElement.id[7]].cost);
+			console.log("cannot perform move: "+ handCards[event.srcElement.id[7]].action + " Cost: " + handCards[event.srcElement.id[7]].cost +
 		 "  players points: " + points);
 	}
 
@@ -93,6 +96,7 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 
 	sock.on('playingRequest', (text) => {
 		cardRemover(text);
+
 	});
 
 
@@ -117,6 +121,11 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 		}
 	});
 
+	document.getElementById('no').addEventListener('click', ()=> {
+		sock.emit("finishReponse", "now");
+	});
+
+
 	sock.on('eplaying', (text) => {
 			//when opponent is playing a card, decrease opponents hand size by 1
 			document.getElementById('eActionCard').src = text;
@@ -127,13 +136,11 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 				temp = document.getElementById('ehandPos' + pos).src;
 			}
 
-			console.log("REMVOING CARD: " + pos);
 			document.getElementById('ehandPos' + pos).src = "img/emptyCard.png";
-
-			const parent = document.querySelector('.prompt');
-			parent.style.display = 'flex';
-
-
+			 if (text == "img/attack.png") {
+				const parent = document.querySelector('.prompt');
+				parent.style.display = 'flex';
+			 }
 
 			});
 
