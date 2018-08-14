@@ -15,11 +15,12 @@ function Card(name, imgURL, action, cost, probability) {
     this.probability = probability;
 }
 
-function Property(number, imgURL, health, shield) {
+function Property(number, imgURL, health, shield, isAttackable) {
     this.number = number;
     this.imgURL = imgURL;
     this.health = health;
     this.shield = shield;
+		this.isAttackable = true;
 }
 
 // function Action(name, imgURL, cost, ability, isWildCard) {
@@ -90,6 +91,9 @@ button.onmouseout = function () {
 
 // *********Game Initialization**********
 var properties = [new Property(0, "img/properties/prop1.png", 100, 0),new Property(1, "img/properties/prop1.png", 100, 0),new Property(2, "img/properties/prop1.png", 100, 0),new Property(3, "img/properties/prop1.png", 100, 0)];
+
+var enemyProperties = [new Property(0, "img/properties/prop1.png", 100, 0),new Property(1, "img/properties/prop1.png", 100, 0),new Property(2, "img/properties/prop1.png", 100, 0),new Property(3, "img/properties/prop1.png", 100, 0)];
+
 //Initializing and declaring deck array
 var weightedDeck = [];
 // var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,0.357), new Card("Reject","img/basicCard.jpg","defence",2, 0.143),
@@ -119,24 +123,25 @@ var handCards = [];
 
 
 /** Card Types Implementation to use on Properties**/
-function useCardOn(propertyId, cardUsed) {
-    console.log(cardUsed.action);
-    if (cardUsed.action == "attack") {
-        //properties[propertyId].health -= 15;
-        console.log(propertyId);
-        properties[propertyId].health -= 15;
-        document.getElementById('health'+propertyId).innerHTML =properties[propertyId].health.toString();
-        console.log("health is now " + properties[propertyId].health);
-    } else if (cardUsed.name == "Defend"){
-        if(properties[propertyId].shield < 30) {
-            properties[propertyId].shield += 15;
-            document.getElementById('shield'+propertyId).innerHTML =properties[propertyId].shield.toString();
-        }else {
-            console.log("cannot put more shields");
-        }
-        console.log("defense is now " + properties[propertyId].shield);
-    }
-}
+// function useCardOn(propertyId, cardUsed) {
+//     console.log(cardUsed.action);
+//     if (cardUsed.action == "attack") {
+//         //properties[propertyId].health -= 15;
+//         console.log(propertyId);
+//         properties[propertyId].health -= 15;
+//         document.getElementById('health'+propertyId).innerHTML =properties[propertyId].health.toString();
+//         console.log("health is now " + properties[propertyId].health);
+//     } else if (cardUsed.name == "Defend"){
+//         if(properties[propertyId].shield < 30) {
+//             properties[propertyId].shield += 15;
+//             document.getElementById('shield'+propertyId).innerHTML =properties[propertyId].shield.toString();
+//         }else {
+//             console.log("cannot put more shields");
+//         }
+//         console.log("defense is now " + properties[propertyId].shield);
+//     }
+// }
+
 function cardRemover(pos) {
     var position = Number(pos);
     var pts = document.getElementById('pt1');
@@ -162,23 +167,23 @@ document.getElementById('actionCard').src = handCards[position].imgURL;
 
     	drawHand();
   //use selected card on selected property
-        var used = false;
-        for (ii =0; ii < 4; ii++){
-            console.log("looping properties")
-            ppty = document.getElementById('eprop' + ii);
-            ppty.addEventListener('dblclick', (event)=> {
-                console.log("watching property");
-                console.log('eprop' + ii);
-
-                console.log(handCards[position]);
-
-                if(used == false) {
-                    console.log("being used");
-                    useCardOn(Number(event.srcElement.id[5]), handCards[position]);
-                    used = true;
-                }
-            });
-        };
+        // var used = false;
+        // for (ii =0; ii < 4; ii++){
+        //     console.log("looping properties")
+        //     ppty = document.getElementById('eprop' + ii);
+        //     ppty.addEventListener('dblclick', (event)=> {
+        //         console.log("watching property");
+        //         console.log('eprop' + ii);
+				//
+        //         console.log(handCards[position]);
+				//
+        //         if(used == false) {
+        //             console.log("being used");
+        //             useCardOn(Number(event.srcElement.id[5]), handCards[position]);
+        //             used = true;
+        //         }
+        //     });
+        // };
 }
 
 /**** Draws hand from character deck****/

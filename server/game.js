@@ -66,12 +66,23 @@ class Game {
           }
         });
       });
+
+      player.getSocket().on('disableHandandDeck', (text) => {
+        player.setIsTurn(false);
+      });
+
+      player.getSocket().on('enableHandandDeck', (text) => {
+        player.setIsTurn(true);
+      });
+
+
     });
   }
 
   setSockListeners4() {
     this.players.forEach((player)=> {
-      player.getSocket().on('finishReponse', (text) => {
+      player.getSocket().on('acceptAttack', (text) => {
+        player.getSocket().broadcast.emit('acceptAttack', text);
         this.players.forEach((opponent)=> {
           if(player.getUsername() == opponent.getUsername()) {
             player.setCanRespond(false);
