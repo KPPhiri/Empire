@@ -154,7 +154,10 @@ if (window.location.pathname != "/multiplayer.html") {
     //     }
     // }
 
-
+		function incrementNegatePoints() {
+			console.log("adding negate increment");
+			sock.emit('incrNegateCards', 'OK');
+		}
 
     sock.on('playingRequest', (text) => {
         //play card on the field and remove from hand

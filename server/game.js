@@ -3,13 +3,18 @@ class Game {
   constructor(players) {
     this.start = true;
     this.players = players;
-    players[0].setIsTurn(true);
+    this.players[0].setIsTurn(true);
     this.setSockListeners();
     this.setSockListeners2();
     this.setSockListeners3();
     this.setSockListeners4();
-
-  }
+    this.players.forEach((player)=> {
+      player.getSocket().on('incrNegateCards', (text) => {
+        player.setNegateCards(player.getNegateCards() + 1);
+        console.log("players neg points are: " + player.getNegateCards());
+      });
+    });
+}
   getStart() {
     return this.start;
   }

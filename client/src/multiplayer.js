@@ -31,6 +31,7 @@ function Property(number, imgURL, health, shield, isAttackable) {
 // 	this.isWildCard = isWildCard
 // }
 
+
 charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg"),new Card("CatMagi", "img/catMagicCard.jpg"), new Card("Ches", "img/ches.jpg")];
 function Player(charIndex) {
   this.playerChar = charCards[charIndex];
@@ -104,10 +105,10 @@ var weightedDeck = [];
 //                 new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
 //                 new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
 //                 new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
-var deckCards = [new Card("Attack","img/attack.png","attack",1,35), new Card("Reject","img/basicCard.jpg","attack",2, 14),
-                new Card("Counter","img/basicCard.jpg","attack",0, 4), new Card("Swap","img/basicCard.jpg","attack",4, 4),
-                new Card("Defend","img/basicCard.jpg","attack",3,21), new Card("No Cost","img/basicCard.jpg","attack",5, 2),
-                new Card("Double Points","img/basicCard.jpg","attack",5,2)];
+var deckCards = [new Card("attack","img/attack.png","attack",1,35), new Card("reject","img/basicCard.jpg","attack",2, 14),
+                new Card("counter","img/basicCard.jpg","attack",0, 4), new Card("swap","img/basicCard.jpg","attack",4, 4),
+                new Card("defend","img/basicCard.jpg","attack",3,21), new Card("no cost","img/basicCard.jpg","attack",5, 2),
+                new Card("double points","img/basicCard.jpg","attack",5,2)];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
 // new Card("Double Points","img/basicCard.jpg","wildCard",5)
@@ -205,6 +206,10 @@ function drawInitialHand() {
         var index = Math.floor(Math.random()*weightedDeck.length);
         rand = weightedDeck[index];
     	 console.log(rand);
+			 if(rand.name == "counter") {
+				 console.log("incrementing");
+				 incrementNegatePoints();
+			 }
         handCards.push(rand);
     }
     for(i = 0; i < handCards.length; i++) {
