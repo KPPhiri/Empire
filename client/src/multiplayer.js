@@ -96,14 +96,17 @@ var weightedDeck = [];
 //                 new Card("Counter","img/basicCard.jpg","defence",0, 0.043), new Card("Swap","img/basicCard.jpg","wildCard",4, 0.043),
 //                 new Card("Defend","img/basicCard.jpg","defence",3,0.214), new Card("No Cost","img/basicCard.jpg","wildCard",5, 0.028),
 //                 new Card("Double Points","img/basicCard.jpg","wildCard",5, 0.029)];
-var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,35), new Card("Reject","img/basicCard.jpg","defence",2, 14),
-                new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
-                new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
-                new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
+// var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,35), new Card("Reject","img/basicCard.jpg","attack",2, 14),
+//                 new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
+//                 new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
+//                 new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
+var deckCards = [new Card("Attack","img/attack.png","attack",1,35), new Card("Reject","img/basicCard.jpg","attack",2, 14),
+                new Card("Counter","img/basicCard.jpg","attack",0, 4), new Card("Swap","img/basicCard.jpg","attack",4, 4),
+                new Card("Defend","img/basicCard.jpg","attack",3,21), new Card("No Cost","img/basicCard.jpg","attack",5, 2),
+                new Card("Double Points","img/basicCard.jpg","attack",5,2)];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
 // new Card("Double Points","img/basicCard.jpg","wildCard",5)
-
 //Character Special Cards Deck
 var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4, 14), new Card("Freeze","img/basicCard.jpg","character",4,14),
                     new Card("Disappear","img/basicCard.jpg","character",4, 14), new Card("Destroy","img/basicCard.jpg","character",4, 14),
@@ -113,6 +116,7 @@ var specialCards = [new Card("Rebuild","img/basicCard.jpg","character",4, 14), n
 var handCards = [];
 // var handCards= [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 //                 new Card("Attack","img/basicCard.jpg","attack",1), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
+
 
 /** Card Types Implementation to use on Properties**/
 function useCardOn(propertyId, cardUsed) {
@@ -133,7 +137,8 @@ function useCardOn(propertyId, cardUsed) {
         console.log("defense is now " + properties[propertyId].shield);
     }
 }
-function cardRemover(position) {
+function cardRemover(pos) {
+    var position = Number(pos);
     var pts = document.getElementById('pt1');
     var points;
     if (pts.textContent.length == 17) {
@@ -145,16 +150,18 @@ function cardRemover(position) {
     while(position + 1 < handCards.length && handCards[position + 1].name != null) {
   		handCards[position] = handCards[position + 1];
   		position++;
+      console.log("hand length is : " + handCards.length);
 	}
         console.log("progressbar");
     	document.getElementById('actionCard').src = handCards[position].imgURL;
         progress(handCards[position].cost);
         //makes the empty card same as the card it had before but 0 cost
     	handCards[position] = new Card(handCards[position].name, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
-        //handCards[position].imgURL = "img/emptyCard.png";
+      //handCards[position] = new Card(null, "img/emptyCard.png", null, 0,0);      
+  //handCards[position].imgURL = "img/emptyCard.png";
 
-        //use selected card on selected property
     	drawHand();
+  //use selected card on selected property
         var used = false;
         for (ii =0; ii < 4; ii++){
             console.log("looping properties")
@@ -192,17 +199,17 @@ function drawInitialHand() {
     for(i = 0; i < 7; i++) {
         var index = Math.floor(Math.random()*weightedDeck.length);
         rand = weightedDeck[index];
-        console.log(rand);
+    	 console.log(rand);
         handCards.push(rand);
     }
     for(i = 0; i < handCards.length; i++) {
-        console.log(handCards[i].name);
+        // console.log(handCards[i].name);
 		document.getElementById('handPos' + i).src = handCards[i].imgURL;
 	}
 }
 function drawHand() {
     for(i = 0; i < handCards.length; i++) {
-        console.log(handCards[i].imgURL);
+        // console.log(handCards[i].imgURL);
 		document.getElementById('handPos' + i).src = handCards[i].imgURL;
 	}
 }
@@ -300,7 +307,6 @@ const Play = () => {
 
 const removePrompt = () => {
     const parent = document.querySelector('.prompt');
-		console.log("REMVOING");
     //add functionality so that when you choose a card it's applied to the game board
     parent.style.display = 'none';
 };

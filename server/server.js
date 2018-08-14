@@ -30,11 +30,11 @@ io.on('connection', (socket) => {
 		io.emit("emessage", text);
 		});
 		if(!waiting) {
-			waiting = new Player(socket, "bob2");
+			waiting = new Player(socket, "Player1");
 			console.log("Waiting on player...");
 		} else {
 
-			new Game([waiting, new Player(socket, "bob")]);
+			new Game([waiting, new Player(socket, "Player2")]);
 			waiting = null;
 			console.log("Starting");
 		}
