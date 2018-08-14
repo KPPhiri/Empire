@@ -264,9 +264,96 @@ p {
     z-index: 16;
     transform: rotate(20deg);
 }
-
-
+.enemyProperties {
+    display: flex;
+    position: absolute;
+    width: 100%;
+}
+#health0 {
+    position: absolute;
+    top:28%;
+    left: 25%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#shield0 {
+    position: absolute;
+    top:30%;
+    left: 26%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
 #eprop0 {
+    top:20%;
+    left: 25%;
+    z-index: 10;
+}
+#health1 {
+    position: absolute;
+    top: 34%;
+    left: 32%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#shield1 {
+    position: absolute;
+    top: 36%;
+    left: 34%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#eprop1 {
+    top: 25%;
+    left: 32%;
+    z-index: 10;
+}
+#health2 {
+    position: absolute;
+    top: 34%;
+    left: 56%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#shield2 {
+    position: absolute;
+    top: 36%;
+    left: 58%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#eprop2 {
+    top: 25%;
+    left: 56%;
+    z-index: 10;
+}
+#health3 {
+    position: absolute;
+    top: 28%;
+    left: 65%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#shield3 {
+    position: absolute;
+    top: 30%;
+    left: 65%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#eprop3 {
+    top: 20%;
+    left: 63%;
+    z-index: 10;
+}
+/* #eprop0 {
     top:11%;
     left: 25%;
     z-index: 10;
@@ -313,8 +400,7 @@ p {
     left: 63%;
     z-index: 16;
     transform: rotate(-20deg);
-}
-
+} */
 
 /* Cards */
 /* .card {

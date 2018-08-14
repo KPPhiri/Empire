@@ -84,7 +84,8 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 					sock.emit('requestResponse', 'allow player repond');
 				}
 			}
-		} else {
+
+} else {
 			// console.log(points);
 			// console.log(handCards[event.srcElement.id[7]].cost);
 			console.log("cannot perform move: "+ handCards[event.srcElement.id[7]].action + " Cost: " + handCards[event.srcElement.id[7]].cost +
