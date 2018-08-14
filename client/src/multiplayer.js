@@ -146,18 +146,18 @@ function cardRemover(pos) {
     } else {
         points = pts.textContent.slice(0,pts.textContent.length-3);
     }
-    console.log(handCards[position + 1]);
+document.getElementById('actionCard').src = handCards[position].imgURL;
     while(position + 1 < handCards.length && handCards[position + 1].name != null) {
   		handCards[position] = handCards[position + 1];
   		position++;
       console.log("hand length is : " + handCards.length);
 	}
         console.log("progressbar");
-    	document.getElementById('actionCard').src = handCards[position].imgURL;
+
         progress(handCards[position].cost);
         //makes the empty card same as the card it had before but 0 cost
     	handCards[position] = new Card(handCards[position].name, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
-      //handCards[position] = new Card(null, "img/emptyCard.png", null, 0,0);      
+      //handCards[position] = new Card(null, "img/emptyCard.png", null, 0,0);
   //handCards[position].imgURL = "img/emptyCard.png";
 
     	drawHand();
