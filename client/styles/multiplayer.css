@@ -216,7 +216,7 @@ p {
   filter: drop-shadow(5px 5px 5px #ffffff);
 }
 
-#prop0 {
+/* #prop0 {
     bottom: 28%;
     left: 25%;
     z-index: 10;
@@ -242,9 +242,8 @@ p {
     left: 43%;
     z-index: 13;
     transform: rotate(0deg);
-}
-
-#prop4 {
+} */
+/* #prop4 {
     bottom: 28%;
     left: 50%;
     z-index: 14;
@@ -263,6 +262,95 @@ p {
     left: 63%;
     z-index: 16;
     transform: rotate(20deg);
+} */
+.playerProperties {
+    display: flex;
+    position: absolute;
+    width: 100%;
+}
+#phealth0 {
+    position: absolute;
+    bottom: 30%;
+    left: 27%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#pshield0 {
+    position: absolute;
+    bottom: 28%;
+    left: 27%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#prop0 {
+    bottom: 35%;
+    left: 25%;
+    z-index: 10;
+}
+#phealth1 {
+    position: absolute;
+    bottom: 35%;
+    left: 33%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#pshield1 {
+    position: absolute;
+    bottom: 33%;
+    left: 33%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#prop1 {
+    bottom: 40%;
+    left: 31%;
+    z-index: 10;
+}
+#phealth2 {
+    position: absolute;
+    bottom: 35%;
+    left: 62%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#pshield2 {
+    position: absolute;
+    bottom: 33%;
+    left: 62%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#prop2 {
+    bottom: 40%;
+    left: 56%;
+    z-index: 10;
+}
+#phealth3 {
+    position: absolute;
+    bottom: 30%;
+    left: 68%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#pshield3 {
+    position: absolute;
+    bottom: 28%;
+    left: 68%;
+    z-index: 11;
+    font-size: 10px;
+    color: black;
+}
+#prop3 {
+    bottom: 35%;
+    left: 63%;
+    z-index: 10;
 }
 .enemyProperties {
     display: flex;
