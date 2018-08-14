@@ -4,6 +4,7 @@ class Player {
     this.username = username;
     this.score = 10;
     this.isTurn = false;
+    this.canRespond = false;
     this.charImg = "./../client/img/vince.jpg";
   }
 
@@ -38,6 +39,14 @@ class Player {
 
   getIsTurn() {
     return this.isTurn;
+  }
+
+  setCanRespond(canRespond) {
+    this.canRespond = canRespond;
+  }
+
+  getCanRespond() {
+    return this.canRespond;
   }
 }
 
