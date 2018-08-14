@@ -102,7 +102,7 @@ document.getElementById('playerDeck0').addEventListener('click', ()=> {
 
 
 	//Adding action listener to deck that adds cards to player hand
-	document.getElementById('playerDeck0').addEventListener('click', () => {
+	document.getElementById('playerDeck0').addEventListener('dblclick', () => {
 		sock.emit('drawingRequest', 'OK');
 
 		});
