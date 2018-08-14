@@ -1,10 +1,10 @@
 // *********Object Constructors**********
 
 function Character(name, imgURL, propertyType, progressPoints) {
-this.name = name;
-this.imgURL =imgURL;
-this.propertyType = propertyType;
-this.progressPoints = progressPoints;
+    this.name = name;
+    this.imgURL =imgURL;
+    this.propertyType = propertyType;
+    this.progressPoints = progressPoints;
 }
 
 function Card(name, imgURL, action, cost, probability) {
@@ -12,9 +12,15 @@ function Card(name, imgURL, action, cost, probability) {
 	this.imgURL = imgURL;
 	this.action = action;
 	this.cost = cost;
-  this.probability = probability;
+    this.probability = probability;
 }
 
+function Property(number, imgURL, health, shield) {
+    this.number = number;
+    this.imgURL = imgURL;
+    this.health = health;
+    this.shield = shield;
+}
 
 // function Action(name, imgURL, cost, ability, isWildCard) {
 // 	this.name = name,
@@ -83,6 +89,7 @@ button.onmouseout = function () {
 
 
 // *********Game Initialization**********
+var properties = [new Property(0, "img/properties/prop1.png", 100, 0),new Property(1, "img/properties/prop1.png", 100, 0),new Property(2, "img/properties/prop1.png", 100, 0),new Property(3, "img/properties/prop1.png", 100, 0)];
 //Initializing and declaring deck array
 var weightedDeck = [];
 // var deckCards = [new Card("Attack","img/basicCard.jpg","attack",1,0.357), new Card("Reject","img/basicCard.jpg","defence",2, 0.143),
@@ -107,8 +114,25 @@ var handCards = [];
 // var handCards= [new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 //                 new Card("Attack","img/basicCard.jpg","attack",1), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
 
-
-
+/** Card Types Implementation to use on Properties**/
+function useCardOn(propertyId, cardUsed) {
+    console.log(cardUsed.action);
+    if (cardUsed.action == "attack") {
+        //properties[propertyId].health -= 15;
+        console.log(propertyId);
+        properties[propertyId].health -= 15;
+        document.getElementById('health'+propertyId).innerHTML =properties[propertyId].health.toString();
+        console.log("health is now " + properties[propertyId].health);
+    } else if (cardUsed.name == "Defend"){
+        if(properties[propertyId].shield < 30) {
+            properties[propertyId].shield += 15;
+            document.getElementById('shield'+propertyId).innerHTML =properties[propertyId].shield.toString();
+        }else {
+            console.log("cannot put more shields");
+        }
+        console.log("defense is now " + properties[propertyId].shield);
+    }
+}
 function cardRemover(position) {
     var pts = document.getElementById('pt1');
     var points;
@@ -117,16 +141,37 @@ function cardRemover(position) {
     } else {
         points = pts.textContent.slice(0,pts.textContent.length-3);
     }
+    console.log(handCards[position + 1]);
     while(position + 1 < handCards.length && handCards[position + 1].name != null) {
   		handCards[position] = handCards[position + 1];
   		position++;
-		}
+	}
+        console.log("progressbar");
     	document.getElementById('actionCard').src = handCards[position].imgURL;
         progress(handCards[position].cost);
-    	handCards[position] = new Character(null, "img/emptyCard.png");
+        //makes the empty card same as the card it had before but 0 cost
+    	handCards[position] = new Card(handCards[position].name, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
+        //handCards[position].imgURL = "img/emptyCard.png";
 
+        //use selected card on selected property
     	drawHand();
+        var used = false;
+        for (ii =0; ii < 4; ii++){
+            console.log("looping properties")
+            ppty = document.getElementById('eprop' + ii);
+            ppty.addEventListener('dblclick', (event)=> {
+                console.log("watching property");
+                console.log('eprop' + ii);
 
+                console.log(handCards[position]);
+
+                if(used == false) {
+                    console.log("being used");
+                    useCardOn(Number(event.srcElement.id[5]), handCards[position]);
+                    used = true;
+                }
+            });
+        };
 }
 
 /**** Draws hand from character deck****/
@@ -170,11 +215,11 @@ function drawHand() {
 function nextRound() {
     var pts = document.getElementById('pt1');
     var newpts= pts.textContent.slice(0,document.getElementById('pt1').textContent.length-3);
+    var round = document.getElementById('round').textContent.slice(5);
     console.log(pts);
-    //pts = pts.textContent.slice(0, pts.length-3);
-    //console.log(pts.textContent.length);
+    //reset points to new max amount
     console.log("pts is " + pts);
-    newpts = parseInt(newpts) + 1;
+    newpts = parseInt(round) + 2;
     console.log("you have " + pts);
     pts.innerHTML = newpts + "pts";
     console.log("concat" + pts);
@@ -182,7 +227,7 @@ function nextRound() {
     //reset progressbar
     var prg = document.getElementById('progress');
     prg.style.width = 200 + 'px';
-    var round = document.getElementById('round').textContent.slice(5);
+    //var round = document.getElementById('round').textContent.slice(5);
     round = parseInt(round) + 1;
     document.getElementById('round').innerHTML = "Round " + round;
 }
