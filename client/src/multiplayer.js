@@ -288,6 +288,10 @@ function eProgress(cost) {
 var characterId;
 
 function Select(charId) {
+		// console.log("cardDescContainer: " + document.getElementById('cardDescContainer').style.zIndex);
+		// console.log("playerProperties: " + document.getElementById('playerProperties').style.zIndex);
+		// console.log("progress-bar : " + document.getElementsByClassName('progress-bar ')[0].style.zIndex);
+
     console.log(charId);
     characterId = charId;
 
