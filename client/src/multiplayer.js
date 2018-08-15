@@ -77,9 +77,9 @@ for (i = 0; i < 7; i++) {
 
 
 // *********Game Initialization**********
-var properties = [new Property(0, "img/properties/prop1.png", 100, 0), new Property(1, "img/properties/prop1.png", 100, 0), new Property(2, "img/properties/prop1.png", 100, 0), new Property(3, "img/properties/prop1.png", 100, 0)];
+var properties = [new Property(0, "img/properties/prop1.png", 100, 0, true), new Property(1, "img/properties/prop1.png", 100, 0, true), new Property(2, "img/properties/prop1.png", 100, 0, true), new Property(3, "img/properties/prop1.png", 100, 0, true)];
 
-var enemyProperties = [new Property(0, "img/properties/prop1.png", 100, 0), new Property(1, "img/properties/prop1.png", 100, 0), new Property(2, "img/properties/prop1.png", 100, 0), new Property(3, "img/properties/prop1.png", 100, 0)];
+var enemyProperties = [new Property(0, "img/properties/prop1.png", 100, 0,true), new Property(1, "img/properties/prop1.png", 100, 0,true), new Property(2, "img/properties/prop1.png", 100, 0,true), new Property(3, "img/properties/prop1.png", 100, 0,true)];
 
 //Initializing and declaring deck array
 var weightedDeck = [];
@@ -91,9 +91,9 @@ var weightedDeck = [];
 //                 new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
 //                 new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
 //                 new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
-var deckCards = [new Card("attack", "img/attack.png", "attack", 1, 35), new Card("reject", "img/basicCard.jpg", "attack", 2, 14),
+var deckCards = [new Card("attack", "img/attack.png", "attack", 1, 35), new Card("reject", "img/basicCard.jpg", "defense", 2, 14),
     new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
-    new Card("defend", "img/basicCard.jpg", "attack", 3, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+    new Card("defend", "img/basicCard.jpg", "defense", 3, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
 ];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
