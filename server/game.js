@@ -46,7 +46,7 @@ class Game {
         this.players.forEach((player) => {
             ['drawingRequest', 'addShield'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
-                    if (player.getIsTurn()) {;
+                    if (player.getIsTurn()) {
                         player.getSocket().emit(action, text);
                         if(action == 'addShield') {
                           console.log("sending enemy requst");
@@ -148,21 +148,7 @@ class Game {
             player.getSocket().on('decEnemyProgBar', (text) => {
                 player.getSocket().broadcast.emit('decEnemyProgBar', text);
             });
-        });
-    }
 
-
-    setSockListeners7() {
-        this.players.forEach((player) => {
-            player.getSocket().on('freezeOpp', (text) => {
-                player.getSocket().broadcast.emit('freezeOpp', text);
-                this.players.forEach((player2) => {
-                    if (player.getUsername() != player2.getUsername()) {
-                        player2.setIsFrozen(true);
-                        console.log("player is frozen: " +player2.getIsFrozen());
-                    }
-                });
-            });
         });
     }
 
