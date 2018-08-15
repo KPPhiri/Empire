@@ -125,11 +125,12 @@ if (window.location.pathname != "/multiplayer.html") {
 
     function enablePlayerPropListener(cardUsed) {
         //use selected card on selected property
+        document.getElementById('cardDescContainer').style.zIndex= '20';
         var used = false;
         for (i = 0; i < 4; i++) {
             property = document.getElementById('prop' + i);
             property.addEventListener('dblclick', (event) => {
-
+              document.getElementById('cardDescContainer').style.zIndex='24';
                 console.log(event.srcElement.id[4]);
 
                 propertyId = event.srcElement.id[4];
@@ -159,10 +160,13 @@ if (window.location.pathname != "/multiplayer.html") {
 
     function enableEnemyPropListener(position,cardUsed) {
         //use selected card on selected property
+        document.getElementById('cardDescContainer').style.zIndex='20';
         var used = false;
         for (i = 0; i < 4; i++) {
             property = document.getElementById('eprop' + i);
             property.addEventListener('dblclick', (event) => {
+              document.getElementById('cardDescContainer').style.zIndex='24';
+
                 console.log("emmitting enemy response");
                 propertyId = event.srcElement.id[5];
                 //sock.emit('requestResponse', event.srcElement.id[5]);
@@ -264,6 +268,7 @@ if (window.location.pathname != "/multiplayer.html") {
         if (Number(text) >= 0) {
             const parent = document.querySelector('.prompt');
             parent.style.display = 'flex';
+
             document.getElementById('no').addEventListener('click', () => {
                 properties[text].health -= 15;
                 document.getElementById('phealth' + text).innerHTML = properties[text].health.toString();

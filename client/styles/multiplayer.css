@@ -210,8 +210,8 @@ p {
 /** Properties **/
 .property {
   position: absolute;
-  height: 10%;
-  width: 10%;
+  height: 38%;
+  width: 17%;
   z-index: 30;
   -webkit-filter: drop-shadow(5px 5px 5px #ffffff);
   filter: drop-shadow(5px 5px 5px #ffffff);
@@ -264,182 +264,196 @@ p {
     z-index: 16;
     transform: rotate(20deg);
 } */
-.playerProperties {
+#playerProperties {
     display: flex;
     position: absolute;
-    width: 100%;
+    bottom: 25%;
+    left: 10%;
+    width: 80%;
+    height: 25%;
+    z-index: 22;
 }
 #phealth0 {
     position: absolute;
-    bottom: 30%;
-    left: 27%;
+    bottom: 23%;
+    left: 9%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #pshield0 {
     position: absolute;
-    bottom: 28%;
-    left: 27%;
+    bottom: 18%;
+    left: 9%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #prop0 {
     bottom: 35%;
-    left: 25%;
+    left: 5%;
     z-index: 10;
 }
 #phealth1 {
-    position: absolute;
-    bottom: 35%;
-    left: 33%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 37%;
+  left: 25%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #pshield1 {
-    position: absolute;
-    bottom: 33%;
-    left: 33%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 42%;
+  left: 25%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #prop1 {
-    bottom: 40%;
-    left: 32%;
+    top:5%;
+    left: 20%;
     z-index: 10;
 }
 #phealth2 {
-    position: absolute;
-    bottom: 35%;
-    left: 62%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 37%;
+  right: 29%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
 #pshield2 {
-    position: absolute;
-    bottom: 33%;
-    left: 62%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 42%;
+  right: 31%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #prop2 {
-    bottom: 40%;
-    left: 56%;
+    top: 5%;
+    right: 20%;
     z-index: 10;
 }
 #phealth3 {
     position: absolute;
-    bottom: 30%;
-    left: 68%;
+    bottom: 23%;
+    right: 14%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #pshield3 {
     position: absolute;
-    bottom: 28%;
-    left: 68%;
+    bottom: 18%;
+    right: 16%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #prop3 {
     bottom: 35%;
-    left: 63%;
+    right: 5%;
     z-index: 10;
 }
-.enemyProperties {
-    display: flex;
-    position: absolute;
-    width: 100%;
+#enemyProperties {
+  display: flex;
+  position: absolute;
+  top: 25%;
+  left: 10%;
+  width: 80%;
+  height: 25%;
+  z-index: 12;
 }
 #health0 {
     position: absolute;
-    top:28%;
-    left: 25%;
+    bottom: 23%;
+    left: 9%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #shield0 {
     position: absolute;
-    top:30%;
-    left: 26%;
+    bottom: 18%;
+    left: 9%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #eprop0 {
-    top:20%;
-    left: 25%;
+    bottom: 35%;
+    left: 5%;
     z-index: 10;
 }
 #health1 {
-    position: absolute;
-    top: 34%;
-    left: 32%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  bottom: 37%;
+  left: 25%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #shield1 {
-    position: absolute;
-    top: 36%;
-    left: 34%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  bottom: 42%;
+  left: 25%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #eprop1 {
-    top: 25%;
-    left: 32%;
+    bottom:10%;
+    left: 20%;
     z-index: 10;
 }
 #health2 {
-    position: absolute;
-    top: 34%;
-    left: 56%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 37%;
+  right: 29%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
 #shield2 {
-    position: absolute;
-    top: 36%;
-    left: 58%;
-    z-index: 11;
-    font-size: 10px;
-    color: black;
+  position: absolute;
+  top: 42%;
+  right: 31%;
+  z-index: 11;
+  font-size: 10px;
+  color: black;
 }
+
 #eprop2 {
-    top: 25%;
-    left: 56%;
+    bottom: 10%;
+    right: 20%;
     z-index: 10;
 }
 #health3 {
     position: absolute;
-    top: 28%;
-    left: 65%;
+    bottom: 23%;
+    right: 14%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #shield3 {
     position: absolute;
-    top: 30%;
-    left: 65%;
+    bottom: 18%;
+    right: 16%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #eprop3 {
-    top: 20%;
-    left: 63%;
+    bottom: 35%;
+    right: 5%;
     z-index: 10;
 }
 /* #eprop0 {
