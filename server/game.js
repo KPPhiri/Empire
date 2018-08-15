@@ -148,9 +148,20 @@ class Game {
             player.getSocket().on('decEnemyProgBar', (text) => {
                 player.getSocket().broadcast.emit('decEnemyProgBar', text);
             });
+        });
+    }
 
-            player.getSocket().on('feezeOpp', (text) => {
-                player.getSocket().broadcast.emit('feezeOpp', text);
+
+    setSockListeners7() {
+        this.players.forEach((player) => {
+            player.getSocket().on('freezeOpp', (text) => {
+                player.getSocket().broadcast.emit('freezeOpp', text);
+                this.players.forEach((player2) => {
+                    if (player.getUsername() != player2.getUsername()) {
+                        player2.setIsFrozen(true);
+                        console.log("player is frozen: " +player2.getIsFrozen());
+                    }
+                });
             });
         });
     }
