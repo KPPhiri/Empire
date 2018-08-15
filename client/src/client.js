@@ -125,6 +125,7 @@ if (window.location.pathname != "/multiplayer.html") {
         for (i = 0; i < 4; i++) {
             property = document.getElementById('prop' + i);
             property.addEventListener('dblclick', (event) => {
+
                 console.log(event.srcElement.id[4]);
 
                 propertyId = event.srcElement.id[4];
@@ -132,9 +133,12 @@ if (window.location.pathname != "/multiplayer.html") {
                     properties[propertyId].isAttackable = false;
                     console.log("makes not attackable");
                 } else if (properties[propertyId].shield < 30 && cardUsed.name == "defend" && !used) {
-                    properties[propertyId].shield += 15;
+										console.log("requesting server to add shield to property")
+										sock.emit('addShield', propertyId);
+                    // properties[propertyId].shield += 15;
                     document.getElementById('pshield' + propertyId).innerHTML = properties[propertyId].shield.toString();
                     used = true;
+
                 } else if(cardUsed.name == "Rebuild" && !used) {
                     properties[propertyId].health = 100;
                     document.getElementById('phealth' + propertyId).innerHTML = properties[propertyId].health.toString();
@@ -293,6 +297,12 @@ if (window.location.pathname != "/multiplayer.html") {
 
     sock.on('addShield', (text) => {
         properties[Number(text)].shield += 15;
+				console.log("adding 15 ");
         document.getElementById('pshield' + text).innerHTML = properties[Number(text)].shield.toString();
+    });
+		sock.on('eaddShield', (text) => {
+			console.log("getting request to add shield to opp prop");
+        enemyProperties[Number(text)].shield += 15;
+        document.getElementById('shield' + text).innerHTML = enemyProperties[Number(text)].shield.toString();
     });
 }

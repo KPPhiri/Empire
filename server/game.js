@@ -44,10 +44,14 @@ class Game {
 
     setSockListeners7() {
         this.players.forEach((player) => {
-            ['drawingRequest'].forEach((action) => {
+            ['drawingRequest', 'addShield'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
                     if (player.getIsTurn()) {;
                         player.getSocket().emit(action, text);
+                        if(action == 'addShield') {
+                          console.log("sending enemy requst");
+                          player.getSocket().broadcast.emit('e' + action, text);
+                        }
                     } else {
                         console.log(" X" + player.getUsername() + " is " + action + " player.getCanRespond(): " + player.getCanRespond() +
                             " player.getIsTurn(): " + player.getIsTurn());
@@ -143,6 +147,10 @@ class Game {
         this.players.forEach((player) => {
             player.getSocket().on('decEnemyProgBar', (text) => {
                 player.getSocket().broadcast.emit('decEnemyProgBar', text);
+            });
+
+            player.getSocket().on('feezeOpp', (text) => {
+                player.getSocket().broadcast.emit('feezeOpp', text);
             });
         });
     }
