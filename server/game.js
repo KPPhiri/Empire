@@ -8,6 +8,8 @@ class Game {
     this.setSockListeners2();
     this.setSockListeners3();
     this.setSockListeners4();
+    this.setSockListeners5();
+    this.setSockListeners7();
     this.players.forEach((player)=> {
       player.getSocket().on('incrNegateCards', (text) => {
         player.setNegateCards(player.getNegateCards() + 1);
@@ -15,6 +17,8 @@ class Game {
       });
     });
 }
+
+
   getStart() {
     return this.start;
   }
@@ -28,8 +32,8 @@ class Game {
         ['drawing', 'playing', 'attack'].forEach((action) => {
           player.getSocket().on(action, (text) => {
           if(player.getIsTurn() || player.getCanRespond()) {
-            player.getSocket().broadcast.emit("e" +action, text);
-            player.getSocket().emit(action, text);
+            player.getSocket().broadcast.emit("e" +action, text.substring(22, text.length-1));
+            player.getSocket().emit(action, text.substring(text.length-1));
           } else {
             console.log("IS NOT PLAYERS TURN");
           }
@@ -38,14 +42,30 @@ class Game {
     });
   }
 
+  setSockListeners7() {
+    this.players.forEach((player)=> {
+        ['drawingRequest'].forEach((action) => {
+          player.getSocket().on(action, (text) => {
+          if(player.getIsTurn()) {;
+            player.getSocket().emit(action, text);
+          } else {
+            console.log(" X" + player.getUsername() + " is " + action +  " player.getCanRespond(): " +  player.getCanRespond()
+            + " player.getIsTurn(): " + player.getIsTurn());
+            console.log("IS NOT PLAYERS TURN");
+            }
+          });
+        });
+
+    });
+  }
+  //
+  //
   setSockListeners() {
     this.players.forEach((player)=> {
-        ['playingRequest', 'drawingRequest'].forEach((action) => {
+        ['playingRequest'].forEach((action) => {
           player.getSocket().on(action, (text) => {
           if(player.getIsTurn() || player.getCanRespond()) {
-            console.log(player.getUsername() + " is " + action +  " player.getCanRespond(): " +  player.getCanRespond()
-            + " player.getIsTurn(): " + player.getIsTurn());
-            player.getSocket().emit(action, text);
+            player.getSocket().broadcast.emit(action, text);
             player.setCanRespond(false);
           } else {
             console.log(" X" + player.getUsername() + " is " + action +  " player.getCanRespond(): " +  player.getCanRespond()
@@ -58,16 +78,33 @@ class Game {
     });
   }
 
+  // setSockListeners6() {
+  //   this.players.forEach((player)=> {
+  //     player.getSocket().on('requestResponse', (text) => {
+  //       this.players.forEach((opponent)=> {
+  //         if(player.getUsername() == opponent.getUsername()) {
+  //           console.log(player.getUsername() + " has to now wait.");
+  //           player.setIsTurn(false);
+  //         } else {
+  //           opponent.setCanRespond(true);
+  //           console.log(opponent.getUsername() + " can now reply." + opponent.setCanRespond(true));
+  //         }
+  //       });
+  //     });
+  //
+
   setSockListeners3() {
     this.players.forEach((player)=> {
       player.getSocket().on('requestResponse', (text) => {
         this.players.forEach((opponent)=> {
           if(player.getUsername() == opponent.getUsername()) {
-            console.log(player.getUsername() + " has to now wait.");
+            console.log("diable player from playing");
             player.setIsTurn(false);
+
           } else {
             opponent.setCanRespond(true);
-            console.log(opponent.getUsername() + " can now reply." + opponent.setCanRespond(true));
+            opponent.getSocket().emit('createPrompt', text);
+            console.log("sending prompt");
           }
         });
       });
@@ -95,6 +132,15 @@ class Game {
             opponent.setIsTurn(true);
           }
         });
+      });
+    });
+  }
+
+
+  setSockListeners5() {
+    this.players.forEach((player)=> {
+      player.getSocket().on('decEnemyProgBar', (text) => {
+        player.getSocket().broadcast.emit('decEnemyProgBar', text);
       });
     });
   }
