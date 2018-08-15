@@ -44,9 +44,9 @@ p {
     position: absolute;
     width: 800px;
     height: 440px;
-    top: 45%;
+    top: 50%;
     left: 50%;
-    z-index:2;
+    z-index: 2;
     margin: -220px 0 0 -400px;
 }
 
@@ -62,12 +62,13 @@ p {
     font-family: "Impact", Segoe UI, sans-serif;
     opacity: 0.45;
     position: absolute;
-    width: 160px;
-    height: 50px;
-    top: 55%;
-    left: 55%;
-    z-index:2;
-    margin: -25px 0 0 -80px;
+    left: 40%;
+    top: 44%;
+    margin: 0;
+    font-size: 4vw;
+    text-align: center;
+    z-index:4;
+
 }
 
 /** Buttons **/
@@ -307,7 +308,7 @@ p {
 }
 #prop1 {
     bottom: 40%;
-    left: 31%;
+    left: 32%;
     z-index: 10;
 }
 #phealth2 {
