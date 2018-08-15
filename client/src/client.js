@@ -78,7 +78,8 @@ if (window.location.pathname != "/multiplayer.html") {
                 sock.emit('decEnemyProgBar', handCards[position].cost);
                 console.log("Playing type: " + handCards[position].name + " Cost: " + handCards[position].cost);
                 sock.emit('playing', event.srcElement.src + position);
-                checkIfAction(handCards[position]);
+                //only remove card if it was successful^
+                checkIfAction(handCards[position], position);
             } else {
                 console.log("!!cannot perform move: " + handCards[event.srcElement.id[7]].action + " Cost: " + handCards[event.srcElement.id[7]].cost +
                     "  players points: " + points);
@@ -91,14 +92,16 @@ if (window.location.pathname != "/multiplayer.html") {
             return false;
         } else if (card == "defend") {
             var violates = true;
-            forEach((poperty) => {
+            properties.forEach((property) => {
                 if (property.shield < 30) {
-                    return false;
+                    violates = false;
                 } else {
                     console.log("cannot use a defensive card");
                 }
             });
             return violates;
+        } else {
+            return false;
         }
     }
 
@@ -106,28 +109,38 @@ if (window.location.pathname != "/multiplayer.html") {
 
 
     /** Card Types Implementation to use on Properties**/
-    function checkIfAction(cardUsed) {
-        if (cardUsed.action == "attack") {
+    function checkIfAction(cardUsed,position) {
+        if (cardUsed.action == "attack" || cardUsed.name == "Destroy") {
             console.log("enabling enemy action listeners");
-            enableEnemyPropListener();
-        } else if (cardUsed.name == "Defend") {
-            enablePlayerPropListener();
-            console.log("defense is now " + properties[propertyId].shield);
+            enableEnemyPropListener(position,cardUsed);
+        } else if (cardUsed.name == "defend" || cardUsed.name == "reject" || cardUsed.name == "Rebuild") {
+            enablePlayerPropListener(cardUsed);
+            //console.log("defense is now " + properties[propertyId].shield);
         }
     }
 
-    function enablePlayerPropListener() {
+    function enablePlayerPropListener(cardUsed) {
         //use selected card on selected property
+        var used = false;
         for (i = 0; i < 4; i++) {
             property = document.getElementById('prop' + i);
             property.addEventListener('dblclick', (event) => {
-                propertyId = event.srcElement.id[5];
-                if (properties[propertyId].shield < 30) {
+                console.log(event.srcElement.id[4]);
+
+                propertyId = event.srcElement.id[4];
+                if(properties[propertyId].isAttackable && cardUsed.name == "reject" && !used) {
+                    properties[propertyId].isAttackable = false;
+                    console.log("makes not attackable");
+                } else if (properties[propertyId].shield < 30 && cardUsed.name == "defend" && !used) {
                     properties[propertyId].shield += 15;
                     document.getElementById('pshield' + propertyId).innerHTML = properties[propertyId].shield.toString();
-
+                    used = true;
+                } else if(cardUsed.name == "Rebuild" && !used) {
+                    properties[propertyId].health = 100;
+                    document.getElementById('phealth' + propertyId).innerHTML = properties[propertyId].health.toString();
                 } else {
-                    console.log("cannot put more shields");
+                    //or reject card was already used on property
+                    console.log("cannot put more shields or youve used the card");
                 }
             });
 
@@ -136,13 +149,31 @@ if (window.location.pathname != "/multiplayer.html") {
 
 
 
-    function enableEnemyPropListener() {
+    function enableEnemyPropListener(position,cardUsed) {
         //use selected card on selected property
+        var used = false;
         for (i = 0; i < 4; i++) {
             property = document.getElementById('eprop' + i);
             property.addEventListener('dblclick', (event) => {
                 console.log("emmitting enemy response");
-                sock.emit('requestResponse', event.srcElement.id[5]);
+                propertyId = event.srcElement.id[5];
+                //sock.emit('requestResponse', event.srcElement.id[5]);
+                if(!used) {
+                    console.log(position);
+                    if(!(enemyProperties[propertyId].isAttackable)) { //if the property they want to attack isnt attackable, just remove card without affecting health
+                        console.log("not attack");
+                        cardRemover(position);
+                    } else if (cardUsed.name == "Destroy") {
+                        console.log("destroys");
+                        enemyProperties[propertyId].health = 0;
+                        document.getElementById('health'+propertyId).innerHTML = enemyProperties[propertyId].health.toString();
+                    } else {
+                        console.log("regular attack");
+                        //else if the opponent has counter card, call emit req
+                        sock.emit('requestResponse', event.srcElement.id[5]);
+                    }
+                    used = true;
+                }
             });
         }
     }
@@ -235,8 +266,17 @@ if (window.location.pathname != "/multiplayer.html") {
 
     sock.on('acceptAttack', (text) => {
         //play card on the field and remove from hand
-        enemyProperties[Number(text)].health -= 15;
-        document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
+        console.log("accpting");
+        if(enemyProperties[Number(text)].shield > 0) {
+            enemyProperties[Number(text)].shield -= 15;
+            document.getElementById('shield' + text).innerHTML = enemyProperties[text].shield.toString();
+        } else {
+            enemyProperties[Number(text)].health -= 15;
+            document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
+
+        }
+        // enemyProperties[Number(text)].health -= 15;
+        // document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
@@ -249,5 +289,10 @@ if (window.location.pathname != "/multiplayer.html") {
             temp = document.getElementById('ehandPos' + pos).src;
         }
         document.getElementById('ehandPos' + pos).src = "img/enemyHand.jpg";
+    });
+
+    sock.on('addShield', (text) => {
+        properties[Number(text)].shield += 15;
+        document.getElementById('pshield' + text).innerHTML = properties[Number(text)].shield.toString();
     });
 }
