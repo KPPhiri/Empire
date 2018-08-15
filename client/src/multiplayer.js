@@ -58,17 +58,6 @@ Player.prototype = {
 //adding action listeners to all 7 cards in hand
 for (i =0; i < 7; i++){
 	button = document.getElementById('handPos' + i);
-	// button.addEventListener('dblclick', (event)=> {
-	// 	console.log("PLAYING: " + event.srcElement.id);
-	// 	//sock.emit('playing', event);
-	//
-	// 	var path = event.target.getAttribute('src');
-	// 	 if(path.substr(path.length - 13) != "emptyCard.png") {
-	// 		 sock.emit('playing', event.srcElementid[7]);
-	// 		 console.log("PLAYING: " + event.srcElementid[7]);
-	// 		 //cardRemover(Number(event.srcElement.id[7]));
-	// 	 }
-	// });
 
 	button.onmouseover = function (event) {
 	var path = event.target.getAttribute('src');
@@ -123,26 +112,6 @@ var handCards = [];
 //                 new Card("Attack","img/basicCard.jpg","attack",1), new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2)];
 
 
-/** Card Types Implementation to use on Properties**/
-// function useCardOn(propertyId, cardUsed) {
-//     console.log(cardUsed.action);
-//     if (cardUsed.action == "attack") {
-//         //properties[propertyId].health -= 15;
-//         console.log(propertyId);
-//         properties[propertyId].health -= 15;
-//         document.getElementById('health'+propertyId).innerHTML =properties[propertyId].health.toString();
-//         console.log("health is now " + properties[propertyId].health);
-//     } else if (cardUsed.name == "Defend"){
-//         if(properties[propertyId].shield < 30) {
-//             properties[propertyId].shield += 15;
-//             document.getElementById('shield'+propertyId).innerHTML =properties[propertyId].shield.toString();
-//         }else {
-//             console.log("cannot put more shields");
-//         }
-//         console.log("defense is now " + properties[propertyId].shield);
-//     }
-// }
-
 function cardRemover(pos) {
     var position = Number(pos);
     var pts = document.getElementById('pt1');
@@ -153,38 +122,17 @@ function cardRemover(pos) {
         points = pts.textContent.slice(0,pts.textContent.length-3);
     }
 document.getElementById('actionCard').src = handCards[position].imgURL;
+progress(handCards[position].cost);
+
     while(position + 1 < handCards.length && handCards[position + 1].name != null) {
   		handCards[position] = handCards[position + 1];
   		position++;
-      console.log("hand length is : " + handCards.length);
 	}
-        console.log("progressbar");
 
-        progress(handCards[position].cost);
+
         //makes the empty card same as the card it had before but 0 cost
     	handCards[position] = new Card(handCards[position].name, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
-      //handCards[position] = new Card(null, "img/emptyCard.png", null, 0,0);
-  //handCards[position].imgURL = "img/emptyCard.png";
-
     	drawHand();
-  //use selected card on selected property
-        // var used = false;
-        // for (ii =0; ii < 4; ii++){
-        //     console.log("looping properties")
-        //     ppty = document.getElementById('eprop' + ii);
-        //     ppty.addEventListener('dblclick', (event)=> {
-        //         console.log("watching property");
-        //         console.log('eprop' + ii);
-				//
-        //         console.log(handCards[position]);
-				//
-        //         if(used == false) {
-        //             console.log("being used");
-        //             useCardOn(Number(event.srcElement.id[5]), handCards[position]);
-        //             used = true;
-        //         }
-        //     });
-        // };
 }
 
 /**** Draws hand from character deck****/
@@ -251,6 +199,46 @@ function nextRound() {
 function progress(cost) {
     var prg = document.getElementById('progress');
     var pts = document.getElementById('pt1');
+    // console.log("you have this many pts " + pts.innerHTML);
+    // console.log("cost is " + cost);
+    //counter is the number of points
+    var counter;
+    //console.log(pts.textContent.length) length of p is 17 initially
+    if (pts.textContent.length == 17) {
+        counter = pts.textContent.slice(0,-16);
+    } else {
+        counter = pts.textContent.slice(0,pts.textContent.length-3);
+    }
+    //var counter = pts.textContent.slice(0,pts.textContent.length-3);
+    var progress = 200;
+    var increment = 200* (1/counter);
+    var id = setInterval(frame, 50);
+
+    function frame() {
+        // if(progress == 500 && counter == 100) {
+        //     clearInterval(id);
+        // } else {
+        //     progress += 5;
+        //     counter+= 1;
+        //     prg.style.width = progress + 'px';
+        //     pts.innerHTML = counter + 'pts';
+        // }
+        if(progress == 0 || cost == 0) {
+            clearInterval(id);
+        } else {
+            progress -= (increment);
+            counter -= 1;
+            cost -= 1;
+            prg.style.width = progress + 'px';
+            pts.innerHTML = counter + 'pts';
+        }
+    }
+}
+
+
+function eProgress(cost) {
+    var prg = document.getElementById('progress-op');
+    var pts = document.getElementById('pt');
     console.log("you have this many pts " + pts.innerHTML);
     console.log("cost is " + cost);
     //counter is the number of points
