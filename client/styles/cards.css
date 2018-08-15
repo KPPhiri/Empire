@@ -114,7 +114,7 @@
 
 #cardDescContainer{
   position:absolute;
-  z-index:20;
+  z-index:9;
   top: 40%;
   left: 35%;
   height: 40%;

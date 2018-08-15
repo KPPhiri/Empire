@@ -135,14 +135,18 @@ function cardRemover(pos) {
 }
 
 /**** Draws hand from character deck****/
-function initializeDeck() {
+function initializeDeck(characterId) {
     //deck elems
     var totalWeights = 96;
     var weights = [35, 14, 4, 4, 21, 2, 2, 14];
     var curElem = 0;
-    while (curElem < deckCards.length) {
+    while (curElem <= deckCards.length) {
         for (i = 0; i < weights[curElem]; i++) {
-            weightedDeck[weightedDeck.length] = deckCards[curElem];
+            if (curElem === 7) {
+                weightedDeck.push(specialCards[characterId]);
+            } else {
+                weightedDeck.push(deckCards[curElem]);
+            }
         }
         curElem++;
     }
@@ -288,7 +292,7 @@ function Select(charId) {
     characterId = charId;
 
     //initialize that character deck
-    deckCards.push(specialCards[charId]);
+    //deckCards.push(specialCards[charId]);
 }
 const Play = () => {
     const parent = document.querySelector('.ch-select');
@@ -296,7 +300,8 @@ const Play = () => {
     document.getElementById('playerChar').src = Player(characterId).imgURL;
     document.getElementById('opponent').src = "img/momoko.jpg";
     parent.style.display = 'none';
-    initializeDeck();
+    initializeDeck(characterId);
+    // weightedDeck.push(specialCards[characterId]);
     drawInitialHand();
 };
 

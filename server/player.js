@@ -6,6 +6,7 @@ class Player {
     this.negateCards = 0;
     this.isTurn = false;
     this.canRespond = false;
+    this.isFrozen = false;
     this.charImg = "./../client/img/vince.jpg";
   }
 
@@ -25,6 +26,9 @@ class Player {
     return this.charImg;
   }
 
+  getIsFrozen() {
+      return this.isFrozen;
+  }
   //setters
   setNegateCards(negateCards) {
     this.negateCards = negateCards;
@@ -57,6 +61,10 @@ class Player {
 
   getCanRespond() {
     return this.canRespond;
+  }
+
+  setIsFrozen(isFrozen) {
+      this.isFrozen = isFrozen;
   }
 }
 

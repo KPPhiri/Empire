@@ -78,7 +78,7 @@ if (window.location.pathname != "/multiplayer.html") {
                 sock.emit('decEnemyProgBar', handCards[position].cost);
                 console.log("Playing type: " + handCards[position].name + " Cost: " + handCards[position].cost);
                 sock.emit('playing', event.srcElement.src + position);
-                //only remove card if it was successful^
+                //!!!!!!only remove card if it was successful^
                 checkIfAction(handCards[position], position);
             } else {
                 console.log("!!cannot perform move: " + handCards[event.srcElement.id[7]].action + " Cost: " + handCards[event.srcElement.id[7]].cost +
@@ -116,6 +116,10 @@ if (window.location.pathname != "/multiplayer.html") {
         } else if (cardUsed.name == "defend" || cardUsed.name == "reject" || cardUsed.name == "Rebuild") {
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
+        } else if (cardUsed.name == "Freeze") {
+            console.log("is a freeze card");
+            sock.emit('freezeOpp', 'true');
+            //makes it so that the opponent's turn will be skipped once the player's turn is done
         }
     }
 
@@ -229,8 +233,8 @@ if (window.location.pathname != "/multiplayer.html") {
             temp = document.getElementById('handPos' + pos).src;
         }
         if ((temp.substr(temp.length - 13)) == "emptyCard.png") {
-            var index = Math.floor(Math.random() * deckCards.length);
-            rand = deckCards[index];
+            var index = Math.floor(Math.random() * weightedDeck.length);
+            rand = weightedDeck[index];
             document.getElementById('handPos' + pos).src = rand.imgURL;
         }
     });
@@ -295,4 +299,11 @@ if (window.location.pathname != "/multiplayer.html") {
         properties[Number(text)].shield += 15;
         document.getElementById('pshield' + text).innerHTML = properties[Number(text)].shield.toString();
     });
+
+    // sock.on('freezeOpp', (text) => {
+    //
+    //     //set opponent's isfrozen totrue
+    //     //once end turn, should check if is frozen before trying to play
+    //     //afterwards, set isfrozen to false;
+    // });
 }
