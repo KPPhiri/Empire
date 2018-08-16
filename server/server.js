@@ -17,27 +17,32 @@ server.listen(8080, () => {
 
 const io = socketio(server);
 
-
-
-
-
 //Socket.IO allows you to “namespace” your sockets, which essentially means assigning different endpoints or paths.
 //This namespace is identified by io.sockets or simply io
 
 var waiting = null;
-io.on('connection', (socket) => {
-	socket.on('message', (text) => {
-		io.emit("emessage", text);
+io.of('/multiplayer').on('connection', (socket) => {
+			socket.on('sendCharID', (text) => {
+				if(!waiting) {
+					console.log("waiting for player..");
+					waiting = new Player(socket, "Player1", text);
+					socket.emit('waitingPlayer','ok');
+					io.of('/index').emit("playerWaiting", text);
+				} else {
+					io.of('/index').emit("gameStarted", text);
+					new Game([waiting, new Player(socket, "Player2", text)]);
+					waiting = null;
+					console.log("Starting");
+				}
 		});
-		if(!waiting) {
-			waiting = new Player(socket, "Player1");
-			console.log("Waiting on player...");
-		} else {
+});
 
-			new Game([waiting, new Player(socket, "Player2")]);
-			waiting = null;
-			console.log("Starting");
-		}
+io.of('/index').on('connection', (socket) => {
+	console.log("home page");
+
+	socket.on('message', (text) => {
+		io.of('/index').emit("emessage", text);
+		});
 
 });
 

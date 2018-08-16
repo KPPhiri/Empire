@@ -1,6 +1,6 @@
-const sock = io();
 
 if (window.location.pathname != "/multiplayer.html") {
+    const sock = io('/index');
 
     const writeEvent = (text) => {
         // <ul> element
@@ -22,6 +22,20 @@ if (window.location.pathname != "/multiplayer.html") {
         parent.scrollTop = parent.scrollHeight;﻿
     };
 
+    sock.on('playerWaiting', () => {
+      console.log("there is a player available");
+      const vsButton = document.getElementsByClassName("btn-vs")[0];
+        vsButton.style.background= "yellow";
+
+    });
+
+    sock.on('gameStarted', () => {
+      console.log("no player available");
+      const vsButton = document.getElementsByClassName("btn-vs")[0];
+        vsButton.style.background= "lightblue";
+
+    });
+
 
 
     const onFormSubmitted = (e) => {
@@ -40,7 +54,7 @@ if (window.location.pathname != "/multiplayer.html") {
     document.querySelector('#chat-form').addEventListener('submit', onFormSubmitted);
 
 } else {
-
+    const sock = io('/multiplayer');
 
     const eDraw = (text) => {
         var x = document.getElementById('drawing');
@@ -115,6 +129,7 @@ if (window.location.pathname != "/multiplayer.html") {
         }
     }
 function emitPlayerIsReady(charId){
+  console.log("CLIENT SENDING");
   sock.emit('sendCharID', charId);
 }
 
@@ -123,7 +138,7 @@ function changeTurns() {
 }
 
 sock.on('startGame', (text)=>{
-  console.log("doing startGame")
+  console.log("doing startGame: " + text)
   play(text);
 });
 
@@ -333,6 +348,31 @@ sock.on('startGame', (text)=>{
 
     sock.on('nextRound', () => {
         nextRound();
+    });
+    sock.on('yourTurn', () => {
+      console.log("your turn color activate");
+
+      document.getElementById('player').style.filter = 'drop-shadow(5px 5px 5px #dddddd)';
+      document.getElementById('player').style.webkitFilter = 'drop-shadow(5px 5px 5px #dddddd)';
+      document.getElementById('oppChar').style.filter = 'none';
+
+    });
+    sock.on('opponentTurn', () => {
+      console.log("opponents turn color activate");
+      document.getElementById('oppChar').style.filter = 'drop-shadow(5px 5px 5px #dddddd)';
+      document.getElementById('oppChar').style.webkitFilter = 'drop-shadow(5px 5px 5px #dddddd)';
+      document.getElementById('player').style.filter = 'none';
+
+    });
+
+    sock.on('waitingPlayer', () => {
+      console.log("waiting");
+      const sButton = document.getElementById("start");
+        sButton.innerHTML = "Waiting on player...";
+        document.getElementById('warning').style.visibility = 'hidden';
+        sButton.style.background= "yellow";
+        sButton.style.fontSize= "12px";
+
     });
 
 

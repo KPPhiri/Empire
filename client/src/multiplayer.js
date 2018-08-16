@@ -307,13 +307,18 @@ function Select(charId) {
 }
 
 function ready() {
-  emitPlayerIsReady(characterId);
+  if(characterId != null) {
+    emitPlayerIsReady(characterId);
+  } else {
+    document.getElementById('warning').style.visibility = 'visible';
+  }
 
 }
 function play(text){
   console.log("Game is starting");
 
     const parent = document.querySelector('.ch-select');
+    console.log("GETTING PLAYERS CHARID: " + characterId);
     document.getElementById('playerChar').src = Player(characterId).imgURL;
     document.getElementById('opponent').src = Player(text).imgURL;
     parent.style.display = 'none';
