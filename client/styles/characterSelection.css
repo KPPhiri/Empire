@@ -9,9 +9,17 @@
     z-index: 40;
     top: 0;
 }
+
+#warning {
+    color:red;
+    font-size: 12px;
+    visibility: hidden;
+}
+
+
 .char-content {
     width: 480px;
-    height: 520px;
+    height: 540px;
     background-color: #9BC1BC;
     z-index: 21;
     border-radius: 4px;

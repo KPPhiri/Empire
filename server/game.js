@@ -29,25 +29,20 @@ class Game {
     changeTurns() {
       this.players.forEach((player) => {
         player.setIsTurn(!player.getIsTurn());
+        if (player.getIsTurn()) {
+          player.getSocket().emit('yourTurn', 'ok');
+        } else {
+          player.getSocket().emit('opponentTurn', 'ok');
+        }
         });
       }
 
       addCharIds() {
-          this.players.forEach((player) => {
-              player.getSocket().on('sendCharID', (text) => {
-              player.setCharId(text);
-              console.log(player.getUsername() + " is joining")
-              if((this.players[0].getCharId() != null) &&(this.players[1].getCharId() != null)) {
-                console.log("PLAYER1: " + this.players[0].getCharId() );
-                console.log("PLAYER2: " + this.players[1].getCharId ());
+        this.players[0].getSocket().emit('startGame', this.players[1].getCharId());
+        this.players[0].getSocket().emit('yourTurn', 'ok');;
+        this.players[1].getSocket().emit('startGame', this.players[0].getCharId());
+        this.players[1].getSocket().emit('opponentTurn', 'ok');;
 
-
-                this.players[0].getSocket().emit('startGame', this.players[1].getCharId());
-                this.players[1].getSocket().emit('startGame', this.players[0].getCharId());
-              }
-
-          });
-            });
       }
 
 
@@ -72,7 +67,6 @@ class Game {
       changeTurnsListener() {
           this.players.forEach((player) => {
               player.getSocket().on('endTurn', (text) => {
-              console.log("CHECKING");
               if(player.getIsTurn()) {
                 this.changeTurns();
 

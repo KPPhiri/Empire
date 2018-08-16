@@ -1,8 +1,8 @@
 class Player {
-  constructor(socket, username) {
+  constructor(socket, username, charId) {
     this.socket = socket;
     this.username = username;
-    this.charId = null;
+    this.charId = charId;
     this.score = 10;
     this.negateCards = 0;
     this.isTurn = false;
