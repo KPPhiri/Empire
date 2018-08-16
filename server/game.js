@@ -67,6 +67,8 @@ class Game {
       changeTurnsListener() {
           this.players.forEach((player) => {
               player.getSocket().on('endTurn', (text) => {
+                console.log("yes change turns");
+
               if(player.getIsTurn()) {
                 this.changeTurns();
 
@@ -228,7 +230,9 @@ class Game {
     setSockListeners5() {
         this.players.forEach((player) => {
             player.getSocket().on('decEnemyProgBar', (text) => {
+              if(player.getIsTurn()) {
                 player.getSocket().broadcast.emit('decEnemyProgBar', text);
+              }
             });
 
         });

@@ -125,6 +125,7 @@ function emitPlayerIsReady(charId){
 }
 
 function changeTurns() {
+  console.log("ending turn");
   sock.emit('endTurn', 'turns');
 }
 
@@ -383,10 +384,4 @@ sock.on('startGame', (text)=>{
         document.getElementById('shield' + text).innerHTML = enemyProperties[Number(text)].shield.toString();
     });
 
-    // sock.on('freezeOpp', (text) => {
-    //
-    //     //set opponent's isfrozen totrue
-    //     //once end turn, should check if is frozen before trying to play
-    //     //afterwards, set isfrozen to false;
-    // });
 }
