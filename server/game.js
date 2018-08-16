@@ -12,6 +12,7 @@ class Game {
         this.setSockListeners7();
         this.changeTurnsListener();
         this.addCharIds();
+        this.swapCharIds();
         this.players.forEach((player) => {
             player.getSocket().on('incrNegateCards', (text) => {
                 player.setNegateCards(player.getNegateCards() + 1);
@@ -48,14 +49,15 @@ class Game {
 
       swapCharIds() {
           this.players.forEach((player) => {
-              player.getSocket().on('swapCharId', (text) => {
+              player.getSocket().on('swap', (text) => {
+                console.log("getting swap request");
                   this.players.forEach((opponent) => {
                       if (player.getUsername() != opponent.getUsername()) {
                           var temp = player.getCharId();
                           player.setCharId(opponent.getCharId());
                           opponent.setCharId(temp);
-                          player.emit('swapCharId', player.getCharId());
-                          opponent.emit('swapCharId', opponent.getCharId());
+                          player.getSocket().emit('swapCharId', player.getCharId());
+                          opponent.getSocket().emit('swapCharId', opponent.getCharId());
                       }
                   });
               });
