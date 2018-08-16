@@ -145,7 +145,7 @@ sock.on('startGame', (text)=>{
 
     /** Card Types Implementation to use on Properties**/
     function checkIfAction(cardUsed,position) {
-        if (cardUsed.action == "attack" || cardUsed.name == "Destroy") {
+        if (cardUsed.name == "attack" || cardUsed.name == "Destroy") {
             console.log("enabling enemy action listeners");
             sock.emit('disableHandandDeck', 'ok');
             enableEnemyPropListener(position,cardUsed);
@@ -155,6 +155,7 @@ sock.on('startGame', (text)=>{
         } else if (cardUsed.name == "counter") {
             sock.emit('cancelAttack', cardUsed.name);
         } else if (cardUsed.name == "swap") {
+          console.log("sending swap");
             sock.emit('swap', 'ok');
         } else if (cardUsed.name == "Freeze") {
             console.log("is a freeze card");
