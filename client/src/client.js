@@ -134,6 +134,7 @@ function emitPlayerIsReady(charId){
 }
 
 function changeTurns() {
+  console.log("ending turn");
   sock.emit('endTurn', 'turns');
 }
 
@@ -397,6 +398,7 @@ sock.on('startGame', (text)=>{
         enemyProperties[Number(text)].shield += 15;
         document.getElementById('shield' + text).innerHTML = enemyProperties[Number(text)].shield.toString();
     });
+
 
     sock.on('takeProperty', (text) => {
         var applied = false;
