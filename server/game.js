@@ -112,7 +112,7 @@ class Game {
 
     setSockListeners7() {
         this.players.forEach((player) => {
-            ['drawingRequest', 'addShield'].forEach((action) => {
+            ['drawingRequest', 'addShield', 'takeProperty'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
                     if (player.getIsTurn()) {
                         console.log(player.getUsername() + " server is emitting drawing");
@@ -120,7 +120,11 @@ class Game {
                         if(action == 'addShield') {
                           console.log("sending enemy requst");
                           player.getSocket().broadcast.emit('e' + action, text);
-                        }
+                      } else if(action == 'takeProperty') {
+                          console.log("taking enemy property's health");
+                          player.getSocket().emit('takeProperty', text);
+                          player.getSocket().broadcast.emit('eTakenProperty', text);
+                      }
                     } else {
                         console.log(" X" + player.getUsername() + " is " + action + " player.getCanRespond(): " + player.getCanRespond() +
                             " player.getIsTurn(): " + player.getIsTurn());

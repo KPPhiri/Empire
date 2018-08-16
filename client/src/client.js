@@ -115,6 +115,15 @@ if (window.location.pathname != "/multiplayer.html") {
                 }
             });
             return violates;
+        } else if (card == "Disappear") {
+            var violates = true;
+            properties.forEach((property) => {
+                if(property.shield == 0) {
+                    violates = false;
+                } else {
+                    console.log("none of your properties have 0 health");
+                }
+            });
         } else {
             return false;
         }
@@ -151,6 +160,9 @@ sock.on('startGame', (text)=>{
             console.log("is a freeze card");
             sock.emit('freezeOpp', 'true');
             //makes it so that the opponent's turn will be skipped once the player's turn is done
+        } else if (cardUsed.name == "Disappear") {
+            console.log("will take as own");
+            enableEnemyPropListener(position,cardUsed);
         }
     }
 
@@ -215,6 +227,9 @@ sock.on('startGame', (text)=>{
                         console.log("destroys");
                         enemyProperties[propertyId].health = 0;
                         document.getElementById('health'+propertyId).innerHTML = enemyProperties[propertyId].health.toString();
+                    } else if (cardUsed.name == "Disappear") {
+                        console.log("disappear");
+                        sock.emit('takeProperty', event.srcElement.id[5]);
                     } else {
                         console.log("regular attack");
                         //else if the opponent has counter card, call emit req
@@ -384,4 +399,48 @@ sock.on('startGame', (text)=>{
         document.getElementById('shield' + text).innerHTML = enemyProperties[Number(text)].shield.toString();
     });
 
+
+    sock.on('takeProperty', (text) => {
+        var applied = false;
+        properties.forEach((property) => {
+            if(property.health == 0 && !applied) {
+                console.log("taking from property");
+                properties[property.number].health = enemyProperties[Number(text)].health;
+                document.getElementById('phealth' + property.number).innerHTML = properties[Number(text)].health.toString();
+
+                enemyProperties[Number(text)].health = 0;
+                document.getElementById('health' + Number(text)).innerHTML = 0;
+                applied = true;
+            }
+        });
+    });
+    sock.on('eTakenProperty', (text) => {
+        console.log("enemy will decrease");
+        console.log("this property: " + Number(text));
+
+
+        enempyProperties.forEach((property) => {
+            if(property.health == 0) {
+                enemyProperties[property.number].health = properties[Number(text)].health;
+                document.getElementById('health' + text).innerHTML = enemyProperties[Number(text)].health.toString();
+            }
+        });
+
+        properties[Number(text)].health = 0;
+        document.getElementById('phealth' + property.number).innerHTML = properties[Number(text)].health.toString();
+        // var applied = false;
+        // properties.forEach((property) => {
+        //     if(property.health == 0 && !applied) {
+        //         properties[property.number].health = enemyProperties[Number(text)].health;
+        //         document.getElementById('phealth' + property.number).innerHTML = properties[Number(text)].health.toString();
+        //         applied = true;
+        //     }
+        // });
+    });
+    // sock.on('freezeOpp', (text) => {
+    //
+    //     //set opponent's isfrozen totrue
+    //     //once end turn, should check if is frozen before trying to play
+    //     //afterwards, set isfrozen to false;
+    // });
 }
