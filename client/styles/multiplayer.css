@@ -390,7 +390,7 @@ p {
     left: 5%;
     z-index: 10;
 }
-#health1 {
+#shield1 {
   position: absolute;
   bottom: 37%;
   left: 25%;
@@ -399,7 +399,7 @@ p {
   color: black;
 }
 
-#shield1 {
+#health1 {
   position: absolute;
   bottom: 42%;
   left: 25%;

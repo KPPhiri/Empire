@@ -91,6 +91,8 @@ var weightedDeck = [];
 //                 new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
 //                 new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
 //                 new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
+
+
 var deckCards = [new Card("attack", "img/attack.png", "attack", 1, 35), new Card("reject", "img/basicCard.jpg", "defense", 2, 14),
     new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
     new Card("defend", "img/basicCard.jpg", "defense", 3, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
@@ -150,14 +152,14 @@ function initializeDeck(characterId) {
         }
         curElem++;
     }
-    console.log(weightedDeck.length);
 }
 
 function drawInitialHand() {
+  console.log("hand length is " + handCards.length);
+
     for (i = 0; i < 7; i++) {
         var index = Math.floor(Math.random() * weightedDeck.length);
         rand = weightedDeck[index];
-        console.log(rand);
         if (rand.name == "counter") {
             console.log("incrementing");
             incrementNegatePoints();
@@ -165,7 +167,6 @@ function drawInitialHand() {
         handCards.push(rand);
     }
     for (i = 0; i < handCards.length; i++) {
-        // console.log(handCards[i].name);
         document.getElementById('handPos' + i).src = handCards[i].imgURL;
     }
 }
@@ -184,6 +185,8 @@ function drawHand() {
 
 function nextRound() {
     var pts = document.getElementById('pt1');
+    var ptsOp = document.getElementById('pt');
+
     var newpts = pts.textContent.slice(0, document.getElementById('pt1').textContent.length - 3);
     var round = document.getElementById('round').textContent.slice(5);
     console.log(pts);
@@ -192,11 +195,16 @@ function nextRound() {
     newpts = parseInt(round) + 2;
     console.log("you have " + pts);
     pts.innerHTML = newpts + "pts";
+    ptsOp.innerHTML = newpts + "pts";
     console.log("concat" + pts);
 
     //reset progressbar
     var prg = document.getElementById('progress');
     prg.style.width = 200 + 'px';
+    var prgOp = document.getElementById('progress-op');
+    prgOp.style.width = 200 + 'px';
+
+
     //var round = document.getElementById('round').textContent.slice(5);
     round = parseInt(round) + 1;
     document.getElementById('round').innerHTML = "Round " + round;
@@ -292,21 +300,39 @@ function Select(charId) {
 		// console.log("playerProperties: " + document.getElementById('playerProperties').style.zIndex);
 		// console.log("progress-bar : " + document.getElementsByClassName('progress-bar ')[0].style.zIndex);
 
-    console.log(charId);
-    characterId = charId;
 
+    characterId = charId;
     //initialize that character deck
     //deckCards.push(specialCards[charId]);
 }
-const Play = () => {
-    const parent = document.querySelector('.ch-select');
 
+function ready() {
+  emitPlayerIsReady(characterId);
+
+}
+function play(text){
+  console.log("Game is starting");
+
+    const parent = document.querySelector('.ch-select');
     document.getElementById('playerChar').src = Player(characterId).imgURL;
-    document.getElementById('opponent').src = "img/momoko.jpg";
+    document.getElementById('opponent').src = Player(text).imgURL;
     parent.style.display = 'none';
     initializeDeck(characterId);
     // weightedDeck.push(specialCards[characterId]);
     drawInitialHand();
+};
+
+function swap(text){
+  console.log("Game is starting");
+
+    const parent = document.querySelector('.ch-select');
+    console.log("chosen player charid is " + Player(characterId).imgURL);
+
+    document.getElementById('playerChar').src = Player(characterId).imgURL;
+    console.log("enemy char id: " + Player(text).imgURL);
+    document.getElementById('opponent').src = Player(text).imgURL;
+    parent.style.display = 'none';
+    initializeDeck(characterId);
 };
 
 
