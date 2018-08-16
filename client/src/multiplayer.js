@@ -91,17 +91,38 @@ var weightedDeck = [];
 //                 new Card("Counter","img/basicCard.jpg","defence",0, 4), new Card("Swap","img/basicCard.jpg","wildCard",4, 4),
 //                 new Card("Defend","img/basicCard.jpg","defence",3,21), new Card("No Cost","img/basicCard.jpg","wildCard",5, 2),
 //                 new Card("Double Points","img/basicCard.jpg","wildCard",5,2)];
-var deckCards = [new Card("attack", "img/attack.png", "attack", 1, 35), new Card("reject", "img/basicCard.jpg", "defense", 2, 14),
+// var deckCards = [new Card("attack", "img/attack.png", "attack", 1, 35), new Card("reject", "img/basicCard.jpg", "defense", 3, 14),
+//     new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
+//     new Card("defend", "img/basicCard.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+//     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+// ];
+var deckCards;
+var deckCards0 = [new Card("attack", "img/maroDeck1.jpg", "attack", 1, 35), new Card("reject", "img/maroDeck3.jpg", "defense", 3, 14),
+    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/maroDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/maroDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+];
+var deckCards1 = [new Card("attack", "img/momoDeck1.jpg", "attack", 1, 35), new Card("reject", "img/momoDeck3.jpg", "defense", 3, 14),
+    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/momoDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/momoDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+];
+var deckCards2 = [new Card("attack", "img/catDeck1.jpg", "attack", 1, 35), new Card("reject", "img/catDeck3.jpg", "defense", 3, 14),
     new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
-    new Card("defend", "img/basicCard.jpg", "defense", 3, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+    new Card("defend", "img/catDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
+    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+];
+var deckCards3 = [new Card("attack", "img/chesDeck1.jpg", "attack", 1, 35), new Card("reject", "img/chesDeck3.jpg", "defense", 3, 14),
+    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
+    new Card("defend", "img/chesDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
 ];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
 // new Card("Double Points","img/basicCard.jpg","wildCard",5)
 //Character Special Cards Deck
-var specialCards = [new Card("Rebuild", "img/basicCard.jpg", "character", 4, 14), new Card("Freeze", "img/basicCard.jpg", "character", 4, 14),
-    new Card("Disappear", "img/basicCard.jpg", "character", 4, 14), new Card("Destroy", "img/basicCard.jpg", "character", 4, 14),
+var specialCards = [new Card("Rebuild", "img/maroDeckSpecial.jpg", "character", 4, 14), new Card("Freeze", "img/momoDeckSpecial.jpg", "character", 4, 14),
+    new Card("Disappear", "img/catDeckSpecial.jpg", "character", 4, 14), new Card("Destroy", "img/chesDeckSpecial.jpg", "character", 4, 14),
     new Card("Protect", "img/basicCard.jpg", "character", 4, 14), new Card("Redirect", "img/basicCard.jpg", "character", 4, 14)
 ];
 
@@ -137,6 +158,15 @@ function cardRemover(pos) {
 /**** Draws hand from character deck****/
 function initializeDeck(characterId) {
     //deck elems
+    if(characterId == 0) {
+        deckCards = deckCards0;
+    } else if(characterId == 1) {
+        deckCards = deckCards1;
+    } else if(characterId == 2) {
+        deckCards = deckCards2;
+    } else if(characterId == 3) {
+        deckCards = deckCards3;
+    }
     var totalWeights = 96;
     var weights = [35, 14, 4, 4, 21, 2, 2, 14];
     var curElem = 0;
