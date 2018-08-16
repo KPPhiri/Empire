@@ -2,12 +2,22 @@ class Player {
   constructor(socket, username) {
     this.socket = socket;
     this.username = username;
+    this.charId = null;
     this.score = 10;
     this.negateCards = 0;
     this.isTurn = false;
     this.canRespond = false;
     this.isFrozen = false;
     this.charImg = "./../client/img/vince.jpg";
+  }
+
+
+  getCharId() {
+    return this.charId;
+  }
+
+  setCharId(charId) {
+    this.charId = charId;
   }
 
   //getters

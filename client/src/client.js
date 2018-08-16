@@ -53,7 +53,8 @@ if (window.location.pathname != "/multiplayer.html") {
 
 
     //adding action listener to deck
-    document.getElementById('playerDeck0').addEventListener('click', () => {
+    document.getElementById('playerDeck0').addEventListener('dblclick', () => {
+      console.log("drawing");
         sock.emit("drawingRequest", "now");
         sock.emit("drawing", "now");
 
@@ -104,18 +105,32 @@ if (window.location.pathname != "/multiplayer.html") {
             return false;
         }
     }
+function emitPlayerIsReady(charId){
+  sock.emit('sendCharID', charId);
+}
 
+function changeTurns() {
+  sock.emit('endTurn', 'turns');
+}
 
-
+sock.on('startGame', (text)=>{
+  console.log("doing startGame")
+  play(text);
+});
 
     /** Card Types Implementation to use on Properties**/
     function checkIfAction(cardUsed,position) {
         if (cardUsed.action == "attack" || cardUsed.name == "Destroy") {
             console.log("enabling enemy action listeners");
+            sock.emit('disableHandandDeck', 'ok');
             enableEnemyPropListener(position,cardUsed);
         } else if (cardUsed.name == "defend" || cardUsed.name == "reject" || cardUsed.name == "Rebuild") {
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
+        } else if (cardUsed.name == "counter") {
+            sock.emit('cancelAttack', cardUsed.name);
+        } else if (cardUsed.name == "swap") {
+            sock.emit('swap', 'ok');
         } else if (cardUsed.name == "Freeze") {
             console.log("is a freeze card");
             sock.emit('freezeOpp', 'true');
@@ -123,7 +138,12 @@ if (window.location.pathname != "/multiplayer.html") {
         }
     }
 
+    function disablePlayerDeckHand(){
+      sock.emit('disablePlayerDeckHand', "ok");
+    }
+
     function enablePlayerPropListener(cardUsed) {
+        disablePlayerDeckHand();
         //use selected card on selected property
         document.getElementById('cardDescContainer').style.zIndex= '20';
         var used = false;
@@ -216,6 +236,10 @@ if (window.location.pathname != "/multiplayer.html") {
         sock.emit('incrNegateCards', 'OK');
     }
 
+    sock.on('swapCharId', (text) => {
+        swap(text);
+    });
+
     sock.on('playing', (text) => {
         //play card on the field and remove from hand
         cardRemover(text);
@@ -225,15 +249,8 @@ if (window.location.pathname != "/multiplayer.html") {
         eProgress(text);
     });
 
-
-    //Adding action listener to deck that adds cards to player hand
-    document.getElementById('playerDeck0').addEventListener('dblclick', () => {
-        sock.emit('drawingRequest', 'OK');
-
-    });
-
-
     sock.on('drawingRequest', (text) => {
+      console.log('im drawing');
         var pos = 0;
         var temp = document.getElementById('handPos' + pos).src;
         while (temp.substr(temp.length - 13) != "emptyCard.png" && pos < 6) {
@@ -244,6 +261,7 @@ if (window.location.pathname != "/multiplayer.html") {
             var index = Math.floor(Math.random() * weightedDeck.length);
             rand = weightedDeck[index];
             document.getElementById('handPos' + pos).src = rand.imgURL;
+            handCards.push(rand);
         }
     });
 
@@ -263,19 +281,23 @@ if (window.location.pathname != "/multiplayer.html") {
 
     });
 
+    var propi = 0;
     sock.on('createPrompt', (text) => {
         console.log("creating prompt: " + text);
         if (Number(text) >= 0) {
             const parent = document.querySelector('.prompt');
             parent.style.display = 'flex';
+            propi = Number(text);
 
-            document.getElementById('no').addEventListener('click', () => {
-                properties[text].health -= 15;
-                document.getElementById('phealth' + text).innerHTML = properties[text].health.toString();
-                sock.emit("acceptAttack", text);
-            });
         }
     });
+
+    document.getElementById('no').addEventListener('click', () => {
+        properties[propi].health -= 15;
+        document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+        sock.emit("acceptAttack", propi);
+    });
+
 
     sock.on('acceptAttack', (text) => {
         //play card on the field and remove from hand
@@ -292,6 +314,12 @@ if (window.location.pathname != "/multiplayer.html") {
         // document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
+
+
+    sock.on('nextRound', () => {
+        nextRound();
+    });
+
 
 
     sock.on('edrawing', (text) => {
