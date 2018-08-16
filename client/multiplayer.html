@@ -82,7 +82,7 @@
             <img src="img/enemyHand.jpg"  class="playerDeck" id="playerDeck3" ></img>
             <h1 id="player" >PLAYER1</h1>
         </div>
-        <button id="end" onclick="nextRound()">End Turn</button>
+        <button id="end" onclick="changeTurns()">End Turn</button>
     </div>
     <hgroup class="speech-bubble">
     	<h1 id="speech-text">Hmm..</h1>
@@ -144,8 +144,9 @@
             <button class="char1">
                 <img id="3" src="img/ches.jpg" alt="" class="ch-card" onclick="Select(this.id);"/>
             </button>
+            <p id="warning">Please choose a character.</p>
 
-            <button type="button" onclick="Play();return false;" class="button" id="start">Start</button>
+            <button type="button" onclick="ready();return false;" class="button" id="start">Start</button>
         </div>
     </div>
 

@@ -10,6 +10,8 @@ class Game {
         this.setSockListeners4();
         this.setSockListeners5();
         this.setSockListeners7();
+        this.changeTurnsListener();
+        this.addCharIds();
         this.players.forEach((player) => {
             player.getSocket().on('incrNegateCards', (text) => {
                 player.setNegateCards(player.getNegateCards() + 1);
@@ -23,6 +25,63 @@ class Game {
         return this.start;
     }
 
+
+    changeTurns() {
+      this.players.forEach((player) => {
+        player.setIsTurn(!player.getIsTurn());
+        if (player.getIsTurn()) {
+          player.getSocket().emit('yourTurn', 'ok');
+        } else {
+          player.getSocket().emit('opponentTurn', 'ok');
+        }
+        });
+      }
+
+      addCharIds() {
+        this.players[0].getSocket().emit('startGame', this.players[1].getCharId());
+        this.players[0].getSocket().emit('yourTurn', 'ok');;
+        this.players[1].getSocket().emit('startGame', this.players[0].getCharId());
+        this.players[1].getSocket().emit('opponentTurn', 'ok');;
+
+      }
+
+
+      swapCharIds() {
+          this.players.forEach((player) => {
+              player.getSocket().on('swapCharId', (text) => {
+                  this.players.forEach((opponent) => {
+                      if (player.getUsername() != opponent.getUsername()) {
+                          var temp = player.getCharId();
+                          player.setCharId(opponent.getCharId());
+                          opponent.setCharId(temp);
+                          player.emit('swapCharId', player.getCharId());
+                          opponent.emit('swapCharId', opponent.getCharId());
+                      }
+                  });
+              });
+          });
+      }
+
+
+
+      changeTurnsListener() {
+          this.players.forEach((player) => {
+              player.getSocket().on('endTurn', (text) => {
+              if(player.getIsTurn()) {
+                this.changeTurns();
+
+                if(player.getUsername() == this.players[1].getUsername()){
+                  console.log("Player 2 is done.");
+
+                  player.getSocket().emit('nextRound', 'round done');
+                  player.getSocket().broadcast.emit('nextRound', 'round done');
+                }
+              }
+
+          });
+            });
+      }
+
     addPlayer(player) {
         this.players.push(player);
     }
@@ -31,7 +90,14 @@ class Game {
         this.players.forEach((player) => {
             ['drawing', 'playing', 'attack'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
-                    if (player.getIsTurn() || player.getCanRespond()) {
+                    if(action == "attack") {
+                      player.setIsTurn() = false;
+                      console.log("stopping player from attacking again");
+                    } else if (text == "counter") {
+                        player.getSocket().broadcast.emit("e" + action, text.substring(22, text.length - 1));
+                        player.getSocket().emit(action, text.substring(text.length - 1));
+                        cancelAttack()
+                    }else if (player.getIsTurn()) {
                         player.getSocket().broadcast.emit("e" + action, text.substring(22, text.length - 1));
                         player.getSocket().emit(action, text.substring(text.length - 1));
                     } else {
@@ -47,6 +113,7 @@ class Game {
             ['drawingRequest', 'addShield', 'takeProperty'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
                     if (player.getIsTurn()) {
+                        console.log(player.getUsername() + " server is emitting drawing");
                         player.getSocket().emit(action, text);
                         if(action == 'addShield') {
                           console.log("sending enemy requst");
@@ -108,12 +175,12 @@ class Game {
                 this.players.forEach((opponent) => {
                     if (player.getUsername() == opponent.getUsername()) {
                         console.log("diable player from playing");
-                        player.setIsTurn(false);
-
                     } else {
                       console.log("allowing opponent to respond");
                         opponent.setCanRespond(true);
                         opponent.getSocket().emit('createPrompt', text);
+                        opponent.getSocket().emit('enableEnemyHand', text);
+
                         console.log("sending prompt");
                     }
                 });
@@ -135,6 +202,21 @@ class Game {
         this.players.forEach((player) => {
             player.getSocket().on('acceptAttack', (text) => {
                 player.getSocket().broadcast.emit('acceptAttack', text);
+                this.players.forEach((opponent) => {
+                    if (player.getUsername() == opponent.getUsername()) {
+                        player.setCanRespond(false);
+                    } else {
+                        opponent.setIsTurn(true);
+                    }
+                });
+            });
+        });
+    }
+
+    cancelAttack() {
+        this.players.forEach((player) => {
+            player.getSocket().on('cancelAttack', (text) => {
+                player.getSocket().broadcast.emit('cancelAttack', text);
                 this.players.forEach((opponent) => {
                     if (player.getUsername() == opponent.getUsername()) {
                         player.setCanRespond(false);
