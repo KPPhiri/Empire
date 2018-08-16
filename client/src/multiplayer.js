@@ -109,12 +109,12 @@ var deckCards1 = [new Card("attack", "img/momoDeck1.jpg", "attack", 1, 35), new 
     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
 ];
 var deckCards2 = [new Card("attack", "img/catDeck1.jpg", "attack", 1, 35), new Card("reject", "img/catDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
+    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/catDeck4.jpg", "attack", 4, 4),
     new Card("defend", "img/catDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
 ];
 var deckCards3 = [new Card("attack", "img/chesDeck1.jpg", "attack", 1, 35), new Card("reject", "img/chesDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/basicCard.jpg", "attack", 4, 4),
+    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/chesDeck4.jpg", "attack", 4, 4),
     new Card("defend", "img/chesDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
     new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
 ];
