@@ -184,7 +184,6 @@ function initializeDeck(characterId) {
 }
 
 function drawInitialHand() {
-  console.log("hand length is " + handCards.length);
 
     for (i = 0; i < 7; i++) {
         var index = Math.floor(Math.random() * weightedDeck.length);
@@ -193,10 +192,13 @@ function drawInitialHand() {
             console.log("incrementing");
             incrementNegatePoints();
         }
-        handCards.push(rand);
+        handCards[i]=rand;
+        console.log("adding: " + rand.name);
     }
     for (i = 0; i < handCards.length; i++) {
         document.getElementById('handPos' + i).src = handCards[i].imgURL;
+        console.log("drawing: " + rand.name + " pos " + i);
+
     }
 }
 
@@ -218,14 +220,14 @@ function nextRound() {
 
     var newpts = pts.textContent.slice(0, document.getElementById('pt1').textContent.length - 3);
     var round = document.getElementById('round').textContent.slice(5);
-    console.log(pts);
+    // console.log(pts);
     //reset points to new max amount
-    console.log("pts is " + pts);
+    // console.log("pts is " + pts);
     newpts = parseInt(round) + 2;
-    console.log("you have " + pts);
+    // console.log("you have " + pts);
     pts.innerHTML = newpts + "pts";
     ptsOp.innerHTML = newpts + "pts";
-    console.log("concat" + pts);
+    // console.log("concat" + pts);
 
     //reset progressbar
     var prg = document.getElementById('progress');
@@ -362,11 +364,17 @@ function swap(text){
     const parent = document.querySelector('.ch-select');
     console.log("chosen player charid is " + Player(characterId).imgURL);
 
-    document.getElementById('playerChar').src = Player(characterId).imgURL;
+    document.getElementById('playerChar').src = Player(text).imgURL;
     console.log("enemy char id: " + Player(text).imgURL);
-    document.getElementById('opponent').src = Player(text).imgURL;
+    document.getElementById('opponent').src = Player(characterId).imgURL;
+    characterId = text;
+
     parent.style.display = 'none';
+    weightedDeck = [];
+
     initializeDeck(characterId);
+    drawInitialHand();
+
 };
 
 

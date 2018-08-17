@@ -13,6 +13,7 @@ class Game {
         this.changeTurnsListener();
         this.endGameListener();
         this.addCharIds();
+        this.swapCharIds();
         this.players.forEach((player) => {
             player.getSocket().on('incrNegateCards', (text) => {
                 player.setNegateCards(player.getNegateCards() + 1);
@@ -49,14 +50,15 @@ class Game {
 
       swapCharIds() {
           this.players.forEach((player) => {
-              player.getSocket().on('swapCharId', (text) => {
+              player.getSocket().on('swap', (text) => {
+                console.log("getting swap request");
                   this.players.forEach((opponent) => {
                       if (player.getUsername() != opponent.getUsername()) {
                           var temp = player.getCharId();
                           player.setCharId(opponent.getCharId());
                           opponent.setCharId(temp);
-                          player.emit('swapCharId', player.getCharId());
-                          opponent.emit('swapCharId', opponent.getCharId());
+                          player.getSocket().emit('swapCharId', player.getCharId());
+                          opponent.getSocket().emit('swapCharId', opponent.getCharId());
                       }
                   });
               });
@@ -68,6 +70,8 @@ class Game {
       changeTurnsListener() {
           this.players.forEach((player) => {
               player.getSocket().on('endTurn', (text) => {
+                console.log("yes change turns");
+
               if(player.getIsTurn()) {
                 this.changeTurns();
 
@@ -92,7 +96,7 @@ class Game {
             ['drawing', 'playing', 'attack'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
                     if(action == "attack") {
-                      player.setIsTurn() = false;
+                      player.setIsTurn(false);
                       console.log("stopping player from attacking again");
                     } else if (text == "counter") {
                         player.getSocket().broadcast.emit("e" + action, text.substring(22, text.length - 1));
@@ -140,7 +144,10 @@ class Game {
         this.players.forEach((player) => {
             ['playingRequest'].forEach((action) => {
                 player.getSocket().on(action, (text) => {
+                  console.log("player is attempting to play");
                     if (player.getIsTurn() || player.getCanRespond()) {
+                      console.log("player is playing a counter");
+
                         player.getSocket().broadcast.emit(action, text);
                         player.setCanRespond(false);
                     } else {
@@ -178,11 +185,18 @@ class Game {
                         console.log("diable player from playing");
                     } else {
                       console.log("allowing opponent to respond");
+                      if(opponent.getNegateCards() > 0) {
                         opponent.setCanRespond(true);
+                        console.log("allowing opponent to play");
                         opponent.getSocket().emit('createPrompt', text);
-                        opponent.getSocket().emit('enableEnemyHand', text);
 
                         console.log("sending prompt");
+                      } else {
+                        opponent.getSocket().emit('createPrompt', '-1');
+                        console.log("opponent cannot respond");
+
+                      }
+
                     }
                 });
             });
@@ -233,22 +247,24 @@ class Game {
     setSockListeners5() {
         this.players.forEach((player) => {
             player.getSocket().on('decEnemyProgBar', (text) => {
+              console.log("decreasng enemy");
+              if(player.getIsTurn()) {
                 player.getSocket().broadcast.emit('decEnemyProgBar', text);
+              }
             });
 
         });
     }
 
-    // endGameListener() {
-    //     this.players.forEach((player) => {
-    //         console.log("adding socket listener2");
-    //         player.getSocket().on('requestResponse', (text) => {
-    //             console.log("should ge there");
-    //             player.getSocket().broadcast.emit('endGame', text);
-    //         });
-    //
-    //     });
-    // }
+    endGameListener() {
+        this.players.forEach((player) => {
+            player.getSocket().on('requestResponse', (text) => {
+                console.log("should ge there");
+                player.getSocket().broadcast.emit('endGame', text);
+            });
+
+        });
+    }
 
 
 

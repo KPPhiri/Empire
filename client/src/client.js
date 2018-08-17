@@ -134,6 +134,7 @@ function emitPlayerIsReady(charId){
 }
 
 function changeTurns() {
+  console.log("ending turn");
   sock.emit('endTurn', 'turns');
 }
 
@@ -144,7 +145,7 @@ sock.on('startGame', (text)=>{
 
     /** Card Types Implementation to use on Properties**/
     function checkIfAction(cardUsed,position) {
-        if (cardUsed.action == "attack" || cardUsed.name == "Destroy") {
+        if (cardUsed.name == "attack" || cardUsed.name == "Destroy") {
             console.log("enabling enemy action listeners");
             sock.emit('disableHandandDeck', 'ok');
             enableEnemyPropListener(position,cardUsed);
@@ -152,8 +153,10 @@ sock.on('startGame', (text)=>{
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
         } else if (cardUsed.name == "counter") {
+          console.log("playing counter card");
             sock.emit('cancelAttack', cardUsed.name);
         } else if (cardUsed.name == "swap") {
+          console.log("sending swap");
             sock.emit('swap', 'ok');
         } else if (cardUsed.name == "Freeze") {
             console.log("is a freeze card");
@@ -310,6 +313,10 @@ sock.on('startGame', (text)=>{
         if ((temp.substr(temp.length - 13)) == "emptyCard.png") {
             var index = Math.floor(Math.random() * weightedDeck.length);
             rand = weightedDeck[index];
+            if (rand.name == "counter") {
+                console.log("incrementing");
+                incrementNegatePoints();
+            }
             document.getElementById('handPos' + pos).src = rand.imgURL;
             handCards.push(rand);
         }
@@ -338,7 +345,10 @@ sock.on('startGame', (text)=>{
             const parent = document.querySelector('.prompt');
             parent.style.display = 'flex';
             propi = Number(text);
-
+        } else {
+          properties[propi].health -= 15;
+          document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+          sock.emit("acceptAttack", propi);
         }
     });
 
@@ -348,6 +358,9 @@ sock.on('startGame', (text)=>{
         sock.emit("acceptAttack", propi);
     });
 
+      // sock.on('enableEnemyHand', (text) => {
+      //   //TODO: adding action listeners
+      // });
 
     sock.on('acceptAttack', (text) => {
         //play card on the field and remove from hand
@@ -371,18 +384,18 @@ sock.on('startGame', (text)=>{
             const game = document.querySelector('.endGame');
             game.style.display = 'flex';
             console.log("emit end game");
-            //sock.emit('endGame','ended');
+            sock.emit('endGame','ended');
         }
         //enemyProperties[Number(text)].health -= 15;
         //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
-    // sock.on('endGame', () => {
-    //     console.log("ending the game here");
-    //     const game = document.querySelector('.endGame');
-    //     game.style.display = 'flex';
-    // });
+    sock.on('endGame', () => {
+        console.log("ending the game here");
+        const game = document.querySelector('.endGame');
+        game.style.display = 'flex';
+    });
 
     sock.on('nextRound', () => {
         nextRound();
@@ -435,6 +448,7 @@ sock.on('startGame', (text)=>{
         enemyProperties[Number(text)].shield += 15;
         document.getElementById('shield' + text).innerHTML = enemyProperties[Number(text)].shield.toString();
     });
+
 
     sock.on('takeProperty', (text) => {
         var applied = false;
