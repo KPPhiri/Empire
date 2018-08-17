@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../styles/characterSelection.css">
     <link rel="stylesheet" href="../styles/promptBox.css">
     <link rel="stylesheet" href="../styles/cards.css">
+    <link rel="stylesheet" href="../styles/endGame.css">
 
 </head>
 <body>
@@ -47,16 +48,16 @@
       <div id="enemyProperties">
 
         <img src="img/smallhousetrans.png" class="property" id="eprop0"></img>
-         <p id="health0">100</p>
+         <p id="health0">15</p>
          <p id="shield0">0</p>
         <img src="img/smallhousetrans.png" class="property" id="eprop1"></img>
-         <p id="health1">100</p>
+         <p id="health1">0</p>
          <p id="shield1">0</p>
         <img src="img/smallhousetrans.png" class="property" id="eprop2"></img>
-         <p id="health2">100</p>
+         <p id="health2">0</p>
          <p id="shield2">0</p>
         <img src="img/smallhousetrans.png" class="property" id="eprop3"></img>
-        <p id="health3">100</p>
+        <p id="health3">0</p>
         <p id="shield3">0</p>
         <!-- <img src="img/properties/prop5.png" class="property" id="eprop4"></img>
         <img src="img/properties/prop6.png" class="property" id="eprop5"></img>
@@ -159,6 +160,13 @@
         </div>
     </div>
 
+    <div class="endGame">
+        <div class="result-content">
+            <h1>Game Over!</h1>
+            <p id="status">You...</p>
+            <button onclick="window.location='./index.html'" id="endGame" >OK</button>
+        </div>
+    </div>
 
     <script src ="/socket.io/socket.io.js"></script>
     <script src="src/client.js"></script>

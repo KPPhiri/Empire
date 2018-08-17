@@ -79,7 +79,7 @@ for (i = 0; i < 7; i++) {
 // *********Game Initialization**********
 var properties = [new Property(0, "img/properties/prop1.png", 100, 0, true), new Property(1, "img/properties/prop1.png", 100, 0, true), new Property(2, "img/properties/prop1.png", 100, 0, true), new Property(3, "img/properties/prop1.png", 100, 0, true)];
 
-var enemyProperties = [new Property(0, "img/properties/prop1.png", 100, 0,true), new Property(1, "img/properties/prop1.png", 100, 0,true), new Property(2, "img/properties/prop1.png", 100, 0,true), new Property(3, "img/properties/prop1.png", 100, 0,true)];
+var enemyProperties = [new Property(0, "img/properties/prop1.png", 15, 0,true), new Property(1, "img/properties/prop1.png", 0, 0,true), new Property(2, "img/properties/prop1.png", 0, 0,true), new Property(3, "img/properties/prop1.png", 0, 0,true)];
 
 //Initializing and declaring deck array
 var weightedDeck = [];

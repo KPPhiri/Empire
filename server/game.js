@@ -11,6 +11,7 @@ class Game {
         this.setSockListeners5();
         this.setSockListeners7();
         this.changeTurnsListener();
+        this.endGameListener();
         this.addCharIds();
         this.swapCharIds();
         this.players.forEach((player) => {
@@ -243,6 +244,17 @@ class Game {
 
         });
     }
+
+    // endGameListener() {
+    //     this.players.forEach((player) => {
+    //         console.log("adding socket listener2");
+    //         player.getSocket().on('requestResponse', (text) => {
+    //             console.log("should ge there");
+    //             player.getSocket().broadcast.emit('endGame', text);
+    //         });
+    //
+    //     });
+    // }
 
 
 
