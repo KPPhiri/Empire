@@ -65,18 +65,20 @@ li.oddChat:nth-child(odd) {
 }
 
 .btn-vs {
-    top: 150px;
+    top: 125px;
 }
 .btn-start {
-    top: 250px;
+    top: 225px;
 }
 .btn-history {
-    top: 350px;
+    top: 325px;
+}
+.btn-feedback {
+    top: 425px;
 }
 .btn-about {
-    top: 450px;
+    top: 525px;
 }
-
 .character {
      border-style: solid;
 }
