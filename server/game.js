@@ -256,16 +256,15 @@ class Game {
         });
     }
 
-    // endGameListener() {
-    //     this.players.forEach((player) => {
-    //         console.log("adding socket listener2");
-    //         player.getSocket().on('requestResponse', (text) => {
-    //             console.log("should ge there");
-    //             player.getSocket().broadcast.emit('endGame', text);
-    //         });
-    //
-    //     });
-    // }
+    endGameListener() {
+        this.players.forEach((player) => {
+            player.getSocket().on('requestResponse', (text) => {
+                console.log("should ge there");
+                player.getSocket().broadcast.emit('endGame', text);
+            });
+
+        });
+    }
 
 
 
