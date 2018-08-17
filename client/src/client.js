@@ -366,11 +366,11 @@ sock.on('startGame', (text)=>{
     document.getElementById('no').addEventListener('click', () => {
         if(properties[propi].shield > 0) {
             console.log(propi);
-            console.log(properties);
             properties[Number(propi)].shield -=15;
             document.getElementById('pshield' + propi).innerHTML = properties[Number(propi)].shield;
         } else {
             properties[propi].health -= 15;
+            console.log("health bc said no " + properties[3].health);
             document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
         }
         // properties[propi].health -= 15;
@@ -410,19 +410,27 @@ sock.on('startGame', (text)=>{
             document.getElementById('status').innerHTML += "win! Congratulations!";
             game.style.display = 'flex';
             console.log("emit end game");
-            //sock.emit('endGame','ended');
+            sock.emit('endGame','ended');
         }
         //enemyProperties[Number(text)].health -= 15;
         //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
-    // sock.on('endGame', () => {
-    //     console.log("ending the game here");
-    //     const game = document.querySelector('.endGame');
-    //     document.getElementById('status').innerHTML += "lose. Try again?";
-    //     game.style.display = 'flex';
-    // });
+    //!!this is actually called before the "no" click goes through
+    sock.on('endGame', () => {
+        console.log("ending the game here");
+        // console.log("health decreased to " + properties[3].health);
+        //check if it's the end for the opponent
+        if(isEnd) {
+            const game = document.querySelector('.endGame');
+            document.getElementById('status').innerHTML += "lose. Try again?";
+            game.style.display = 'flex';
+        }
+        // const game = document.querySelector('.endGame');
+        // document.getElementById('status').innerHTML += "lose. Try again?";
+        // game.style.display = 'flex';
+    });
 
     sock.on('nextRound', () => {
         nextRound();
