@@ -384,18 +384,18 @@ sock.on('startGame', (text)=>{
             const game = document.querySelector('.endGame');
             game.style.display = 'flex';
             console.log("emit end game");
-            //sock.emit('endGame','ended');
+            sock.emit('endGame','ended');
         }
         //enemyProperties[Number(text)].health -= 15;
         //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
-    // sock.on('endGame', () => {
-    //     console.log("ending the game here");
-    //     const game = document.querySelector('.endGame');
-    //     game.style.display = 'flex';
-    // });
+    sock.on('endGame', () => {
+        console.log("ending the game here");
+        const game = document.querySelector('.endGame');
+        game.style.display = 'flex';
+    });
 
     sock.on('nextRound', () => {
         nextRound();
