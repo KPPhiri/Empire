@@ -184,7 +184,6 @@ function initializeDeck(characterId) {
 }
 
 function drawInitialHand() {
-  console.log("hand length is " + handCards.length);
 
     for (i = 0; i < 7; i++) {
         var index = Math.floor(Math.random() * weightedDeck.length);
@@ -198,7 +197,7 @@ function drawInitialHand() {
     }
     for (i = 0; i < handCards.length; i++) {
         document.getElementById('handPos' + i).src = handCards[i].imgURL;
-        console.log("drawing: " + rand.name);
+        console.log("drawing: " + rand.name + " pos " + i);
 
     }
 }
