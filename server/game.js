@@ -192,7 +192,9 @@ class Game {
 
                         console.log("sending prompt");
                       } else {
-                        opponent.getSocket().emit('createPrompt', '-1');
+                        //if they dont have negate cards,
+                        opponent.getSocket().emit('createPrompt', text);
+                        //opponent.getSocket().emit('createPrompt', '-1');
                         console.log("opponent cannot respond");
 
                       }

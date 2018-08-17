@@ -276,7 +276,7 @@ p {
 #phealth0 {
     position: absolute;
     bottom: 23%;
-    left: 9%;
+    left: 10%;
     z-index: 11;
     font-size: 10px;
     color: black;
@@ -284,7 +284,7 @@ p {
 #pshield0 {
     position: absolute;
     bottom: 18%;
-    left: 9%;
+    left: 10%;
     z-index: 11;
     font-size: 10px;
     color: black;
@@ -320,7 +320,7 @@ p {
 #phealth2 {
   position: absolute;
   top: 37%;
-  right: 29%;
+  right: 31%;
   z-index: 11;
   font-size: 10px;
   color: black;
@@ -342,7 +342,7 @@ p {
 #phealth3 {
     position: absolute;
     bottom: 23%;
-    right: 14%;
+    right: 16%;
     z-index: 11;
     font-size: 10px;
     color: black;
@@ -371,16 +371,16 @@ p {
 }
 #health0 {
     position: absolute;
-    bottom: 23%;
-    left: 9%;
+    bottom: 67%;
+    left: 10%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #shield0 {
     position: absolute;
-    bottom: 18%;
-    left: 9%;
+    bottom: 62%;
+    left: 10%;
     z-index: 11;
     font-size: 10px;
     color: black;
@@ -416,7 +416,7 @@ p {
 #health2 {
   position: absolute;
   top: 37%;
-  right: 29%;
+  right: 31%;
   z-index: 11;
   font-size: 10px;
   color: black;
@@ -437,15 +437,15 @@ p {
 }
 #health3 {
     position: absolute;
-    bottom: 23%;
-    right: 14%;
+    bottom: 67%;
+    right: 16%;
     z-index: 11;
     font-size: 10px;
     color: black;
 }
 #shield3 {
     position: absolute;
-    bottom: 18%;
+    bottom: 62%;
     right: 16%;
     z-index: 11;
     font-size: 10px;
