@@ -11,7 +11,6 @@ class Player {
     this.charImg = "./../client/img/vince.jpg";
   }
 
-
   getCharId() {
     return this.charId;
   }

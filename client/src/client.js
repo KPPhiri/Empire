@@ -153,6 +153,7 @@ sock.on('startGame', (text)=>{
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
         } else if (cardUsed.name == "counter") {
+          console.log("playing counter card");
             sock.emit('cancelAttack', cardUsed.name);
         } else if (cardUsed.name == "swap") {
           console.log("sending swap");
@@ -292,6 +293,10 @@ sock.on('startGame', (text)=>{
         if ((temp.substr(temp.length - 13)) == "emptyCard.png") {
             var index = Math.floor(Math.random() * weightedDeck.length);
             rand = weightedDeck[index];
+            if (rand.name == "counter") {
+                console.log("incrementing");
+                incrementNegatePoints();
+            }
             document.getElementById('handPos' + pos).src = rand.imgURL;
             handCards.push(rand);
         }
@@ -320,7 +325,10 @@ sock.on('startGame', (text)=>{
             const parent = document.querySelector('.prompt');
             parent.style.display = 'flex';
             propi = Number(text);
-
+        } else {
+          properties[propi].health -= 15;
+          document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+          sock.emit("acceptAttack", propi);
         }
     });
 
@@ -330,6 +338,9 @@ sock.on('startGame', (text)=>{
         sock.emit("acceptAttack", propi);
     });
 
+      // sock.on('enableEnemyHand', (text) => {
+      //   //TODO: adding action listeners
+      // });
 
     sock.on('acceptAttack', (text) => {
         //play card on the field and remove from hand
