@@ -207,7 +207,7 @@ sock.on('startGame', (text)=>{
     }
 
 
-
+    //var propi;
     function enableEnemyPropListener(position,cardUsed) {
         //use selected card on selected property
         document.getElementById('cardDescContainer').style.zIndex='20';
@@ -219,6 +219,7 @@ sock.on('startGame', (text)=>{
 
                 console.log("emmitting enemy response");
                 propertyId = event.srcElement.id[5];
+                //propi = propertyId;
                 //sock.emit('requestResponse', event.srcElement.id[5]);
                 if(!used) {
                     console.log(position);
@@ -277,15 +278,18 @@ sock.on('startGame', (text)=>{
     //**Check if game is over
     function isEndGame() {
         var count = 0;
+        console.log("checking end game");
         enemyProperties.forEach((property) => {
             if(property.health == 0){
                 count++;
+                console.log("counting healths 0");
             }
         });
         if (count == 4) {
             console.log("end of game");
             isEnd = true;
         }
+        console.log(isEnd);
         return isEnd;
     }
 
@@ -339,13 +343,20 @@ sock.on('startGame', (text)=>{
     });
 
     var propi = 0;
+    // sock.on('dontPrompt', (text) => {
+    //     properties[propi].health -= 15;
+    //     document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+    //     sock.emit("acceptAttack", propi);
+    // });
     sock.on('createPrompt', (text) => {
+        propi = Number(text);
         console.log("creating prompt: " + text);
         if (Number(text) >= 0) {
             const parent = document.querySelector('.prompt');
             parent.style.display = 'flex';
             propi = Number(text);
         } else {
+            console.log("propi id: " + propi);
           properties[propi].health -= 15;
           document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
           sock.emit("acceptAttack", propi);
@@ -353,8 +364,17 @@ sock.on('startGame', (text)=>{
     });
 
     document.getElementById('no').addEventListener('click', () => {
-        properties[propi].health -= 15;
-        document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+        if(properties[propi].shield > 0) {
+            console.log(propi);
+            console.log(properties);
+            properties[Number(propi)].shield -=15;
+            document.getElementById('pshield' + propi).innerHTML = properties[Number(propi)].shield;
+        } else {
+            properties[propi].health -= 15;
+            document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
+        }
+        // properties[propi].health -= 15;
+        // document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
         sock.emit("acceptAttack", propi);
     });
 
@@ -362,10 +382,13 @@ sock.on('startGame', (text)=>{
       //   //TODO: adding action listeners
       // });
 
+    //** This is going to opponent who is accepting attack
     sock.on('acceptAttack', (text) => {
         //play card on the field and remove from hand
         console.log("accpting");
+        console.log(properties[Number(text)].shield);
         if(enemyProperties[Number(text)].shield > 0) {
+            console.log("taking from shield");
             enemyProperties[Number(text)].shield -= 15;
             document.getElementById('shield' + text).innerHTML = enemyProperties[text].shield.toString();
         } else {
@@ -379,23 +402,27 @@ sock.on('startGame', (text)=>{
             document.getElementById('health' + text).innerHTML = newHealth.toString();
 
         }
-        if(isEndGame()){
+        isEndGame();
+        if(isEnd){
             //display ending popup
+            console.log("end game was true");
             const game = document.querySelector('.endGame');
+            document.getElementById('status').innerHTML += "win! Congratulations!";
             game.style.display = 'flex';
             console.log("emit end game");
-            sock.emit('endGame','ended');
+            //sock.emit('endGame','ended');
         }
         //enemyProperties[Number(text)].health -= 15;
         //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
-    sock.on('endGame', () => {
-        console.log("ending the game here");
-        const game = document.querySelector('.endGame');
-        game.style.display = 'flex';
-    });
+    // sock.on('endGame', () => {
+    //     console.log("ending the game here");
+    //     const game = document.querySelector('.endGame');
+    //     document.getElementById('status').innerHTML += "lose. Try again?";
+    //     game.style.display = 'flex';
+    // });
 
     sock.on('nextRound', () => {
         nextRound();

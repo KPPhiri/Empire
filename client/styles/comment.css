@@ -1,0 +1,11 @@
+label{
+    font-size: 20px;
+}
+#comment {
+    width: 50%;
+    height: 50%;
+}
+input {
+    margin-top: 30px;
+    font-size: 20px;
+}

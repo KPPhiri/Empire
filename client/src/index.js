@@ -10,3 +10,8 @@ document.getElementsByClassName("btn-feedback")[0].addEventListener("click", () 
   window.location="./commentSuggestions.html"
   Console.log("Going to comments page");
 });
+
+document.getElementsByClassName("btn-about")[0].addEventListener("click", () => {
+  window.location="./about.html"
+  Console.log("About page");
+});
