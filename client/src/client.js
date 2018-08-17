@@ -231,8 +231,12 @@ sock.on('startGame', (text)=>{
                         sock.emit('takeProperty', event.srcElement.id[5]);
                     } else {
                         console.log("regular attack");
+                        //check if the property is attackable
+                        if(enemyProperties[propertyId].isAttackable) {
+                            sock.emit('requestResponse', event.srcElement.id[5]);
+                        }
                         //else if the opponent has counter card, call emit req
-                        sock.emit('requestResponse', event.srcElement.id[5]);
+                        //sock.emit('requestResponse', event.srcElement.id[5]);
                     }
                     used = true;
                 }
@@ -264,6 +268,22 @@ sock.on('startGame', (text)=>{
     function incrementNegatePoints() {
         console.log("adding negate increment");
         sock.emit('incrNegateCards', 'OK');
+    }
+
+    var isEnd = false;
+    //**Check if game is over
+    function isEndGame() {
+        var count = 0;
+        enemyProperties.forEach((property) => {
+            if(property.health == 0){
+                count++;
+            }
+        });
+        if (count == 4) {
+            console.log("end of game");
+            isEnd = true;
+        }
+        return isEnd;
     }
 
     sock.on('swapCharId', (text) => {
@@ -336,15 +356,33 @@ sock.on('startGame', (text)=>{
             enemyProperties[Number(text)].shield -= 15;
             document.getElementById('shield' + text).innerHTML = enemyProperties[text].shield.toString();
         } else {
-            enemyProperties[Number(text)].health -= 15;
-            document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
+            var newHealth;
+            newHealth = enemyProperties[Number(text)].health -= 15;
+            if (newHealth <= 0) {
+                newHealth = 0;
+                enemyProperties[Number(text)].isAttackable = false;
+            }
+            //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
+            document.getElementById('health' + text).innerHTML = newHealth.toString();
 
         }
-        // enemyProperties[Number(text)].health -= 15;
-        // document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
+        if(isEndGame()){
+            //display ending popup
+            const game = document.querySelector('.endGame');
+            game.style.display = 'flex';
+            console.log("emit end game");
+            //sock.emit('endGame','ended');
+        }
+        //enemyProperties[Number(text)].health -= 15;
+        //document.getElementById('health' + text).innerHTML = enemyProperties[text].health.toString();
 
     });
 
+    // sock.on('endGame', () => {
+    //     console.log("ending the game here");
+    //     const game = document.querySelector('.endGame');
+    //     game.style.display = 'flex';
+    // });
 
     sock.on('nextRound', () => {
         nextRound();
