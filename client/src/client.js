@@ -357,6 +357,7 @@ sock.on('startGame', (text)=>{
             propi = Number(text);
         } else {
             console.log("propi id: " + propi);
+
           properties[propi].health -= 15;
           document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
           sock.emit("acceptAttack", propi);
@@ -431,6 +432,7 @@ sock.on('startGame', (text)=>{
         // document.getElementById('status').innerHTML += "lose. Try again?";
         // game.style.display = 'flex';
     });
+
 
     sock.on('nextRound', () => {
         nextRound();
