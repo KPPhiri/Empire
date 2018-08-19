@@ -31,7 +31,7 @@ function Property(number, imgURL, health, shield, isAttackable) {
 // }
 
 
-charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg"), new Card("CatMagi", "img/catMagicCard.jpg"), new Card("Ches", "img/ches.jpg")];
+charCards = [new Card("Maro", "img/maro.jpg"), new Card("Momo", "img/momoko.jpg"), new Card("CatMagi", "img/catMagicCard.jpg"), new Card("Ches", "img/chesu.jpg")];
 
 function Player(charIndex) {
     this.playerChar = charCards[charIndex];
@@ -99,24 +99,24 @@ var weightedDeck = [];
 // ];
 var deckCards;
 var deckCards0 = [new Card("attack", "img/maroDeck1.jpg", "attack", 1, 35), new Card("reject", "img/maroDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/maroDeck4.jpg", "attack", 4, 4),
-    new Card("defend", "img/maroDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
-    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+    new Card("counter", "img/maroDeck0.jpg", "attack", 0, 4), new Card("swap", "img/maroDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/maroDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/maroDeckNo5.jpg", "attack", 5, 2),
+    new Card("double points", "img/maroDeck5.jpg", "attack", 5, 2)
 ];
 var deckCards1 = [new Card("attack", "img/momoDeck1.jpg", "attack", 1, 35), new Card("reject", "img/momoDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/momoDeck4.jpg", "attack", 4, 4),
-    new Card("defend", "img/momoDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
-    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+    new Card("counter", "img/momoDeck0.jpg", "attack", 0, 4), new Card("swap", "img/momoDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/momoDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/momoDeckNo5.jpg", "attack", 5, 2),
+    new Card("double points", "img/momoDeck5.jpg", "attack", 5, 2)
 ];
 var deckCards2 = [new Card("attack", "img/catDeck1.jpg", "attack", 1, 35), new Card("reject", "img/catDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/catDeck4.jpg", "attack", 4, 4),
-    new Card("defend", "img/catDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
-    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+    new Card("counter", "img/catDeck0.jpg", "attack", 0, 4), new Card("swap", "img/catDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/catDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/catDeckNo5.jpg", "attack", 5, 2),
+    new Card("double points", "img/catDeck5.jpg", "attack", 5, 2)
 ];
 var deckCards3 = [new Card("attack", "img/chesDeck1.jpg", "attack", 1, 35), new Card("reject", "img/chesDeck3.jpg", "defense", 3, 14),
-    new Card("counter", "img/basicCard.jpg", "attack", 0, 4), new Card("swap", "img/chesDeck4.jpg", "attack", 4, 4),
-    new Card("defend", "img/chesDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/basicCard.jpg", "attack", 5, 2),
-    new Card("double points", "img/basicCard.jpg", "attack", 5, 2)
+    new Card("counter", "img/chesDeck0.jpg", "attack", 0, 4), new Card("swap", "img/chesDeck4.jpg", "attack", 4, 4),
+    new Card("defend", "img/chesDeck2.jpg", "defense", 2, 21), new Card("no cost", "img/chesDeckNo5.jpg", "attack", 5, 2),
+    new Card("double points", "img/chesDeck5.jpg", "attack", 5, 2)
 ];
 //basic cards new Card("Attack","img/basicCard.jpg","attack",1), new Card("Reject","img/basicCard.jpg","defence",2),
 // new Card("Counter","img/basicCard.jpg","defence",0), new Card("Swap","img/basicCard.jpg","wildCard",4), new Card("Defend","img/basicCard.jpg","defence",3), new Card("No Cost","img/basicCard.jpg","wildCard",5),
