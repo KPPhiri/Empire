@@ -74,7 +74,6 @@ class Game {
 
               if(player.getIsTurn()) {
                 this.changeTurns();
-
                 if(player.getUsername() == this.players[1].getUsername()){
                   console.log("Player 2 is done.");
 
@@ -187,14 +186,15 @@ class Game {
                       console.log("allowing opponent to respond");
                       if(opponent.getNegateCards() > 0) {
                         opponent.setCanRespond(true);
-                        console.log("allowing opponent to play");
+                        console.log("allowing opponent to play and has " + opponent.getNegateCards() + " negate cards");
                         opponent.getSocket().emit('createPrompt', text);
 
                         console.log("sending prompt");
                       } else {
-                        //if they dont have negate cards,
-                        opponent.getSocket().emit('createPrompt', text);
-                        //opponent.getSocket().emit('createPrompt', '-1');
+                        opponent.getSocket().emit('createPrompt', '-' + text);
+
+
+                        //if they dont have negate cards,                        //opponent.getSocket().emit('createPrompt', '-1');
                         console.log("opponent cannot respond");
 
                       }
@@ -209,6 +209,13 @@ class Game {
 
             player.getSocket().on('enableHandandDeck', (text) => {
                 player.setIsTurn(true);
+            });
+
+            player.getSocket().on('protectProperty', (text) => {
+              console.log("!!sending protectionXXX");
+                player.getSocket().broadcast.emit('protectEProperty', text);
+                player.getSocket().broadcast.emit('endGame', text);
+
             });
 
 
