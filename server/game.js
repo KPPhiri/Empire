@@ -70,9 +70,10 @@ class Game {
       changeTurnsListener() {
           this.players.forEach((player) => {
               player.getSocket().on('endTurn', (text) => {
-                console.log("yes change turns");
+                console.log("!!yes change turns");
 
               if(player.getIsTurn()) {
+                console.log("going in loop to change");
                 this.changeTurns();
                 if(player.getUsername() == this.players[1].getUsername()){
                   console.log("Player 2 is done.");
