@@ -121,14 +121,17 @@ class Game {
                     if (player.getIsTurn()) {
                         console.log(player.getUsername() + " server is emitting drawing");
                         player.getSocket().emit(action, text);
-                        if(action == 'addShield') {
+                        // if(action == 'addShield') {
+                        //   console.log("sending enemy requst");
+                        //   player.getSocket().broadcast.emit('e' + action, text);
+                    } else if (action == 'addShield') {
+                        player.getSocket().emit(action, text);
                           console.log("sending enemy requst");
                           player.getSocket().broadcast.emit('e' + action, text);
-                      } else if(action == 'takeProperty') {
+                    } else if(action == 'takeProperty') {
                           console.log("taking enemy property's health");
                           player.getSocket().emit('takeProperty', text);
                           player.getSocket().broadcast.emit('eTakenProperty', text);
-                      }
                     } else {
                         console.log(" X" + player.getUsername() + " is " + action + " player.getCanRespond(): " + player.getCanRespond() +
                             " player.getIsTurn(): " + player.getIsTurn());
