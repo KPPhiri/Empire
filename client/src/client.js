@@ -77,7 +77,7 @@ if (window.location.pathname != "/multiplayer.html") {
     //
     for (i = 0; i < 7; i++) {
         button = document.getElementById('handPos' + i);
-        button.addEventListener('click', (event) => {
+        button.addEventListener('dblclick', (event) => {
             var imgSrc = event.srcElement.src.substr(event.srcElement.src.length - 13);
             var position = event.srcElement.id[7];
             var pts = document.getElementById('pt1');

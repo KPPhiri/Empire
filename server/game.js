@@ -30,6 +30,7 @@ class Game {
 
     changeTurns() {
       this.players.forEach((player) => {
+        console.log("CHANGINTURNSSS");
         player.setIsTurn(!player.getIsTurn());
         if (player.getIsTurn()) {
           player.getSocket().emit('yourTurn', 'ok');
@@ -213,10 +214,9 @@ class Game {
             });
 
             player.getSocket().on('protectProperty', (text) => {
-              console.log("!!sending protectionXXX");
+              console.log("!!sending protection");
                 player.getSocket().broadcast.emit('protectEProperty', text);
-                player.getSocket().broadcast.emit('endGame', text);
-
+                player.setIsTurn(true);
             });
 
 
