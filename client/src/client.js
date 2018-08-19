@@ -532,7 +532,7 @@ if (window.location.pathname != "/multiplayer.html") {
 
         sock.on('addShield', (text) => {
             properties[Number(text)].shield += 15;
-            // console.log("adding 15 ");
+            console.log("adding 15 ");
             document.getElementById('pshield' + text).innerHTML = properties[Number(text)].shield.toString();
         });
         sock.on('eaddShield', (text) => {
