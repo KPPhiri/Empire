@@ -146,15 +146,16 @@ function cardRemover(pos) {
     progress(handCards[position].cost);
 
     while (position + 1 < handCards.length && handCards[position + 1].name != null) {
+      console.log("Shifting card position: " + position + " with position: " + (position + 1));
         handCards[position] = handCards[position + 1];
         position++;
     }
-
-
     //makes the empty card same as the card it had before but 0 cost
-    handCards[position] = new Card(handCards[position].name, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
+    handCards[position] = new Card(null, "img/emptyCard.png", handCards[position].action, 0, handCards[position].probability);
     drawHand();
 }
+
+
 
 /**** Draws hand from character deck****/
 function initializeDeck(characterId) {
@@ -205,6 +206,7 @@ function drawInitialHand() {
 function drawHand() {
     for (i = 0; i < handCards.length; i++) {
         // console.log(handCards[i].imgURL);
+        console.log("Hand length: " + handCards.length);
         document.getElementById('handPos' + i).src = handCards[i].imgURL;
     }
 }
