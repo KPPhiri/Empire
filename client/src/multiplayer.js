@@ -189,15 +189,15 @@ function drawInitialHand() {
         var index = Math.floor(Math.random() * weightedDeck.length);
         rand = weightedDeck[index];
         if (rand.name == "counter") {
-            console.log("incrementing");
+            // console.log("incrementing");
             incrementNegatePoints();
         }
         handCards[i]=rand;
-        console.log("adding: " + rand.name);
+        // console.log("adding: " + rand);
     }
     for (i = 0; i < handCards.length; i++) {
         document.getElementById('handPos' + i).src = handCards[i].imgURL;
-        console.log("drawing: " + rand.name + " pos " + i);
+        // console.log("drawing: " + rand.name + " pos " + i);
 
     }
 }
@@ -284,8 +284,8 @@ function progress(cost) {
 function eProgress(cost) {
     var prg = document.getElementById('progress-op');
     var pts = document.getElementById('pt');
-    console.log("you have this many pts " + pts.innerHTML);
-    console.log("cost is " + cost);
+    // console.log("you have this many pts " + pts.innerHTML);
+    // console.log("cost is " + cost);
     //counter is the number of points
     var counter;
     //console.log(pts.textContent.length) length of p is 17 initially
@@ -311,14 +311,14 @@ function eProgress(cost) {
         if (progress == 0 || cost == 0) {
             clearInterval(id);
         } else {
-            console.log("frame");
-            console.log("increment is " + increment);
+            // console.log("frame");
+            // console.log("increment is " + increment);
             progress -= (increment);
             counter -= 1;
             cost -= 1;
             prg.style.width = progress + 'px';
             pts.innerHTML = counter + 'pts';
-            console.log(pts.textContent);
+            // console.log(pts.textContent);
         }
     }
 }
@@ -346,10 +346,10 @@ function ready() {
 
 }
 function play(text){
-  console.log("Game is starting");
+  // console.log("Game is starting");
 
     const parent = document.querySelector('.ch-select');
-    console.log("GETTING PLAYERS CHARID: " + characterId);
+    // console.log("GETTING PLAYERS CHARID: " + characterId);
     document.getElementById('playerChar').src = Player(characterId).imgURL;
     document.getElementById('opponent').src = Player(text).imgURL;
     parent.style.display = 'none';
@@ -359,13 +359,13 @@ function play(text){
 };
 
 function swap(text){
-  console.log("Game is starting");
+  // console.log("Game is starting");
 
     const parent = document.querySelector('.ch-select');
-    console.log("chosen player charid is " + Player(characterId).imgURL);
+    // console.log("chosen player charid is " + Player(characterId).imgURL);
 
     document.getElementById('playerChar').src = Player(text).imgURL;
-    console.log("enemy char id: " + Player(text).imgURL);
+    // console.log("enemy char id: " + Player(text).imgURL);
     document.getElementById('opponent').src = Player(characterId).imgURL;
     characterId = text;
 
