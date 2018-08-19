@@ -173,8 +173,9 @@ if (window.location.pathname != "/multiplayer.html") {
             sock.emit('disableHandandDeck', 'ok');
             enableEnemyPropListener(position, cardUsed);
         } else if (cardUsed.name == "defend" || cardUsed.name == "reject" || cardUsed.name == "Rebuild") {
+            console.log("reject");
           sock.emit('disableHandandDeck', 'ok');
-
+            console.log("reject");
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
         } else if (cardUsed.name == "counter") {
