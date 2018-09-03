@@ -21,4 +21,5 @@ Play now at //link!
   * Used NodeJs along with Socket.io for real-time client/server communication between players
 * Bianca Guerrero
   * UI/UX designer
+  * Artist
   * Worked on front-end functionality
