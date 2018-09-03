@@ -146,7 +146,6 @@ function cardRemover(pos) {
     progress(handCards[position].cost);
 
     while (position + 1 < handCards.length && handCards[position + 1].name != null) {
-      console.log("Shifting card position: " + position + " with position: " + (position + 1));
         handCards[position] = handCards[position + 1];
         position++;
     }
