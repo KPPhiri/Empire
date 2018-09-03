@@ -29,6 +29,7 @@ if (window.location.pathname != "/multiplayer.html") {
     });
 
     sock.on('gameStarted', () => {
+
         // console.log("no player available");
         const vsButton = document.getElementsByClassName("btn-vs")[0];
         vsButton.style.background = "lightblue";
@@ -54,6 +55,24 @@ if (window.location.pathname != "/multiplayer.html") {
 
 } else {
     const sock = io('/multiplayer');
+    var isTurn = false;
+    var canDraw = false;
+    var canPlay = false;
+    var canRespond = false;
+    var canClickEProperty = false;
+    var canClickProperty = false;
+
+
+
+
+    sock.on('updateField', (text) => {
+        console.log("doing startGame: " + text)
+        enemyProperties = text;
+    });
+
+
+
+
 
     const eDraw = (text) => {
         var x = document.getElementById('drawing');
@@ -67,9 +86,12 @@ if (window.location.pathname != "/multiplayer.html") {
 
     //adding action listener to deck
     document.getElementById('playerDeck0').addEventListener('dblclick', () => {
-        console.log("drawing");
-        sock.emit("drawingRequest", "now");
-        sock.emit("drawing", "now");
+        if (canDraw) {
+          console.log("can draw")
+          drawCard()
+          sock.emit('updateEnemyHand', 'NA');
+        }
+
 
     });
 
@@ -88,21 +110,28 @@ if (window.location.pathname != "/multiplayer.html") {
                 points = pts.textContent.slice(0, pts.textContent.length - 3);
             }
             //checks to see if sufficient amount of points to play card and the card isn't an empty cardUsed
-            if ((imgSrc != "emptyCard.png") && (handCards[position].cost <= points) && !hasConstraints(handCards[position].name)) {
-                sock.emit('decEnemyProgBar', handCards[position].cost);
-                // console.log("Playing type: " + handCards[position].name + " Cost: " + handCards[position].cost);
-                sock.emit('playing', event.srcElement.src + position);
-                //!!!!!!only remove card if it was successful^
-                checkIfAction(handCards[position], position);
+            if (canPlay && (imgSrc != "emptyCard.png") && (handCards[position].cost <= points) && !hasConstraints(handCards[position].name)) {
+                console.log("Playing card at position: " + position);
+                sock.emit('updateEnemyProgBar', handCards[position].cost);
+                var temp = handCards[position];
+                cardRemover(position);
+                sock.emit('updateEnemyActionField', event.srcElement.src + position);
+                checkIfAction(temp, position);
+            } else if (canRespond && handCards[position].name == 'counter'){
+                canRespond = false;
+                cardRemover(position);
+                console.log("canceling attack")
+                sock.emit('cancelAttack');
             } else {
-                // console.log("!!cannot perform move: " + handCards[event.srcElement.id[7]].action + " Cost: " + handCards[event.srcElement.id[7]].cost +
-                // "  players points: " + points);
+
             }
         });
     }
 
     function hasConstraints(card) {
         if (card == "attack") {
+            console.log("checking constraints and is attack");
+
             return false;
         } else if (card == "defend") {
             var violates = true;
@@ -138,6 +167,14 @@ if (window.location.pathname != "/multiplayer.html") {
         clearERejectProtection();
         console.log("ending turn");
         sock.emit('endTurn', 'turns');
+        isTurn = false;
+        canDraw = true;
+        canPlay = false;
+        canRespond = false;
+        canClickEProperty = false;
+        canClickProperty = false;
+
+
     }
 
     function clearActionField() {
@@ -149,11 +186,15 @@ if (window.location.pathname != "/multiplayer.html") {
     }
 
 
-
-
     sock.on('startGame', (text) => {
         console.log("doing startGame: " + text)
         play(text);
+    });
+
+    sock.on('cancelAttack', (text) => {
+        console.log("Enemy has declined attack");
+        canDraw = true;
+        canPlay = true;
     });
 
     sock.on('protectEProperty', (text) => {
@@ -168,19 +209,20 @@ if (window.location.pathname != "/multiplayer.html") {
 
     /** Card Types Implementation to use on Properties**/
     function checkIfAction(cardUsed, position) {
+        console.log("#! " + cardUsed.name + " was played.")
         if (cardUsed.name == "attack" || cardUsed.name == "Destroy") {
-            console.log("enabling enemy action listeners");
-            sock.emit('disableHandandDeck', 'ok');
+            console.log("attack was used");
+            canClickEProperty = true;
+            canPlay = false;
+            canDraw = false;
             enableEnemyPropListener(position, cardUsed);
         } else if (cardUsed.name == "defend" || cardUsed.name == "reject" || cardUsed.name == "Rebuild") {
-            console.log("reject");
-          sock.emit('disableHandandDeck', 'ok');
+            canClickProperty = true;
+            canPlay = false;
+            canDraw = false;
             console.log("reject");
             enablePlayerPropListener(cardUsed);
             //console.log("defense is now " + properties[propertyId].shield);
-        } else if (cardUsed.name == "counter") {
-            console.log("playing counter card");
-            sock.emit('cancelAttack', cardUsed.name);
         } else if (cardUsed.name == "swap") {
             console.log("sending swap");
             sock.emit('swap', 'ok');
@@ -194,43 +236,44 @@ if (window.location.pathname != "/multiplayer.html") {
         }
     }
 
-    function disablePlayerDeckHand() {
-        sock.emit('disablePlayerDeckHand', "ok");
-    }
+
 
     function enablePlayerPropListener(cardUsed) {
-        disablePlayerDeckHand();
-        //use selected card on selected property
         document.getElementById('cardDescContainer').style.zIndex = '20';
         var used = false;
         console.log("used is now: " + used);
         for (i = 0; i < 4; i++) {
             property = document.getElementById('prop' + i);
             property.addEventListener('dblclick', (event) => {
-                document.getElementById('cardDescContainer').style.zIndex = '24';
-                console.log(event.srcElement.id[4]);
+                if(canClickProperty) {
+                  canPlay = true;
+                  canDraw = true;
+                  canClickProperty = false;
+                  document.getElementById('cardDescContainer').style.zIndex = '24';
+                  console.log(event.srcElement.id[4] + " OK");
 
-                propertyId = event.srcElement.id[4];
-                if (properties[propertyId].isAttackable && cardUsed.name == "reject" && !used) {
-                    properties[propertyId].isAttackable = false;
-                    sock.emit('protectProperty', propertyId);
-                    console.log("makes not attackable");
-                } else if (properties[propertyId].shield < 30 && cardUsed.name == "defend" && !used) {
-                    console.log("requesting server to add shield to property")
-                    sock.emit('addShield', propertyId);
-                    // properties[propertyId].shield += 15;
-                    document.getElementById('pshield' + propertyId).innerHTML = properties[propertyId].shield.toString();
-                    used = true;
+                  propertyId = event.srcElement.id[4];
+                  if (properties[propertyId].isAttackable && cardUsed.name == "reject" && !used) {
+                      properties[propertyId].isAttackable = false;
+                      sock.emit('protectProperty', propertyId);
+                      console.log("makes not attackable");
+                  } else if (properties[propertyId].shield < 30 && cardUsed.name == "defend" && !used) {
+                      console.log("requesting server to add shield to property");
+                      properties[propertyId].shield += 15;
+                      sock.emit('updateEnemyProperties', properties);
 
-                } else if (cardUsed.name == "Rebuild" && !used) {
-                    properties[propertyId].health = 100;
-                    document.getElementById('phealth' + propertyId).innerHTML = properties[propertyId].health.toString();
-                } else {
-                    //or reject card was already used on property
-                    console.log("cannot put more shields or youve used the card");
+                      document.getElementById('pshield' + propertyId).innerHTML = properties[propertyId].shield.toString();
+                      used = true;
+
+                  } else if (cardUsed.name == "Rebuild" && !used) {
+                      properties[propertyId].health = 100;
+                      document.getElementById('phealth' + propertyId).innerHTML = properties[propertyId].health.toString();
+                  } else {
+                      //or reject card was already used on property
+                      console.log("cannot put more shields or youve used the card");
+                  }
                 }
             });
-
         }
     }
 
@@ -250,25 +293,28 @@ if (window.location.pathname != "/multiplayer.html") {
                 //propi = propertyId;
                 //sock.emit('requestResponse', event.srcElement.id[5]);
                 if (!used) {
-                    console.log(position);
                     if (!(enemyProperties[propertyId].isAttackable)) { //if the property they want to attack isnt attackable, just remove card without affecting health
                         console.log("not attack");
                         cardRemover(position);
+                        canPlay = true;
+                        canDraw= true;
                     } else if (cardUsed.name == "Destroy") {
                         console.log("destroys");
                         enemyProperties[propertyId].health = 0;
                         document.getElementById('health' + propertyId).innerHTML = enemyProperties[propertyId].health.toString();
+                        canPlay = true;
+                        canDraw= true;
                     } else if (cardUsed.name == "Disappear") {
                         console.log("disappear");
                         sock.emit('takeProperty', event.srcElement.id[5]);
+                        canPlay = true;
+                        canDraw= true;
                     } else {
                         console.log("regular attack");
                         //check if the property is attackable
                         if (enemyProperties[propertyId].isAttackable) {
                             sock.emit('requestResponse', event.srcElement.id[5]);
                         }
-                        //else if the opponent has counter card, call emit req
-                        //sock.emit('requestResponse', event.srcElement.id[5]);
                     }
                     used = true;
                 }
@@ -276,26 +322,6 @@ if (window.location.pathname != "/multiplayer.html") {
         }
     }
 
-
-    /** Card Types Implementation to use on Properties**/
-    // function useCardOn(propertyId, cardUsed) {
-    //     console.log(cardUsed.action);
-    //     if (cardUsed.action == "attack") {
-    //         //properties[propertyId].health -= 15;
-    //         console.log(propertyId);
-    //         properties[propertyId].health -= 15;
-    //         document.getElementById('health'+propertyId).innerHTML =properties[propertyId].health.toString();
-    //         console.log("health is now " + properties[propertyId].health);
-    //     } else if (cardUsed.name == "Defend"){
-    //         if(properties[propertyId].shield < 30) {
-    //             properties[propertyId].shield += 15;
-    //             document.getElementById('shield'+propertyId).innerHTML =properties[propertyId].shield.toString();
-    //         }else {
-    //             console.log("cannot put more shields");
-    //         }
-    //         console.log("defense is now " + properties[propertyId].shield);
-    //     }
-    // }
 
     function incrementNegatePoints() {
         // console.log("adding negate increment");
@@ -325,18 +351,28 @@ if (window.location.pathname != "/multiplayer.html") {
         swap(text);
     });
 
-    sock.on('playing', (text) => {
-        //play card on the field and remove from hand
-        console.log("removing card at: " + text);
-        cardRemover(text);
+    sock.on('updateEnemyProperties', (array) => {
+        console.log("Enemy properties are" + array);
+        enemyProperties = array;
+        updateEnemyProperties();
     });
 
-    sock.on('decEnemyProgBar', (text) => {
-        eProgress(text);
+    function updateEnemyProperties(){
+      console.log(enemyProperties);
+      for(i = 0; i < 4; i++) {
+        document.getElementById('shield' + i).innerHTML = enemyProperties[i].shield.toString();
+      }
+
+    }
+
+
+    sock.on('updateEnemyProgBar', (cost) => {
+
+        eProgress(cost);
     });
 
-    sock.on('drawingRequest', (text) => {
-        // console.log('im drawing');
+    function drawCard() {
+      console.log("drawing")
         var pos = 0;
         var temp = document.getElementById('handPos' + pos).src;
         while (temp.substr(temp.length - 13) != "emptyCard.png" && pos < 6) {
@@ -347,36 +383,29 @@ if (window.location.pathname != "/multiplayer.html") {
             var index = Math.floor(Math.random() * weightedDeck.length);
             rand = weightedDeck[index];
             if (rand.name == "counter") {
-                // console.log("incrementing");
                 incrementNegatePoints();
             }
             document.getElementById('handPos' + pos).src = rand.imgURL;
             handCards[pos]=rand;
         }
-    });
+    }
 
 
 
-    sock.on('eplaying', (text) => {
+    sock.on('e_updateActionField', (imgURL) => {
         //when opponent is playing a card, decrease opponents hand size by 1
-        document.getElementById('eActionCard').src = text;
+        document.getElementById('eActionCard').src = imgURL;
         var pos = 6;
         var temp = document.getElementById('ehandPos' + pos).src;
         while (temp.substr(temp.length - 13) == "emptyCard.png" && pos > 0) {
             pos--;
             temp = document.getElementById('ehandPos' + pos).src;
         }
-
         document.getElementById('ehandPos' + pos).src = "img/emptyCard.png";
 
     });
 
     var propi = 0;
-    // sock.on('dontPrompt', (text) => {
-    //     properties[propi].health -= 15;
-    //     document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
-    //     sock.emit("acceptAttack", propi);
-    // });
     sock.on('createPrompt', (text) => {
         propi = Number(text.substring(1, text.length));
         // console.log("creating prompt: " + text);
@@ -395,22 +424,20 @@ if (window.location.pathname != "/multiplayer.html") {
 
     document.getElementById('no').addEventListener('click', () => {
         if (properties[propi].shield > 0) {
-            // console.log(propi);
             properties[Number(propi)].shield -= 15;
             document.getElementById('pshield' + propi).innerHTML = properties[Number(propi)].shield;
         } else {
             properties[propi].health -= 15;
-            // console.log("health bc said no " + properties[3].health);
             document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
         }
-        // properties[propi].health -= 15;
-        // document.getElementById('phealth' + propi).innerHTML = properties[propi].health.toString();
         sock.emit("acceptAttack", propi);
     });
 
-    // sock.on('enableEnemyHand', (text) => {
-    //   //TODO: adding action listeners
-    // });
+    document.getElementById('yes').addEventListener('click', () => {
+        canRespond = true;
+    });
+
+
 
     //** This is going to opponent who is accepting attack
     sock.on('acceptAttack', (text) => {
@@ -491,6 +518,10 @@ if (window.location.pathname != "/multiplayer.html") {
 
 
         sock.on('yourTurn', () => {
+            isTurn = true;
+            canDraw = true;
+            canPlay = true;
+
             clearRejectProtection();
             clearEActionField();
             console.log("your turn color activate");
@@ -557,10 +588,6 @@ if (window.location.pathname != "/multiplayer.html") {
             });
         });
         sock.on('eTakenProperty', (text) => {
-            // console.log("enemy will decrease");
-            // console.log("this property: " + Number(text));
-            //
-
             enempyProperties.forEach((property) => {
                 if (property.health == 0) {
                     enemyProperties[property.number].health = properties[Number(text)].health;
@@ -570,19 +597,5 @@ if (window.location.pathname != "/multiplayer.html") {
 
             properties[Number(text)].health = 0;
             document.getElementById('phealth' + property.number).innerHTML = properties[Number(text)].health.toString();
-            // var applied = false;
-            // properties.forEach((property) => {
-            //     if(property.health == 0 && !applied) {
-            //         properties[property.number].health = enemyProperties[Number(text)].health;
-            //         document.getElementById('phealth' + property.number).innerHTML = properties[Number(text)].health.toString();
-            //         applied = true;
-            //     }
-            // });
         });
-        // sock.on('freezeOpp', (text) => {
-        //
-        //     //set opponent's isfrozen totrue
-        //     //once end turn, should check if is frozen before trying to play
-        //     //afterwards, set isfrozen to false;
-        // });
     }
