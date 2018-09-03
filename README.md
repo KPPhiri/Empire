@@ -13,3 +13,12 @@ Online multiplayer strategy game about protecting properties. Fight against othe
 Play now at //link!
 
 ## Poster Design ##
+
+
+### Contributions
+* Kee-Bum Phiri
+  * Worked on front-end/back-end functionality
+  * Used NodeJs along with Socket.io for real-time client/server communication between players
+* Bianca Guerrero
+  * UI/UX designer
+  * Worked on front-end functionality
