@@ -11,3 +11,5 @@ Online multiplayer strategy game about protecting properties. Fight against othe
 
 ## Play ##
 Play now at //link!
+
+## Poster Design ##
