@@ -15,7 +15,7 @@ Play now at //link!
 ## Poster Design ##
 
 
-### Contributions
+## Contributions
 * Kee-Bum Phiri
   * Worked on front-end/back-end functionality
   * Used NodeJs along with Socket.io for real-time client/server communication between players
