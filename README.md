@@ -8,9 +8,10 @@ Online multiplayer strategy game about protecting properties. Fight against othe
 * Multiplayer mode
 * Original characters and art design
   - Characters have own unique features
+  
+##Characters##
 
 ### Play ##
-Play now at //link!
 
 ### Poster Design ##
 
