@@ -10,8 +10,8 @@ Online multiplayer strategy game about protecting properties. Fight against othe
   - Characters have own unique features
   
 ## Characters ##
-<img alt="Momoko" src="client/img/momoko.jpg"  width="25%"  height="20%"> <img alt="Maro" src="client/img/maro.jpg"  width="25%"  height="20%">
-<img alt="Ches" src="client/img/chesu.jpg"  width="25%"  height="20%"> <img alt="Magicat" src="client/img/catMagicCard.jpg"  width="25%"  height="20%">
+<img alt="Momoko" src="client/img/momoko.jpg"  width="20%"  height="20%"> <img alt="Maro" src="client/img/maro.jpg"  width="05%"  height="20%">
+<img alt="Ches" src="client/img/chesu.jpg"  width="20%"  height="20%"> <img alt="Magicat" src="client/img/catMagicCard.jpg"  width="20%"  height="20%">
 
 ### Play ##
 
